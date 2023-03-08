@@ -9,21 +9,27 @@ function Login(props) {
             <div className='login'>
                 <h1>Login</h1>
                 <form>
-                    <div className='username'>
+                    <div className='usernameL'>
                         <label name='username'>Username</label>
-                        <Link to='/Forgot' className='forgot'>Forgot Username</Link>
+                        <Link to='/Forgot' className='forgotL'>Forgot Username</Link>
                     </div>
                     <div>
-                        <input type='text' id='Username' className='input'/>
+                        <input type='text' id='Username' className='input' />
                     </div>
-                    <div className='password'>
+                    <div className='passwordL'>
                         <label name='Password'>Password</label>
-                        <Link to='/Forgot' className='forgot'>Forgot Password</Link>
+                        <Link to='/Forgot' className='forgotL'>Forgot Password</Link>
                     </div>
                     <div>
                         <input type='text' id='opening-text' className='input' />
                     </div>
                     <button>Login</button>
+                    <div>
+                        <Link to='/Register'>
+                            <button>Register</button>
+                        </Link>
+                    </div>
+
                 </form>
             </div>
         </div>

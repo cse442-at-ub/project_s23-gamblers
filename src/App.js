@@ -4,6 +4,7 @@ import Register from './Components/Register'
 import Home from './Components/Home'
 import Forgot from './Components/Forgot'
 import { useState } from 'react'
+import UserAgreement from './Components/UserAgreement'
 
 function App() {
   const [login, setLogin] = useState(false)
@@ -19,6 +20,7 @@ function App() {
           <Route path='/Login' element={<Login />} />
           <Route path='/Register' element={<Register />} />
           <Route path='/Forgot' element={<Forgot />} />
+          <Route path='/UserAgreement' element={<UserAgreement />} />
         </Routes>
       </BrowserRouter>
       
