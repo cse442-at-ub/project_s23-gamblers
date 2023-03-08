@@ -1,0 +1,30 @@
+.loginPage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100px;
+    background: #8BBAFF;
+}
+
+.frame12{
+    background: #BEE8FF;
+}
+
+.login{
+    text-align: center;
+}
+
+.control {
+    margin: 1rem 0;
+}
+
+.username{
+    margin-right: 10px;
+}
+.password {
+    margin-right: 10px;
+}
+
+.forgot{
+    margin-left: 10px;
+}
