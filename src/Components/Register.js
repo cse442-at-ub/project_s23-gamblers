@@ -42,9 +42,9 @@ function Register(){
                     <div>
                         <Link to='/UserAgreement'>UserAgreement</Link>
                     </div>
-                    
                     <button type='submit'>Register</button>
                 </form>
+                <Link to='/Login'>Already have an acoount? Click to Login!</Link>
             </div>
         </div>
     )
