@@ -24,7 +24,9 @@ function ItemInfo(){
             </Col>
             <Col >
                 <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
-                    <UserImage></UserImage>   
+                    <a href='#profile'>
+                        <UserImage></UserImage> 
+                    </a>  
                     <SearchBar></SearchBar>
                 </Container>
             </Col>
