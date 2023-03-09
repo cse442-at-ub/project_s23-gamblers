@@ -1,22 +1,19 @@
 import {Form,Col,Container,Row} from 'react-bootstrap/';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import "./EditWindow.css"
 import UserImage from './UserImage';
 import PopUp from './PopUp';
 import { useState } from 'react';
-function EditWindow(){
-    const [buttonPopup, setButtonPopup] = useState(false)
+function EditWindow(props){
     return (
-        
-        <div>
-            <main>
-                <button className='the-pop-button' onClick={() => setButtonPopup(true)}>edit profile</button>
-                
-                <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
                     <div  className='window'>
                         <Row>
                         <Col className="edit_header_upper" >
-                            <UserImage ></UserImage>
+                            <UserImage >
+                            </UserImage>
+                            <form action="/image-upload" id="image-form" method="post" encType="multipart/form-data" className='serach_input' >
+                                <input id="form-file" type="file" title=" " name="upload" hidden></input >
+                                <input type="submit" value="upload" hidden></input>
+                            </form>
                         </Col>
                         </Row>
                         <Row>
@@ -48,7 +45,7 @@ function EditWindow(){
                                             </Col>
                                         </Form.Group>
                                         <div className="d-flex justify-content-around">
-                                        <button className='mt-5 mb-5 cancel_bot' onClick={() => setButtonPopup(false)}>
+                                        <button className='mt-5 mb-5 cancel_bot' onClick={() => props.onChange(false)}>
                                         Close
                                         </button>
                                         <button className='mt-5 mb-5 save_bot'  type="submit">
@@ -60,11 +57,6 @@ function EditWindow(){
                             
                         </Row>
                     </div>
-                    
-                </PopUp>
-            </main>
-        </div>
-        
     )
 }
 export default EditWindow

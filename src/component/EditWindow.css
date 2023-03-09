@@ -32,12 +32,18 @@
     background: #F5F5F5;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
+input[type='file'] {
+    opacity:0    
+  }
 .edit_txt{
     color: #66C5FB;
     font-size:10px;
 }
-
+.image-form{
+    position: relative;
+    width: 1px;
+    margin-top: 50px;
+}
 .cancel_bot{
     width: 25%;
     height: 50px;
