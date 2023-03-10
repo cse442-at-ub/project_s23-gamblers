@@ -52,6 +52,7 @@ function Register(){
                     </div>
                     <button type='submit' className='RegisterButton'>Register</button>
                 </form>
+                <Link to='/Login'>Already have an acoount? Click to Login!</Link>
             </div>
         </div>
     )
