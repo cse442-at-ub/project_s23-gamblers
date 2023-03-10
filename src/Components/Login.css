@@ -8,10 +8,13 @@
 
 .frame12{
     background: #BEE8FF;
+    height: 100vh;
 }
 
-.login{
-    text-align: center;
+.formBlock{
+    margin: auto;
+    width: 450px;
+    height: 400px;
 }
 
 .control {
@@ -19,12 +22,52 @@
 }
 
 .usernameL{
-    margin-right: 10px;
+    margin-right: 0px;
+    font-size: 20pt;
 }
 .passwordL{
-    margin-right: 10px;
+    margin-right: 0px;
+    font-size: 20pt;
 }
 
 .forgotL{
-    margin-left: 10px;
+    margin-left: 100px;
+
+}
+
+.blue{
+    color: #66C5FB;
+}
+
+.LoginButton{
+    margin-top: 20px;
+    width: 250px;
+    height: 60px;
+    background-color: #66C5FB;
+    font-size: 25pt;
+    border-radius: 8px;
+}
+
+.RegisterButton{
+    margin-top: 20px;
+        width: 250px;
+        height: 60px;
+        background-color: #66C5FB;
+        font-size: 25pt;
+        border-radius: 8px;
+}
+
+
+.login{
+    text-align: center;
+}
+
+.form{
+    text-align: center;
+}
+
+.input{
+    height: 50px;
+    width: 400px;
+    font-size: 28pt;
 }

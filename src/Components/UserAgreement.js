@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom"
-function UserAgreement(){
-    return <div>
-        u need agree blah blah
-        u need agree blah blah
-        u need agree blah blah
-        u need agree blah blah
-        u need agree blah blah
-        <Link to='/Register'>Back</Link>
-    </div>
+import './UserAgreement.css'
+
+function UserAgreement(props) {
+    return (props.trigger)?(
+        <div className="popup">
+            <div>
+                <div className="popup-inner">
+                    <Link to='/Register'>Back</Link>
+                </div>
+            </div>
+        </div>
+        ):'';
 }
 export default UserAgreement

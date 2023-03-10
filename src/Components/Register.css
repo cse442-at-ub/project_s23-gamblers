@@ -1,18 +1,28 @@
 .username {
-    margin-right: 110px;
+    margin-right: 300px;
+    font-size: 20pt;
+    color: #66C5FB;
 }
 
 .password {
-    margin-right: 110px;
+    margin-right: 300px;
+    font-size: 20pt;
+    color: #66C5FB;
 }
 
 .Cpassword{
-    margin-right: 55px;
+    margin-right: 210px;
+    font-size: 20pt;
+    color: #66C5FB;
 }
 
 .email{
-    margin-right: 130px;
+    margin-right: 340px;
+    font-size: 20pt;
+    color: #66C5FB;
 }
 .phone {
-    margin-right: 75px;
+    margin-right: 250px;
+    font-size: 20pt;
+    color: #66C5FB;
 }

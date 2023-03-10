@@ -6,27 +6,27 @@ function Login(props) {
             <div className='loginPage'>
                 {/* <img className='image0' src={require('../image/image0.png')} alt="icon" /> */}
             </div>
-            <div className='login'>
-                <h1>Login</h1>
-                <form>
+            <div className='formBlock'>
+                <h1 className='login'>Login</h1>
+                <form className='form'>
                     <div className='usernameL'>
-                        <label name='username'>Username</label>
+                        <label name='username' className='blue'>Username</label>
                         <Link to='/Forgot' className='forgotL'>Forgot Username</Link>
                     </div>
                     <div>
                         <input type='text' id='Username' className='input' />
                     </div>
                     <div className='passwordL'>
-                        <label name='Password'>Password</label>
+                        <label name='Password' className='blue'>Password</label>
                         <Link to='/Forgot' className='forgotL'>Forgot Password</Link>
                     </div>
                     <div>
                         <input type='text' id='opening-text' className='input' />
                     </div>
-                    <button>Login</button>
+                    <button className='LoginButton'>Login</button>
                     <div>
                         <Link to='/Register'>
-                            <button>Register</button>
+                            <button className='RegisterButton'>Register</button>
                         </Link>
                     </div>
 

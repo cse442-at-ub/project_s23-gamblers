@@ -1,6 +1,11 @@
-import { Link } from 'react-router-dom'
 import './Register.css'
+import UserAgreement from './UserAgreement'
+import { useState } from 'react'
+
 function Register(){
+
+    const [popup, setPopup] = useState(false)
+
     return (
         <div className='frame12'>
             <div className='loginPage'>
@@ -40,10 +45,12 @@ function Register(){
                         <input type='text' id='phone' className='input' />
                     </div>
                     <div>
-                        <Link to='/UserAgreement'>UserAgreement</Link>
+                        <input type='checkbox'/>
+                        <button onClick={()=>setPopup(true)}>UserAgreement</button>
+                        {console.log(popup)}
+                        <UserAgreement trigger={popup}></UserAgreement>
                     </div>
-                    
-                    <button type='submit'>Register</button>
+                    <button type='submit' className='RegisterButton'>Register</button>
                 </form>
             </div>
         </div>
