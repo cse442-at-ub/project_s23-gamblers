@@ -1,6 +1,7 @@
 import './Register.css'
 import UserAgreement from './UserAgreement'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Register(){
 
