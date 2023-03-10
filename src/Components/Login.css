@@ -49,12 +49,13 @@
 }
 
 .RegisterButton{
-    margin-top: 20px;
+        margin-top: 20px;
         width: 250px;
         height: 60px;
         background-color: #66C5FB;
         font-size: 25pt;
         border-radius: 8px;
+        cursor: pointer;
 }
 
 

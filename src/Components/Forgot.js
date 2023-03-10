@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import './Forgot.css'
+
 function Forgot() {
     return (
         <div className='frame12'>
@@ -7,7 +9,10 @@ function Forgot() {
                 <h1 style={{textAlign:'center'}}>Please enter your email</h1>
                 <form className='form'>
                     <input type='text' id='email' className='input' />
-                    <button type='submit' className='RegisterButton'>Send</button>
+                    <Link to='/Verify'>
+                        <button type='submit' className='RegisterButton'>Send</button>
+                    </Link>
+                    
                 </form>
             </div>
         </div>

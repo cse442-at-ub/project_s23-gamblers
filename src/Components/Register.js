@@ -45,14 +45,19 @@ function Register(){
                     <div>
                         <input type='text' id='phone' className='input' />
                     </div>
+                     <br></br>
                     <div>
                         <input type='checkbox'/>
-                        <button onClick={()=>setPopup(true)}>UserAgreement</button>
+                        <span onClick={()=>setPopup(true)} className='div'>UserAgreement</span>
                         {console.log(popup)}
-                        <UserAgreement trigger={popup}></UserAgreement>
+                        <UserAgreement trigger={popup} setPopup={setPopup}></UserAgreement>
                     </div>
-                    <button type='submit' className='RegisterButton'>Register</button>
+                    <Link to='/Verify'> 
+                        <button type='submit' className='RegisterButton'>Register</button>
+                    </Link>
+                    
                 </form>
+                <br></br>
                 <Link to='/Login'>Already have an acoount? Click to Login!</Link>
             </div>
         </div>
