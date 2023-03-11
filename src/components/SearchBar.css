@@ -1,0 +1,11 @@
+.search-bar{
+    padding-left: 40px;
+    border-radius: 43.0504px
+}
+
+
+.serach_input{    
+    background: url("../image/image7.png") top left     no-repeat;
+    background-size: contain;
+    background-color:white;
+}
