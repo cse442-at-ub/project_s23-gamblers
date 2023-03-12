@@ -8,7 +8,7 @@ function Verify() {
             <h1 style={{textAlign:'center'}}>A email has been sent to your email.</h1>
             <div style={{ textAlign: 'center' }}>
                <Link to='/'>
-                <button className='RegisterButton' >Back to home page</button>
+                <button className='RegisterButton' >Home page</button>
             </Link> 
             </div>
             
