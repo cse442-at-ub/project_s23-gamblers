@@ -5,7 +5,9 @@ import EditHome from './component/EditHome';
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter
+        basename='CSE442-542/2023-Spring/cse-442m/edit'
+      >
       <nav>
         <ul>
           <li>
