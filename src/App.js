@@ -4,8 +4,15 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/iteminfo">iteminfo</Link>
+          </li>
+        </ul>
+      </nav>
       <Routes>
-        <Route index path="/iteminfo" element={<ItemInfo/>}/>
+        <Route index path="/iteminfo" element={<ItemInfo itid={1}/>}/>
       </Routes>
       </BrowserRouter>
     </div>
