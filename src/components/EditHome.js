@@ -38,7 +38,7 @@ function EditHome(){
 
             <button className='the-pop-button' onClick={() => setButtonPopup(true)}>edit profile</button>
             <PopUp trigger={buttonPopup} >
-            <EditWindow trigger={buttonPopup} onChange={handleChange}></EditWindow>
+            <EditWindow trigger={buttonPopup} onChange={handleChange} id = {uid}></EditWindow>
             </PopUp>
         </div>
     )

@@ -1,12 +1,12 @@
 import {Form,Col,Container,Row} from 'react-bootstrap/';
 import "./EditWindow.css"
 import UserImage from './UserImage';
-import PopUp from './PopUp';
-import { useParams,useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 import axios from "axios";
 function EditWindow(props){
     const [post, setPost] = useState({});
-    const [username, setUsername] = useState("");
+    // const [username, setUsername] = useState("");
+
     useEffect(() => {
         getUser();
     }, [])
@@ -16,14 +16,15 @@ function EditWindow(props){
         });
     }
     const handleSubmit = (event) => {
-        event.preventDefault()
-        axios.put(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/${username}`, post);
+        event.preventDefault();
+        axios.put(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/${props.id}`, post);
+        props.onChange(false)
     }
     const handleChange = (event) => {
         
-        if(event.target.name === "username"){
-            setUsername(event.target.value)
-        }
+        // if(event.target.name === "username"){
+        //     setUsername(event.target.value)
+        // }
         setPost(vals => ({ ...vals, [event.target.name]: event.target.value }));
         console.log(post);
     }
@@ -60,7 +61,7 @@ function EditWindow(props){
                             </Form.Group>
                             </Row>
                             <div className="d-flex justify-content-around">
-                            <button className='mt-5 mb-5 cancel_bot' onClick={() => props.onChange(false)}>
+                            <button className='mt-5 mb-5 cancel_bot'>
                             Close
                             </button>
                             <button className='mt-5 mb-5 save_bot'  type="submit">

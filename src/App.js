@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <BrowserRouter
-        basename='CSE442-542/2023-Spring/cse-442m/edit'
+        // basename='CSE442-542/2023-Spring/cse-442m/edit'
       >
       <nav>
         <ul>
