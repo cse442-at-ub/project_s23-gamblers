@@ -46,6 +46,7 @@
     background-color: #66C5FB;
     font-size: 25pt;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .RegisterButton{

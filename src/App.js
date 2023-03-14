@@ -1,11 +1,11 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Login from './components/Login'
-import Register from './components/Register'
-import Home from './components/Home'
-import Forgot from './components/Forgot'
-import Verify from './components/Verify'
+import Login from './Components/Login'
+import Register from './Components/Register'
+import Home from './Components/Home'
+import Forgot from './Components/Forgot'
+import Verify from './Components/Verify'
 import { useState } from 'react'
-import UserAgreement from './components/UserAgreement'
+import UserAgreement from './Components/UserAgreement'
 
 function App() {
   const [login, setLogin] = useState(false)
