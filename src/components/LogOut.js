@@ -11,7 +11,7 @@ function PopUp(props){
                 <button className='cancelbutton' onClick={()=>props.setTrigger(false)}>
                     <span className='cancelfont'>Cancel</span>
                 </button>
-                <a href="\">
+                <a href="\login">
                 <button className='logoutbutton' >
                     <span className='logoutfont'>Log Out</span>
                 </button>
