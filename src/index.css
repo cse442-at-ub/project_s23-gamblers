@@ -33,10 +33,7 @@ a{
 ul{
   list-style-type: none;
 }
-img{
-  width: 100%;
-  display: block;
-}
+
 button{
   cursor: pointer;
   outline: 0;
