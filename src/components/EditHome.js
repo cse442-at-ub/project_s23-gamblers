@@ -1,6 +1,6 @@
 import "./EditHome.css"
 import { useState } from 'react';
-import PopUp from "./PopUp";
+import PopUp from "./PopUpWindow";
 import EditWindow from "./EditWindow";
 import axios from "axios";
 function EditHome(){

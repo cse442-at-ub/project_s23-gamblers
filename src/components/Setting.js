@@ -2,8 +2,15 @@ import './Setting.css'
 import PopUp from './LogOut'
 import {useState } from 'react'
 import img1 from '../image/icon/unnamed.jpg'
+import PopUpWindow from './PopUpWindow'
+import EditWindow from './EditWindow'
 function Setting(){
+    
+    const [buttonEditPopup, setEditPopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
+    function handleChange(newV){
+        setEditPopup(newV)
+    }
     return(
         <div className='Background'>
             <div className='Mainpage'>
@@ -29,7 +36,9 @@ function Setting(){
                     <button type='button' className='Edituserprofile'>
                         <span className='EdituserprofileFont'>Edit User Profile</span>
                     </button>
-                    </a>
+                    
+                </a>
+                
                 </div>
                 <button className='Myaccount'>
                     <span className='MyaccountFont'>My account</span>
@@ -49,7 +58,11 @@ function Setting(){
                     </button> 
                     </a> 
                 </div>
-
+                <button onClick={() => setEditPopup(true)}>  edit 
+                    <PopUpWindow trigger={buttonEditPopup} >
+                        <EditWindow trigger={buttonEditPopup} onChange={handleChange} id = {1}></EditWindow>
+                    </PopUpWindow>
+                </button>
                 <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
                 </PopUp>
             </div>
