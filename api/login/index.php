@@ -13,7 +13,8 @@ switch($method){
                 die("one of you information is empty");
             }
             if (check_user_password($dump['username'],$dump['password'])){
-                // header("Set-Cookie: auto:2313123");
+                
+                setcookie('uid', randomStr(20), time() + 60 * 60, '/');
                 echo "success";
             }else{
                 echo "fail";

@@ -15,6 +15,16 @@ function check_user_password($username, $password){
         return false;
     }
 }
+function randomStr($len){
+    echo $len;
+    if($len<=0) return "";
+    $set = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $setlen = strlen($set);
+    for ($i = 0; $i < $len; $i++) {
+        $str = $str.$set[rand(0, $setlen)];
+    }
+    return $str;
+}
 function get_by_username($username){
     $objDb = new DbConnect;
     $conn = $objDb->connect();
