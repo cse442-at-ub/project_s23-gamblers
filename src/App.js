@@ -7,7 +7,7 @@ import Forgot from './components/Forgot'
 import Verify from './components/Verify'
 import { useState } from 'react'
 import UserAgreement from './components/UserAgreement'
-
+import Setting from './components/Setting'
 function App() {
   const [login, setLogin] = useState(false)
 
@@ -25,6 +25,7 @@ function App() {
           <Route path='/Forgot' element={<Forgot />} />
           <Route path='/UserAgreement' element={<UserAgreement />} />
           <Route path='/Verify' element={<Verify />} />
+          <Route path="/Setting" element={<Setting/>}></Route>
         </Routes>
       </BrowserRouter>
 

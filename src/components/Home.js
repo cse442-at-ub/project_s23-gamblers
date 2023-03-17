@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom'
+import Services from './Services'
 function Home(){
     return(
         <div>
-            This is homepage
-            <Link to='Setting'>Setting</Link>
+            <Services></Services>
         </div>
     )
 }
