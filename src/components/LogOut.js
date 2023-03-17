@@ -1,7 +1,7 @@
 import React from "react"
 import './LogOut.css'
 
-function PopUp(props){
+function LogOut(props){
     return(props.trigger)?(
         <div className="popup">
         <div className='Logoutnotification'>
@@ -11,7 +11,7 @@ function PopUp(props){
                 <button className='cancelbutton' onClick={()=>props.setTrigger(false)}>
                     <span className='cancelfont'>Cancel</span>
                 </button>
-                <a href="\">
+                <a href="\login">
                 <button className='logoutbutton' >
                     <span className='logoutfont'>Log Out</span>
                 </button>
@@ -22,4 +22,4 @@ function PopUp(props){
     ): "";
 
 }
-export default PopUp
+export default LogOut

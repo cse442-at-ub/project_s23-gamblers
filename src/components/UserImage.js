@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./UserImage.css"
 function UserImage(){
     return (
         
