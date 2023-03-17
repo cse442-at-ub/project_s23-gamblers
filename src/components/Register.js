@@ -3,7 +3,6 @@ import UserAgreement from './UserAgreement'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import 'react-phone-number-input/style.css'
 
 function Register() {
 
