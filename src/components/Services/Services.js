@@ -1,29 +1,38 @@
-import React from "react";
-import data from "../../constants/data";
-import "./Services.css";
+import ItemInfo from "./components/ItemInfo";
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import Login from './components/Login'
+import Register from './components/Register'
+import Home from './components/Home'
+import Forgot from './components/Forgot'
+import Verify from './components/Verify'
+import { useState } from 'react'
+import UserAgreement from './components/UserAgreement'
+import Services from "./components/Services/Services";
 
-const Services = () => {
-    return (
-        <div className="services section__padding bg__whitesmoke">
-            <div className="container">
-                <div className="services__content grid">
-                    {
-                        data.services.map((service, index) => {
-                            return (
-                                <div className="services__content--item text__center" key = {index}>
-                                    <img src = {service.img} alt = "item_image" className="icon" />
-                                    <h4 className="text__upper text">{service.title}</h4>
-                                    <p className="para__text text__grey">{service.text}</p>
-                                    <p className="para__text text__grey">poster: {service.poster}</p>
-                                    <a href = "#" className="btn btn__blue">contact</a>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </div>
-        </div>
-    )
+function App() {
+  const [login, setLogin] = useState(false)
+
+  return (
+    <div>
+      <div>
+        {login && <Login setLogin={setLogin} />}
+      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route index path="/iteminfo" element={<ItemInfo />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/Login' element={<Login />} />
+          <Route path='/Register' element={<Register />} />
+          <Route path='/Forgot' element={<Forgot />} />
+          <Route path='/UserAgreement' element={<UserAgreement />} />
+          <Route path='/Verify' element={<Verify />} />
+          <Route path='/Service' element={<Services/>}/>
+        </Routes>
+      </BrowserRouter>
+
+
+    </div>
+  )
 }
 
-export default Services;
+export default App;
