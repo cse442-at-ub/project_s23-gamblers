@@ -1,5 +1,5 @@
 import ItemInfo from "./components/ItemInfo";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
@@ -13,10 +13,13 @@ function App() {
 
   return (
     <div>
+      <div>
+        {login && <Login setLogin={setLogin} />}
+      </div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home />} />
           <Route index path="/iteminfo" element={<ItemInfo />} />
+          <Route path='/' element={<Home />} />
           <Route path='/Login' element={<Login />} />
           <Route path='/Register' element={<Register />} />
           <Route path='/Forgot' element={<Forgot />} />
@@ -24,11 +27,6 @@ function App() {
           <Route path='/Verify' element={<Verify />} />
         </Routes>
       </BrowserRouter>
-      <div>
-        {login && <Login setLogin={setLogin} />}
-      </div>
-
-
 
 
     </div>
