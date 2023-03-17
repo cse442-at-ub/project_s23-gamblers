@@ -1,9 +1,32 @@
 import './Setting.css'
-import PopUp from './LogOut'
-import {useState } from 'react'
+import LogOut from './LogOut'
+import {useState, useEffect} from 'react'
 import img1 from '../image/icon/unnamed.jpg'
+import axios from 'axios'
 function Setting(){
     const [buttonPopup, setButtonPopup] = useState(false);
+    const [uid, setUid] = useState("")
+    const [user, setUser] = useState([])
+    function handleChange(newV){
+        setButtonPopup(newV)
+    }
+
+    useEffect(()=>{
+        handlerGetUser()
+    },[])
+
+    const handlerGetUser = () => {
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/2`, "").then(function(response) {
+            // console.log(response.data);
+            setUser(response.data);
+            console.log(user);
+        });
+    }
+    const handleLookChange = (event) =>{
+        setUid(event.target.value)
+        console.log(uid);
+        console.log(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/${uid}`);
+    }
     return(
         <div className='Background'>
             <div className='Mainpage'>
@@ -20,7 +43,8 @@ function Setting(){
                             <img className='img1' src={img1} alt='icon' />
                         </div>
                         <div className='Username'>
-                            <span className='UsernameFont'>Username</span>
+
+                            <span className='UsernameFont'>{user.username}</span>
                         </div>
                     
                     </div>
@@ -43,15 +67,15 @@ function Setting(){
                 <a href='\iteminfo' >
                     <button className="card">
                         <img className='img2' src={img1} alt="Avatar"/>
-                        <div class="container">
+                        <div className="container">
                             <h4><b>Item Name</b></h4> 
                         </div>
                     </button> 
                     </a> 
                 </div>
 
-                <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
-                </PopUp>
+                <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
+                </LogOut>
             </div>
         </div>
     )
