@@ -54,8 +54,8 @@ function ItemInfo(props){
             
         </Container>
     </Navbar>
-    <input onChange={handleItemChange}/>
-    <button onClick={handleLookItem}>find item</button>
+    {/* <input onChange={handleItemChange}/> */}
+    {/* <button onClick={handleLookItem}>find item</button> */}
     <Container fluid className='main-wrapper'>
         <Row className="d-flex mt-3 mb-3">
             <Col md={{ span: 4, offset: 2}} className="d-flex mt-3 mb-3">
