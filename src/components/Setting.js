@@ -9,13 +9,13 @@ import { useLocation } from 'react-router-dom';
 
 function Setting(){
     
-    const [buttonEditPopup, setEditPopup] = useState(false);
+    //const [buttonEditPopup, setEditPopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [uid, setUid] = useState("")
     // const [user, setUser] = useState([])
-    function handleChange(newV){
-        setEditPopup(newV)
-    }
+    //function handleChange(newV){
+        //setEditPopup(newV)
+    //}
 
     // useEffect(()=>{
     //     handlerGetUser()
@@ -64,23 +64,22 @@ function Setting(){
                 </div>
                 <div className='Iconw'>
 
-            
-
-                    <button onClick={() => setEditPopup(true)} className='Edituserprofile'>Edit User Profile</button>
-                    <PopUp trigger={buttonEditPopup} >
-                    <EditWindow trigger={buttonEditPopup} onChange={handleChange} id = {uid}></EditWindow>
-                    </PopUp>
+                <a href='/profile' >
+                    <button type='button' className='Edituserprofile'>Edit User Profile</button>
                         <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
                     </LogOut>
+                    </a>
 
 
                 </div>
                 <button className='Myaccount'>
                     <span className='MyaccountFont'>My account</span>
                 </button>
+                <a href='/profile' >
                 <button className='Profile'>
                     <span className='ProfileFont'>Profile</span>
                 </button>   
+                </a>
                 
             </div>
         </div>
