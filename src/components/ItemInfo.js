@@ -4,7 +4,27 @@ import "./ItemInfo.css"
 import "./UserImage.css"
 import SearchBar from './SearchBar';
 import UserImage from './UserImage';
-function ItemInfo(){
+import axios from "axios";
+import { useState , useEffect} from 'react';
+function ItemInfo(props){
+    const [item, setItem] = useState([]);
+    const [itid, setItid] = useState(undefined);
+    useEffect(() => {
+        handleLookItem();
+    },[])
+    const handleLookItem = () =>{
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item/${props.itid}`, "").then(function(response) {
+            console.log(props.itid);
+            // console.log(response.data);
+            setItem(response.data);
+            console.log(item);
+        });
+    }
+    const handleItemChange = (event) =>{
+        setItid(event.target.value);
+        console.log(itid);
+       
+    }
     return (
         
         <div>
@@ -34,6 +54,8 @@ function ItemInfo(){
             
         </Container>
     </Navbar>
+    {/* <input onChange={handleItemChange}/> */}
+    {/* <button onClick={handleLookItem}>find item</button> */}
     <Container fluid className='main-wrapper'>
         <Row className="d-flex mt-3 mb-3">
             <Col md={{ span: 4, offset: 2}} className="d-flex mt-3 mb-3">
@@ -48,7 +70,7 @@ function ItemInfo(){
             <Col md={{ span: 4 ,offset:1 }}>
                 <Row >
                     <h1 className='text'>
-                    <span id="item_name">ITEM_NAME</span>
+                    <span id="item_name">{item.name}</span>
                     </h1>
                 </Row>
                 <Row>
@@ -56,7 +78,7 @@ function ItemInfo(){
                 </Row>
                 <Row>
                     <h2 className='text'>
-                        <span  id="item_description">25 Light Modes: The LED desk lamp can easily switch between 5 brightness and 5 color tempers (3200K-6500K) with buttons, providing you with healthy and comfortable office lighting. Different lights meet the needs of different scenes, suitable for you and your children to read, work, study, relax,</span>
+                        <span  id="item_description">{item.description}</span>
                     </h2>
                 </Row>
                 <Row>
@@ -65,12 +87,12 @@ function ItemInfo(){
                 <Row>
                     <Col>
                         <h2 className='text'>
-                            <span  id="item_price">price: </span>
+                            <span  id="item_price">Price: </span>
                         </h2>
                     </Col>
                     <Col>
                         <h2 className='text'>
-                            <span  className='text' id="item_price_number">25</span>
+                            <span  className='text' id="item_price_number">{item.price}</span>
                         </h2>
                     </Col>
                 </Row>
@@ -80,12 +102,12 @@ function ItemInfo(){
                 <Row>
                     <Col>
                         <h2 className='text'>
-                            <span  >SELLER CONTACT: </span>
+                            <span  >Seller contact: </span>
                         </h2>
                     </Col>
                     <Col>
                         <h2 className='text'>
-                            <span  id="item_seller">UB@buffalo.edu 123-456-7890</span>
+                            <span  id="item_seller">{item.contact}</span>
                         </h2>
                     </Col>
                 </Row>
