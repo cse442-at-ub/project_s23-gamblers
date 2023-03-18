@@ -13,10 +13,8 @@ switch($method){
                 die("one of you information is empty");
             }
             if (check_user_password($dump['username'],$dump['password'])){
-                // $data = get_by_username($dump['username']);
-                // $uid = randomStr(20);
-                // saveuid($uid,$data['id']);
-                // setcookie('uid', $uid, time() + 60 * 60, '/');
+                
+                setcookie('uid', randomStr(20), time() + 60 * 60, '/');
                 echo "success";
             }else{
                 echo "fail";
