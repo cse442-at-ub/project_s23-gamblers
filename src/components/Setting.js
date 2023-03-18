@@ -52,7 +52,7 @@ function Setting(){
                         </div>
                     
                     </div>
-                <div className='cardposition'>
+                    <div className='cardposition'>
                     <button className="card">
                         <a href='\iteminfo' >
                         <img className='img2' src={img1} alt=""/>
