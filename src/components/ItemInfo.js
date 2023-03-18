@@ -1,10 +1,8 @@
 import {Col,Navbar,Container,Row} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./ItemInfo.css"
-import "./UserImage.css"
-import SearchBar from './SearchBar';
-import UserImage from './UserImage';
 import axios from "axios";
+import Header from './Header';
 import { useState , useEffect} from 'react';
 function ItemInfo(props){
     const [item, setItem] = useState([]);
@@ -13,7 +11,7 @@ function ItemInfo(props){
         handleLookItem();
     },[])
     const handleLookItem = () =>{
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item/${props.itid}`, "").then(function(response) {
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item/1`, "").then(function(response) {
             console.log(props.itid);
             // console.log(response.data);
             setItem(response.data);
@@ -28,34 +26,9 @@ function ItemInfo(props){
     return (
         
         <div>
-    <Navbar   className="header" variant="light"  expand="lg">
-        <Container  fluid className="header">
-            <Col md={2}>
-                <Container variant="dark" className='mt-4 mb-3'>
-                    <Navbar.Brand href="#home"><img
-                        alt=""
-                        src="https://picsum.photos/100/100"
-                        width="60"
-                        height="60"
-                        className="d-inline-block align-top"
-                        />
-                    </Navbar.Brand> 
-                </Container>
-            </Col>
-            <Col >
-                <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
-                    <a href='#profile'>
-                        <UserImage></UserImage> 
-                    </a>  
-                    <SearchBar></SearchBar>
-                </Container>
-            </Col>
-            
-            
-        </Container>
-    </Navbar>
-    {/* <input onChange={handleItemChange}/> */}
-    {/* <button onClick={handleLookItem}>find item</button> */}
+    <Header></Header>
+    <input onChange={handleItemChange}/>
+    <button onClick={handleLookItem}>find item</button>
     <Container fluid className='main-wrapper'>
         <Row className="d-flex mt-3 mb-3">
             <Col md={{ span: 4, offset: 2}} className="d-flex mt-3 mb-3">
