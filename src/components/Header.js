@@ -3,6 +3,7 @@ import {Col,Navbar,Container,Row} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar';
 import UserImage from './UserImage';
+import brand_image from '../assets/images/exchange.png'
 function Header() {
     return (
             <Navbar   className="header" variant="light"  expand="lg">
@@ -11,7 +12,7 @@ function Header() {
                     <Container variant="dark" className='mt-4 mb-3'>
                         <Navbar.Brand href="/"><img
                             alt=""
-                            src="https://picsum.photos/100/100"
+                            src={brand_image}
                             width="60"
                             height="60"
                             className="d-inline-block align-top"
