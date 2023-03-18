@@ -6,6 +6,7 @@ import PopUp from "./PopUp"
 import EditWindow from './EditWindow'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 function Profile(){
     
     const [buttonEditPopup, setEditPopup] = useState(false);
@@ -15,18 +16,20 @@ function Profile(){
     function handleChange(newV){
         setEditPopup(newV)
     }
+    const location = useLocation()
+    const {username} = location.state
 
-    useEffect(()=>{
-        handlerGetUser()
-    },[])
-
-    const handlerGetUser = () => {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/2`, "").then(function(response) {
-            // console.log(response.data);
-            setUser(response.data);
-            console.log(user);
-        });
-    }
+    // useEffect(()=>{
+    //     handlerGetUser()
+    // },[])
+    // const handlerGetUser = () => {
+    axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/[id] `, "").then(function(response) 
+    {
+        // console.log(response.data);
+        setUser(response.data);
+        console.log(user);
+    })
+    // }
     // const handleLookChange = (event) =>{
     //     setUid(event.target.value)
     //     console.log(uid);
@@ -69,13 +72,13 @@ function Profile(){
 
                 </div>
                 <Link to='/Setting'>
-                <button className='Myaccount'>
-                    <span className='MyaccountFont'>My account</span>
+                <button className='Myaccount1'>
+                    <span className='MyaccountFont1'>My account</span>
                 </button>
                 </Link>
                 <Link to='/profile'>
-                    <button className='Profile'>
-                    <span className='ProfileFont'>Profile</span>
+                    <button className='Profile1'>
+                    <span className='ProfileFont1'>Profile</span>
                 </button> 
                 </Link>  
                 
