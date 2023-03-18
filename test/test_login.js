@@ -1,7 +1,8 @@
 const axios = require('axios');
-let faildata = {"email":"justfortest@exchange.com","username":"22","password":"9299","phone":"123456"} // object?
-let rightdata = {"email":"justfortest@exchange.com","username":"223","password":"999","phone":"123456"} //object? should be string idk
-axios.post('http://localhost:8080/project_s23-gamblers/api/login/',faildata)
+// make sure have such user?
+let faildata = {"username":"test","password":"testpwd1"} // object?
+let rightdata = {"username":"test","password":"testpwd"} //object? should be string idk
+axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/login/',faildata)
   .then(response => {
     
     if(response.data !== "success"){
@@ -14,7 +15,7 @@ axios.post('http://localhost:8080/project_s23-gamblers/api/login/',faildata)
     console.log(error);
   });
 
-axios.post('http://localhost:8080/project_s23-gamblers/api/login/',rightdata)
+axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/login/',rightdata)
 .then(response => {
 
 if(response.data === "success"){
