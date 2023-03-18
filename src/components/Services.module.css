@@ -1,19 +1,19 @@
 .services__content{
     gap: 4rem;
 }
-.services__content--item{
+.services__contentitem{
     padding: 2rem;
 }
-.services__content--item .icon{
+.services__contentitem .icon{
     width: 60px;
     margin: 0 auto;
     opacity: 0.7;
 }
-.services__content--item .text{
+.services__contentitem .text{
     margin: 2rem 0;
     opacity: 0.8;
 }
-.services__content--item .para__text{
+.services__contentitem .para__text{
     max-width: 400px;
     margin: 0 auto;
 }
@@ -172,12 +172,13 @@
 html{
   font-size: 10px;
 }
-body{
+
+/* body{
   font-size: 1.8rem;
   line-height: 1.6;
   font-family: var(--font-base);
   color: var(--black-color);
-}
+} */
 
 a{
   color: unset;

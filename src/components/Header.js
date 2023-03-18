@@ -1,5 +1,5 @@
 import './Header.css'
-import {Col,Navbar,Container,Row} from 'react-bootstrap/';
+import {Col,Navbar,Container} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar';
 import UserImage from './UserImage';
@@ -22,7 +22,7 @@ function Header() {
                 </Col>
                 <Col >
                     <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
-                        <a href='/Setting'>
+                        <a href='/Login'>
                             <UserImage></UserImage> 
                         </a>  
                         <SearchBar></SearchBar>

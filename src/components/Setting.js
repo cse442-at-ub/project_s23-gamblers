@@ -4,28 +4,28 @@ import {useState, useEffect} from 'react'
 import img1 from '../image/icon/unnamed.jpg'
 import PopUp from "./PopUp"
 import EditWindow from './EditWindow'
-import axios from 'axios'
+// import axios from 'axios'
+import { useLocation } from 'react-router-dom';
+
 function Setting(){
     
     const [buttonEditPopup, setEditPopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [uid, setUid] = useState("")
-    const [user, setUser] = useState([])
+    // const [user, setUser] = useState([])
     function handleChange(newV){
         setEditPopup(newV)
     }
 
-    useEffect(()=>{
-        handlerGetUser()
-    },[])
-
-    const handlerGetUser = () => {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/2`, "").then(function(response) {
-            // console.log(response.data);
-            setUser(response.data);
-            console.log(user);
-        });
-    }
+    // useEffect(()=>{
+    //     handlerGetUser()
+    // },[])
+    const username = useLocation()
+    // const handlerGetUser = () => {
+    //     axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/2`, "").then(function(response) {
+    //         setUser(response.data);
+    //     });
+    // }
     // const handleLookChange = (event) =>{
     //     setUid(event.target.value)
     //     console.log(uid);
@@ -48,7 +48,7 @@ function Setting(){
                         </div>
                         <div className='Username'>
 
-                            <span className='UsernameFont'>{user.username}</span>
+                        <span className='UsernameFont'>{username.state.username}</span>
                         </div>
                     
                     </div>

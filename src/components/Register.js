@@ -79,7 +79,9 @@ function Register() {
                 {/* <img className='image0' src={require('../image/image0.png')} alt="icon" /> */}
             </div>
             <div className='login'>
+                <br></br>
                 <h1>Register</h1>
+                <br></br>
                 <form onSubmit={submitHandler}>
                     <div className='username'>
                         <label name='username'>Username</label>
@@ -113,7 +115,7 @@ function Register() {
                     </div>
                     <br></br>
                     <div>
-                        <input type='checkbox' value={check} onChange={checkHandler} />
+                        <input type='checkbox' value={check} onChange={checkHandler} style={{height:'20px', width:'20px' }}/>
                         <span onClick={() => setPopup(true)} className='div'>UserAgreement</span>
                         <UserAgreement trigger={popup} setPopup={setPopup}></UserAgreement>
                     </div>

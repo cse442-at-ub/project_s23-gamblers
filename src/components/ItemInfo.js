@@ -1,4 +1,4 @@
-import {Col,Navbar,Container,Row} from 'react-bootstrap/';
+import {Col,Container,Row} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./ItemInfo.css"
 import axios from "axios";
@@ -7,15 +7,15 @@ import { useState , useEffect} from 'react';
 function ItemInfo(props){
     const [item, setItem] = useState([]);
     const [itid, setItid] = useState(undefined);
+    
     useEffect(() => {
         handleLookItem();
+
     },[])
+
     const handleLookItem = () =>{
         axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item/1`, "").then(function(response) {
-            console.log(props.itid);
-            // console.log(response.data);
             setItem(response.data);
-            console.log(item);
         });
     }
     const handleItemChange = (event) =>{

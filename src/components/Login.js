@@ -24,8 +24,8 @@ function Login() {
         }).then(function(response){
             console.log(response)
             if (response.data ==='success'){
-                window.alert('login success, hit ok to go to home page')
-                navigate('/')
+                window.alert('login success, click ok')
+                navigate('/Setting',{state:{username:userName}})
                 setUsername('')
                 setPassword('')
             }else{
@@ -45,7 +45,10 @@ function Login() {
                 {/* <img className='image0' src={require('../image/image0.png')} alt="icon" /> */}
             </div>
             <div className='formBlock'>
+                <br></br>
+                <br></br>
                 <h1 className='login'>Login</h1>
+                <br></br>
                 <form className='form' onSubmit={submitHandler}>
                     <div className='usernameL'>
                         <label name='username' className='blue'>Username</label>
