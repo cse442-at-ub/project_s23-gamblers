@@ -52,6 +52,16 @@ function Setting(){
                         </div>
                     
                     </div>
+                    <div className='cardposition'>
+                    <button className="card">
+                        <a href='\iteminfo' >
+                        <img className='img2' src={img1} alt=""/>
+                        <div className="container">
+                            <h4><b>Item Name</b></h4> 
+                        </div>
+                        </a> 
+                    </button> 
+                </div>
                 <div className='Iconw'>
 
             
