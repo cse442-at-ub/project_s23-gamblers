@@ -1,40 +1,47 @@
 import './Profile.css'
 import LogOut from './LogOut'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import img1 from '../image/icon/unnamed.jpg'
 import PopUp from "./PopUp"
 import EditWindow from './EditWindow'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
 function Profile(){
     
     const [buttonEditPopup, setEditPopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
-    const [uid, setUid] = useState("")
+    const [username, setUsername] = useState("")
     const [user, setUser] = useState([])
     function handleChange(newV){
         setEditPopup(newV)
     }
-    const location = useLocation()
-    const {username} = location.state
-
+    // const location = useLocation()
+    // const {username} = location.state
+  
+    const handlerGetUser = (event) => {
+        event.preventDefault()
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/username/${username}`, "").then(function(response) {
+            // console.log(response.data);
+            setUser(response.data);
+            console.log(user);
+        });
+    }
     // useEffect(()=>{
     //     handlerGetUser()
     // },[])
     // const handlerGetUser = () => {
-    axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/[id] `, "").then(function(response) 
-    {
-        // console.log(response.data);
-        setUser(response.data);
-        console.log(user);
-    })
-    // }
-    // const handleLookChange = (event) =>{
-    //     setUid(event.target.value)
-    //     console.log(uid);
-    //     console.log(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/${uid}`);
-    // }
+    // axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/username/[id] `, "").then(function(response) 
+    // {
+    //     // console.log(response.data);
+    //     setUser(response.data);
+    //     console.log(user);
+    // })
+   
+    const handleLookChange = (event) =>{
+        setUsername(event.target.value)
+        console.log(username);
+        console.log(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/username/${username}`);
+    }
     return(
         <div className='Background'>
             <div className='Mainpage'>
@@ -50,13 +57,18 @@ function Profile(){
                         <div className='circle'>
                             <img className='img1' src={img1} alt='icon' />
                         </div>
+                        
                         <div className='Username'>
 
-                            <span className='UsernameFont'>{user.username}</span>
-                            <div className='UserInfo'>Email: {user.email}</div>
-                            <div className='UserInfo'>Phone number: {user.phoneNumber}</div>
+                        <label className='UsernameFont' >username</label><tr/>
+                        <input type='txt' onChange={handleLookChange} name="look"></input>
+                        <button  onClick={handlerGetUser}>look information</button>
+                        <tr/>
+                        
+                        <td >username:{user.username}</td><tr/>
+                        <td >email:{user.email}</td><tr/>
+                        <td >phoneNumber:{user.phoneNumber}</td><tr/>
                         </div>
-                    
                     </div>
                 <div className='Iconw'>
 
@@ -64,7 +76,7 @@ function Profile(){
 
                     <button onClick={() => setEditPopup(true)} className='Edituserprofile'>Edit User Profile</button>
                     <PopUp trigger={buttonEditPopup} >
-                    <EditWindow trigger={buttonEditPopup} onChange={handleChange} id = {uid}></EditWindow>
+                    <EditWindow trigger={buttonEditPopup} onChange={handleChange} id = {user.id}></EditWindow>
                     </PopUp>
                         <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
                     </LogOut>
