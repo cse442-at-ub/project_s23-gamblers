@@ -1,0 +1,76 @@
+.loginPage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100px;
+    background: #8BBAFF;
+}
+
+.frame12{
+    background: #BEE8FF;
+    height: 100vh;
+}
+
+.formBlock{
+    margin: auto;
+    width: 450px;
+    height: 400px;
+}
+
+.control {
+    margin: 1rem 0;
+}
+
+.usernameL{
+    margin-right: 0px;
+    font-size: 20pt;
+}
+.passwordL{
+    margin-right: 0px;
+    font-size: 20pt;
+}
+
+.forgotL{
+    margin-left: 100px;
+
+}
+
+.blue{
+    color: #66C5FB;
+}
+
+.LoginButton{
+    margin-top: 20px;
+    width: 250px;
+    height: 60px;
+    background-color: #66C5FB;
+    font-size: 25pt;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.RegisterButton{
+        margin-top: 20px;
+        width: 250px;
+        height: 60px;
+        background-color: #66C5FB;
+        font-size: 25pt;
+        border-radius: 8px;
+        cursor: pointer;
+}
+
+
+.login{
+    text-align: center;
+    font-size:xx-large;
+}
+
+.form{
+    text-align: center;
+}
+
+.input{
+    height: 50px;
+    width: 400px;
+    font-size: 28pt;
+}

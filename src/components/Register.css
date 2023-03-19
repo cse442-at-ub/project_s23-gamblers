@@ -1,0 +1,32 @@
+.username {
+    margin-right: 300px;
+    font-size: 20pt;
+    color: #66C5FB;
+}
+
+.password {
+    margin-right: 300px;
+    font-size: 20pt;
+    color: #66C5FB;
+}
+
+.Cpassword{
+    margin-right: 210px;
+    font-size: 20pt;
+    color: #66C5FB;
+}
+
+.email{
+    margin-right: 340px;
+    font-size: 20pt;
+    color: #66C5FB;
+}
+.phone {
+    margin-right: 250px;
+    font-size: 20pt;
+    color: #66C5FB;
+}
+.div{
+   cursor: pointer;
+   margin-left: 15px;
+}
