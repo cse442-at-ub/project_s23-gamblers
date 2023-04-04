@@ -1,8 +1,7 @@
 FROM php:8.0-apache
 WORKDIR /var/www/html
 
-COPY index.php index.php
-ADD project_s23-gamblers project_s23-gamblers
+ADD api api
 COPY apache-selfsigned.crt /etc/ssl/certs/apache-selfsigned.crt
 COPY apache-selfsigned.key /etc/ssl/private/apache-selfsigned.key
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf 
