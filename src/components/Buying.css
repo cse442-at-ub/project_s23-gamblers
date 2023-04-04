@@ -1,0 +1,12 @@
+table, th, td {
+    border:1px solid black;
+    font-size: 20px;
+  }
+
+.table_header {
+    width:  300px
+}
+.box {
+    display: flex;
+    padding: 2px;
+  }
