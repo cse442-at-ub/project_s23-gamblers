@@ -33,7 +33,7 @@ function escape_string($string){
 function saveuid($uid,$id){
     
     if(!check_tb_col_value_exist("cookies","id",$id)){
-        insert_tb_cols_values("cookies","(id, uid)", "($id, $uid)");
+        insert_tb_cols_values("cookies","(id, uid)", "('$id', '$uid')");
         
     }else{
         update_tb_col_value_where("cookies","uid",$uid,"id = $id");
@@ -43,8 +43,9 @@ function randomStr($len){
     if($len<=0) return "";
     $set = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $setlen = strlen($set);
+    $str = '';
     for ($i = 0; $i < $len; $i++) {
-        $str = $str.$set[rand(0, $setlen)];
+        $str = $str.$set[rand(0, $setlen-1)];
     }
     return $str;
 }
@@ -105,7 +106,7 @@ function insert_tb_cols_values($tb, $cols ,$values){
     $conn = $objDb->connect();
     $sql = "INSERT INTO $tb $cols
     VALUES $values";
-    echo "here";
+    $conn->query($sql);
     if ($conn->error){
         die( "Error: " . $conn->error );
     }
