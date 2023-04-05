@@ -20,12 +20,15 @@ class User{
         if(!$this->is_vaild){
             return;
         }
-        
+        $_info = $this->information;
+        $info = ['username' =>$_info['username'],'eamil'=>$_info['email'],"phone_number"=>$_info["phone_number"]]; 
+        echo json_encode($info);        
     }
-    public function postitem(){
+    public function post_item($json){
         if(!$this->is_vaild){
             return;
         }
+        
     }
     public function change_profile($json){
         if(!$this->is_vaild){
