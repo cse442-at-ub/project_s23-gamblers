@@ -36,7 +36,12 @@ class User{
         if(!$this->is_vaild){
             return;
         }
-        $views = get_tb_col_value("view_history","user_id",$this->information['id'],true);
+        $user_id = $this->information['id'];
+        
+        $sql = "SELECT i.item_name, i.item_description, i.item_price, i.item_contact, i.item_image_dir, i.item_state
+        FROM view_history v, items i
+        WHERE v.user_id  = $user_id and v.item_id = i.item_id;";
+        $views = get($sql,true);
         echo json_encode($views);
     }
 }

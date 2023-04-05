@@ -112,7 +112,24 @@
             return $ans;
         }
     }
-    
+    function get($sql,$muti=false){
+        $objDb = new DbConnect;
+        $conn = $objDb->connect();
+        $result = $conn->query($sql);
+        if ($conn->error){
+            echo "Error: " . $conn->error;
+            die();
+        }
+        if(!$muti)
+            return $result->fetch_assoc();
+        else{
+            $ans = array();
+            while($row = $result->fetch_assoc()){
+                array_push($ans,$row);
+            }
+            return $ans;
+        }
+    }
     function check_tb_col_value_exist($tb,$col,$value){
         if($value == "" || $tb == "" || $col == ""){
             die("empty argments");
