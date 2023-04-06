@@ -4,8 +4,9 @@ import {useState, useEffect} from 'react'
 import img1 from '../image/icon/unnamed.jpg'
 import PopUp from "./PopUp"
 import EditWindow from './EditWindow'
-// import axios from 'axios'
-import { useLocation } from 'react-router-dom';
+import { useCallback } from 'react'
+import axios from 'axios'
+
 
 function Setting(){
     
@@ -20,7 +21,6 @@ function Setting(){
     // useEffect(()=>{
     //     handlerGetUser()
     // },[])
-    const username = useLocation()
     // const handlerGetUser = () => {
     //     axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/2`, "").then(function(response) {
     //         setUser(response.data);
@@ -31,6 +31,48 @@ function Setting(){
     //     console.log(uid);
     //     console.log(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/${uid}`);
     // }
+
+    const [guest, setGuest] = useState(true)
+    const [guestName, setGuestName] = useState('Guest')
+
+    function fetchUserHandler() {
+        axios.get(`https://localhost/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
+            console.log(response.data)
+            if (response.status === 401) {
+                setGuest(true)
+            }
+            if (response.status === 200) {
+                setGuest(false)
+                setGuestName(response.data.username)
+            }
+        })
+    }
+
+    // const fetchUserHandler = useCallback(async () => {
+    //     try {
+            
+    //         const response = await fetch('https://localhost/api/userinfo.php', { credentials: 'include' })
+    //         console.log(response.data)
+    //         if (!response.ok) {
+    //             throw new Error('Something went wrong!')
+    //         }
+    //         if (response.status === 401) {
+    //             setGuest(true)
+    //         }
+    //         if (response.status === 200) {
+    //             setGuest(false)
+    //         }
+
+    //     } catch (error) {
+    //         throw new Error('Something went wrong!')
+    //     }
+    // }, []);
+
+
+    useEffect(() => {
+        fetchUserHandler()
+    }, [])
+
     return(
         <div className='Background'>
             <div className='Mainpage'>
@@ -48,7 +90,7 @@ function Setting(){
                         </div>
                         <div className='Username'>
 
-                        <span className='UsernameFont'>{username.state.username}</span>
+                        <span className='UsernameFont'>{guestName}</span>
                         </div>
                     
                     </div>
