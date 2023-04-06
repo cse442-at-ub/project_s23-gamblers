@@ -27,7 +27,7 @@ function App() {
           <Route path='/UserAgreement' element={<UserAgreement />} />
           <Route path='/Verify' element={<Verify />} />
           <Route path="/Setting" element={<Setting/>}></Route>
-          <Route path="/buying" element={<Buying/>}></Route>
+          <Route path="/history" element={<Buying/>}></Route>
         </Routes>
       </BrowserRouter>
 

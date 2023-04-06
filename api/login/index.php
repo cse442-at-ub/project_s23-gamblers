@@ -1,6 +1,5 @@
 <?php
 include_once '../database/db_connect.php';
-include_once "../auth/authentication.php";
 $objDb = new DbConnect;
 $conn = $objDb->connect();
 $method = $_SERVER['REQUEST_METHOD'];

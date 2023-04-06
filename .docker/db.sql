@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS items (
     item_id MEDIUMINT NOT NULL AUTO_INCREMENT,
-    poster_id MEDIUMINT NOT NULL,
+    user_id MEDIUMINT NOT NULL,
     date_posted datetime(6) NOT NULL,
     item_state varchar(80) NOT NULL,
     last_modify datetime(6) DEFAULT NULL,
@@ -56,3 +56,86 @@ CREATE TABLE IF NOT EXISTS cookies (
 	id MEDIUMINT NOT NULL,
     uid varchar(120) NOT NULL
 ) ENGINE=InnoDB;
+
+
+-- ----------------------------
+-- Table structure for user_history
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS user_history (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+    user_id MEDIUMINT NOT NULL,
+    action_id MEDIUMINT NOT NULL,
+    action_type tinyint(1) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+-- ----------------------------
+-- Table structure for action_table
+-- ----------------------------
+/*
+action_type  action_name      table_name
+    1       added item          items
+    2       upload image        images
+    3       view item           view_history
+    4       change profile      user_changes
+*/
+CREATE TABLE IF NOT EXISTS action_table (
+    action_type tinyint(1) NOT NULL,
+    tbl_name varchar(20) NOT NULL,
+    action_name varchar(20) NOT NULL,
+    PRIMARY KEY (action_type)
+) ENGINE=InnoDB;
+INSERT INTO action_table (action_type, action_name, tbl_name) 
+VALUES 
+(1,'added item','items'),
+(2,'upload image','images'),
+(3,'view item','view_history'),
+(4,'change profile','user_changes'),
+(5,'added comment','item_comments');
+-- ----------------------------
+-- Table structure for images
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS images (
+    image_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    user_id MEDIUMINT NOT NULL,
+    image_type TINYINT NOT NULL,
+    image_name varchar(120) NOT NULL,
+    time_created datetime(0) NOT NULL,
+    PRIMARY KEY (image_id)
+) ENGINE=InnoDB;
+
+-- ----------------------------
+-- Table structure for view_history
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS view_history (
+    view_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    user_id MEDIUMINT NOT NULL,
+    item_id MEDIUMINT NOT NULL,
+    time_created datetime(0) NOT NULL,
+    PRIMARY KEY (view_id)
+) ENGINE=InnoDB;
+
+
+
+
+-- ----------------------------
+-- Table structure for user_changes
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS user_changes (
+    id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    time_created datetime(0) NOT NULL,
+    user_id  MEDIUMINT NOT NULL,
+    change_json VARCHAR(120) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS item_comments (
+    id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    user_id  MEDIUMINT NOT NULL,
+    item_id  MEDIUMINT NOT NULL,
+    comment_text VARCHAR(500) NOT NULL,
+    time_created datetime(0) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+
