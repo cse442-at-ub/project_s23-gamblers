@@ -20,15 +20,12 @@ class User{
         if(!$this->is_vaild){
             return;
         }
-        $_info = $this->information;
-        $info = ['username' =>$_info['username'],'eamil'=>$_info['email'],"phone_number"=>$_info["phone_number"]]; 
-        echo json_encode($info);        
+        
     }
-    public function post_item($json){
+    public function postitem(){
         if(!$this->is_vaild){
             return;
         }
-        
     }
     public function change_profile($json){
         if(!$this->is_vaild){
@@ -41,7 +38,7 @@ class User{
         }
         $user_id = $this->information['id'];
         
-        $sql = "SELECT i.item_name, i.item_description, i.item_price, i.item_contact, i.item_image_dir, i.item_state
+        $sql = "SELECT i.item_name, i.item_price, i.item_image_dir, i.item_id
         FROM view_history v, items i
         WHERE v.user_id  = $user_id and v.item_id = i.item_id;";
         $views = get($sql,true);
