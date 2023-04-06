@@ -53,6 +53,9 @@ class User{
         $val = "($poster_id, $date_posted, $item_state , $date_posted, $item_name, $image_name, $item_description, $item_price, $seller)";
         insert_tb_cols_values($tb,$col,$val);
     }
+    public function is_auth(){
+        return $this->is_vaild;
+    }
     // TODO: user sent request to update his profile
     public function change_profile($json){
         if(!$this->is_vaild){
@@ -65,7 +68,6 @@ class User{
             return;
         }
 
-        echo "hh";
         $user_id = $this->information['id'];
         $col = '(`user_id`, `item_id`, `time_created`)';
         $time_created = date("Y-m-d H:i:s");
