@@ -1,6 +1,6 @@
 <?php
 include_once 'database/db_connect.php';
-
+include_once 'helper.php';
 class User{
     private $is_vaild;
     public $information;
@@ -15,7 +15,6 @@ class User{
     /*
         return userinfomation as json string
     */
-
     public function info(){
         if(!$this->is_vaild){
             return;
@@ -24,6 +23,7 @@ class User{
         $info = ['username' =>$_info['username'],'eamil'=>$_info['email'],"phone_number"=>$_info["phone_number"]]; 
         echo json_encode($info);        
     }
+    // user class save the item to database;
     public function post_item($json){
         if(!$this->is_vaild){
             return;
@@ -53,11 +53,26 @@ class User{
         $val = "($poster_id, $date_posted, $item_state , $date_posted, $item_name, $image_name, $item_description, $item_price, $seller)";
         insert_tb_cols_values($tb,$col,$val);
     }
+    // TODO: user sent request to update his profile
     public function change_profile($json){
         if(!$this->is_vaild){
             return;
         }
     }
+    // save the views in view history 
+    public function view_items($item_id){
+        if(!$this->is_vaild){
+            return;
+        }
+
+        echo "hh";
+        $user_id = $this->information['id'];
+        $col = '(`user_id`, `item_id`, `time_created`)';
+        $time_created = date("Y-m-d H:i:s");
+        $val = "('$user_id','$item_id','$time_created')";
+        insert_tb_cols_values("view_history",$col,$val);
+    }
+    // join two table items and view_history to get user's history
     public function view_history(){
         if(!$this->is_vaild){
             return;
