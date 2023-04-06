@@ -2,22 +2,35 @@ import {Col,Container,Row} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./ItemInfo.css"
 import axios from "axios";
+import {  useNavigate , Link} from 'react-router-dom'
 import Header from './Header';
 import { useState , useEffect} from 'react';
 function ItemInfo(props){
     const [item, setItem] = useState([]);
     const [itid, setItid] = useState(undefined);
+    const keyValues = window.location.search
     
+    const navigate = useNavigate()
+    let item_id = 1;
     useEffect(() => {
+        console.log(window.location.search);
+        const a = window.location.search;
+        const arugments = new URLSearchParams(a);
+        item_id = (arugments.get('var'));
         handleLookItem();
 
     },[])
-
     const handleLookItem = () =>{
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item/1`, "").then(function(response) {
+        axios.get(`https://localhost/api/item.php?var=${item_id}`, "").then(function(response) {
             setItem(response.data);
-        });
-    }
+        //TODO: no such items
+        }).catch(function (error) {
+            console.log(error.response.status) // 401
+            console.log(error.response.data.error) //Please Authenticate or whatever returned from server
+            if(error.response.status==404){
+                navigate('/')
+            }
+    })}
     const handleItemChange = (event) =>{
         setItid(event.target.value);
         console.log(itid);
@@ -27,8 +40,6 @@ function ItemInfo(props){
         
         <div>
     <Header></Header>
-    <input onChange={handleItemChange}/>
-    <button onClick={handleLookItem}>find item</button>
     <Container fluid className='main-wrapper'>
         <Row className="d-flex mt-3 mb-3">
             <Col md={{ span: 4, offset: 2}} className="d-flex mt-3 mb-3">
@@ -43,7 +54,7 @@ function ItemInfo(props){
             <Col md={{ span: 4 ,offset:1 }}>
                 <Row >
                     <h1 className='text'>
-                    <span id="item_name">{item.name}</span>
+                    <span id="item_name">{item.item_name}</span>
                     </h1>
                 </Row>
                 <Row>
@@ -51,7 +62,7 @@ function ItemInfo(props){
                 </Row>
                 <Row>
                     <h2 className='text'>
-                        <span  id="item_description">{item.description}</span>
+                        <span  id="item_description">{item.item_description}</span>
                     </h2>
                 </Row>
                 <Row>
@@ -65,7 +76,7 @@ function ItemInfo(props){
                     </Col>
                     <Col>
                         <h2 className='text'>
-                            <span  className='text' id="item_price_number">{item.price}</span>
+                            <span  className='text' id="item_price_number">{item.item_price}</span>
                         </h2>
                     </Col>
                 </Row>
@@ -80,7 +91,7 @@ function ItemInfo(props){
                     </Col>
                     <Col>
                         <h2 className='text'>
-                            <span  id="item_seller">{item.contact}</span>
+                            <span  id="item_seller">{item.item_contact}</span>
                         </h2>
                     </Col>
                 </Row>
