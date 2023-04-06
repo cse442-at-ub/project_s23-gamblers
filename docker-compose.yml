@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  db: 
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Password123#@!
+      MYSQL_DATABASE: cse442_2023_spring_team_m_db
+    volumes:
+          - .docker/db.sql:/docker-entrypoint-initdb.d/db.sql
+    ports:
+      - 33061:3306
+  app: 
+    build: .
+    restart: always
+    environment:
+      WAIT_HOSTS: db:3306
+      MYSQL_ROOT_PASSWORD: Password123#@!
+    ports: 
+      - '443:443'
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+      - db
+    ports:
+      - 8082:80
+    environment:
+      MYSQL_PASSWORD: Password123#@!
+      MYSQL_DATABASE: cse442_2023_spring_team_m_db

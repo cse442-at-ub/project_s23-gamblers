@@ -17,7 +17,15 @@ function EditWindow(props){
     }
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(post)
+        
+        if(Object.keys(post).length<3){
+            props.onChange(false)
+            alert("Invaild Input!!");
+            return
+        }
         axios.put(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/${props.id}`, post);
+        console.log("snet");
         props.onChange(false)
     }
     const handleChange = (event) => {
@@ -26,7 +34,7 @@ function EditWindow(props){
         //     setUsername(event.target.value)
         // }
         setPost(vals => ({ ...vals, [event.target.name]: event.target.value }));
-        console.log(post);
+    
     }
     return (
 
