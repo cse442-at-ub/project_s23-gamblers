@@ -26,6 +26,7 @@ function EditWindow(props){
         }
         axios.put(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/${props.id}`, post);
         console.log("snet");
+        console.log(post);
         props.onChange(false)
     }
     const handleChange = (event) => {
@@ -36,6 +37,7 @@ function EditWindow(props){
         setPost(vals => ({ ...vals, [event.target.name]: event.target.value }));
     
     }
+
     return (
 
         <div  className='window'>
@@ -67,7 +69,23 @@ function EditWindow(props){
                                     <Form.Label className='edit_txt'> Phone Number </Form.Label>
                                     <Form.Control className='edit_input' type="txt" placeholder="Enter Phone Number" name='phoneNumber'  onChange={handleChange}/>
                             </Form.Group>
+                            <Form.Group className='fileupload'>
+                                <Form.Label>Upload Image</Form.Label>
+                            <input type='file' name='file' placeholder='Drag your file here' onChange={handleChange}/>
+                            </Form.Group>
+                            
+
+
                             </Row>
+
+                            {/* <div>
+                                <input className ="up_img" type= "file" accept = "image/*" 
+                                ref = {x=>this._file = x}/>
+                                <botton onClick = {ev =>{
+                                    this._file.click()
+                                }}>Upload Image</botton>
+                            </div> */}
+
                             <div className="d-flex justify-content-around">
                             <button className='mt-5 mb-5 cancel_bot'>
                             Close

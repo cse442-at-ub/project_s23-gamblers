@@ -28,6 +28,9 @@
     border-bottom-right-radius: 36px;
     border-bottom-left-radius: 36px;
 }
+.fileupload{
+    background-color: #10c9c3;
+}
 
 .edit_input{
     background: #F5F5F5;

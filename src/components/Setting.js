@@ -12,6 +12,12 @@ function Setting(){
     //const [buttonEditPopup, setEditPopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [uid, setUid] = useState("")
+    const [buttonEditPopup, setEditPopup] = useState(false);
+    const [username, setUsername] = useState("")
+    const [user, setUser] = useState([])
+    function handleChange(newV){
+        setEditPopup(newV)
+    }                          
     // const [user, setUser] = useState([])
     //function handleChange(newV){
         //setEditPopup(newV)
@@ -20,7 +26,6 @@ function Setting(){
     // useEffect(()=>{
     //     handlerGetUser()
     // },[])
-    const username = useLocation()
     // const handlerGetUser = () => {
     //     axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/2`, "").then(function(response) {
     //         setUser(response.data);
@@ -48,7 +53,7 @@ function Setting(){
                         </div>
                         <div className='Username'>
 
-                        <span className='UsernameFont'>{username.state.username}</span>
+                        <span className='UsernameFont'></span>
                         </div>
                     
                     </div>
@@ -64,11 +69,11 @@ function Setting(){
                 </div>
                 <div className='Iconw'>
 
-                <a href='/profile' >
-                    <button type='button' className='Edituserprofile'>Edit User Profile</button>
-                        <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
-                    </LogOut>
-                    </a>
+    
+                    <button onClick={() => setEditPopup(true)} className='Edituserprofile'>Edit User Profile</button>
+                    <PopUp trigger={buttonEditPopup} >
+                    <EditWindow trigger={buttonEditPopup} onChange={handleChange} id = {user.id}></EditWindow>
+                    </PopUp>
 
 
                 </div>
