@@ -22,6 +22,7 @@ function ItemInfo(props){
     },[])
     const handleLookItem = () =>{
         axios.get(`https://localhost/api/item.php?var=${item_id}`, {withCredentials:true}).then(function(response) {
+            console.log(response.data); 
             setItem(response.data);
         //TODO: no such items
         }).catch(function (error) {
@@ -36,6 +37,32 @@ function ItemInfo(props){
         console.log(itid);
        
     }
+
+    const [guestName, setGuestName] = useState('Guest')
+
+    function fetchUserHandler() {
+        axios.get(`https://localhost/api/userinfo.php`, { withCredentials: true }).then(function (response) {
+            console.log(response.data)
+            if (response.status === 401) {
+            }
+            if (response.status === 200) {
+                setGuestName(response.data.username)
+            }
+        })
+    }
+    useEffect(() => {
+        fetchUserHandler()
+    }, [])
+
+    function handleReport(){
+        window.alert('A report has been sent')
+        axios.post('https://localhost/api/report.php',{
+            reporter: guestName,
+            item_id: item.item_name
+        })
+    }
+
+
     return (
         
         <div>
@@ -46,7 +73,7 @@ function ItemInfo(props){
             <Container>
             <img
                         alt=""
-                        src="https://picsum.photos/600/600"
+                        src={"https://localhost/uploads/"+item.item_image_dir}
                         className='item-image'
                             />
             </Container>
@@ -94,6 +121,7 @@ function ItemInfo(props){
                             <span  id="item_seller">{item.item_contact}</span>
                         </h2>
                     </Col>
+                    <button className='reportbutton' onClick={handleReport}>Report Post</button>
                 </Row>
             </Col>
         </Row>

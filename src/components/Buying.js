@@ -40,7 +40,7 @@ export default function Buying() {
                     <div className='box'>
                         <span className='view_history_name'>{order1['item_name']}<br></br>
                             <Link to={'/item/'+order1['item_id']}>
-                            <img src = "https://picsum.photos/50/50" ></img>
+                            <img src = {"https://localhost/uploads/"+order1['item_image_dir']} ></img>
                             </Link>
                         </span> 
                     </div>
