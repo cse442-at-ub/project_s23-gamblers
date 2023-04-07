@@ -18,10 +18,10 @@ function Login() {
 
     function submitHandler(event) {
         event.preventDefault()
-        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/login/`,{
+        axios.post(`https://localhost/api/login/`,{
             username: userName,
             password: password,
-        }).then(function(response){
+        },{withCredentials:true}).then(function(response){
             console.log(response)
             if (response.data ==='success'){
                 window.alert('login success, click ok')

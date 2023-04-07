@@ -21,7 +21,7 @@ function ItemInfo(props){
 
     },[])
     const handleLookItem = () =>{
-        axios.get(`https://localhost/api/item.php?var=${item_id}`, "").then(function(response) {
+        axios.get(`https://localhost/api/item.php?var=${item_id}`, {withCredentials:true}).then(function(response) {
             setItem(response.data);
         //TODO: no such items
         }).catch(function (error) {
