@@ -3,7 +3,7 @@ import axios from "axios";
 import "./PostForm.css"
 
 function PostForm(){
-    const url ="https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/post_item.php"
+    const url ="https://localhost/api/post_item.php"
     const [postimage,setPostImage] = useState('')
     const [data, setData]= useState({
         item_name:"",
