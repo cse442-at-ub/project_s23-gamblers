@@ -94,6 +94,7 @@ function ItemInfo(props){
                             <span  id="item_seller">{item.item_contact}</span>
                         </h2>
                     </Col>
+                    <button className='reportbutton'>Report Post</button>
                 </Row>
             </Col>
         </Row>
