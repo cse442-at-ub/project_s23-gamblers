@@ -40,17 +40,21 @@ class User{
                 `item_price`,
                 `item_contact`)';
         // dummy 
+        $json_obj = json_decode($json,true);
+        print_r($json_obj);
         $filename = '/path/to/image.jpg';
         $path_parts = pathinfo( $filename );
-        $image_name = sql_dots('/uploads/items/'.randomStr(20).'.'.$path_parts['extension']);
-        $item_description = sql_dots('This is an example item description.');
-        $item_price = sql_dots('99');
-        $seller = sql_dots('seller@example.com');
+        // $image_name = sql_dots('/uploads/items/'.randomStr(20).'.'.$path_parts['extension']);
+        $image_name = sql_dots($json_obj['item_image']);
+        $item_description = sql_dots($json_obj['description']);
+        $item_price = sql_dots($json_obj['price']);
+        $seller = sql_dots($json_obj['contact']);
         $date_posted = sql_dots(date("Y-m-d H:i:s"));
-        $item_name = sql_dots("example i");
-        $poster_id = sql_dots('1');
+        $item_name = sql_dots($json_obj['item_name']);
+        $poster_id = sql_dots($this->information['id']);
         $item_state = sql_dots('active');
         $val = "($poster_id, $date_posted, $item_state , $date_posted, $item_name, $image_name, $item_description, $item_price, $seller)";
+        echo $val;
         insert_tb_cols_values($tb,$col,$val);
     }
     public function is_auth(){

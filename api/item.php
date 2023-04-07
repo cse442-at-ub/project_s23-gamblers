@@ -16,9 +16,14 @@ if ($method == 'GET'){
         $infor = get_tb_col_value("cookies","uid",$uid);
         if($infor){
             $a = new User($infor['id']);
-            if($a->is_auth())
+            if($a->is_auth()){
                 $a->view_items($query['var']); // need to parese argument late
+            }
         }
+    }
+    else{
+        header('HTTP/1.0 401 Unauthorized');
+        die();
     }
     exit();
 }
