@@ -70,7 +70,7 @@ function Login() {
                     </div>
                     <button className='LoginButton' type='submit'>Login</button>
                     <button className='RegisterButton' onClick={registerHandler}>Register</button>
-                    <button className='RegisterButton' onClick={guestHandler}>Continue as guest</button>
+                    <button className='RegisterButton' onClick={guestHandler}>Guest Pass</button>
                 </form>
             </div>
         </div>

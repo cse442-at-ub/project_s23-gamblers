@@ -9,6 +9,7 @@ import { useState } from 'react'
 import UserAgreement from './components/UserAgreement'
 import Setting from './components/Setting'
 import Buying from "./components/Buying"
+import Report from "./components/Report"
 function App() {
   const [login, setLogin] = useState(false)
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/Verify' element={<Verify />} />
           <Route path="/Setting" element={<Setting/>}></Route>
           <Route path="/history" element={<Buying/>}></Route>
+          <Route path="/report" element={<Report />}></Route>
         </Routes>
       </BrowserRouter>
 
