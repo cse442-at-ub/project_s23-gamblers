@@ -18,14 +18,14 @@ function Login() {
 
     function submitHandler(event) {
         event.preventDefault()
-        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/login/`,{
+        axios.post(`https://localhost/api/login/`,{
             username: userName,
             password: password,
-        }).then(function(response){
+        },{withCredentials: true}).then(function(response){
             console.log(response)
             if (response.data ==='success'){
                 window.alert('login success, click ok')
-                navigate('/Setting',{state:{username:userName}})
+                navigate('/')
                 setUsername('')
                 setPassword('')
             }else{
@@ -36,6 +36,10 @@ function Login() {
 
     function registerHandler(){
         navigate('/register')
+    }
+
+    function guestHandler() {
+        navigate('/')
     }
     
 
@@ -66,6 +70,7 @@ function Login() {
                     </div>
                     <button className='LoginButton' type='submit'>Login</button>
                     <button className='RegisterButton' onClick={registerHandler}>Register</button>
+                    <button className='RegisterButton' onClick={guestHandler}>Continue as guest</button>
                 </form>
             </div>
         </div>
