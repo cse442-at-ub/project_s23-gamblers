@@ -47,6 +47,9 @@ function Setting(){
             }
         })
     }
+    useEffect(() => {
+        fetchUserHandler()
+    }, [])
 
     // const fetchUserHandler = useCallback(async () => {
     //     try {
@@ -69,9 +72,7 @@ function Setting(){
     // }, []);
 
 
-    useEffect(() => {
-        fetchUserHandler()
-    }, [])
+   
 
     return(
         <div className='Background'>

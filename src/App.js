@@ -10,6 +10,7 @@ import UserAgreement from './components/UserAgreement'
 import Setting from './components/Setting'
 import Buying from "./components/Buying"
 import PostForm from "./components/PostForm";
+import Report from "./components/Report"
 function App() {
   const [login, setLogin] = useState(false)
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/history" element={<Buying/>}></Route>
           <Route path="/postform" element={<PostForm/>}></Route>
           
+          <Route path="/report" element={<Report />}></Route>
         </Routes>
       </BrowserRouter>
 

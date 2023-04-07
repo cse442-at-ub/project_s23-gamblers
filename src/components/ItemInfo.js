@@ -36,6 +36,32 @@ function ItemInfo(props){
         console.log(itid);
        
     }
+
+    const [guestName, setGuestName] = useState('Guest')
+
+    function fetchUserHandler() {
+        axios.get(`https://localhost/api/userinfo.php`, { withCredentials: true }).then(function (response) {
+            console.log(response.data)
+            if (response.status === 401) {
+            }
+            if (response.status === 200) {
+                setGuestName(response.data.username)
+            }
+        })
+    }
+    useEffect(() => {
+        fetchUserHandler()
+    }, [])
+
+    function handleReport(){
+        window.alert('A report has been sent')
+        axios.post('https://localhost/api/report.php',{
+            reporter: guestName,
+            item_id: item.item_name
+        })
+    }
+
+
     return (
         
         <div>
@@ -94,7 +120,7 @@ function ItemInfo(props){
                             <span  id="item_seller">{item.item_contact}</span>
                         </h2>
                     </Col>
-                    <button className='reportbutton'>Report Post</button>
+                    <button className='reportbutton' onClick={handleReport}>Report Post</button>
                 </Row>
             </Col>
         </Row>
