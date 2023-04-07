@@ -22,6 +22,7 @@ function ItemInfo(props){
     },[])
     const handleLookItem = () =>{
         axios.get(`https://localhost/api/item.php?var=${item_id}`, {withCredentials:true}).then(function(response) {
+            console.log(response.data); 
             setItem(response.data);
         //TODO: no such items
         }).catch(function (error) {
@@ -72,7 +73,7 @@ function ItemInfo(props){
             <Container>
             <img
                         alt=""
-                        src="https://picsum.photos/600/600"
+                        src={"https://localhost/uploads/"+item.item_image_dir}
                         className='item-image'
                             />
             </Container>
