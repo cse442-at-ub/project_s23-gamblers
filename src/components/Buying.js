@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {React} from 'react'
 import {  useNavigate , Link} from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -43,6 +44,7 @@ export default function Buying() {
                             <img className='history_item_image' src = {"https://localhost/uploads/"+order1['item_image_dir']} ></img>
                             </Link>
                         </span> 
+                        <span className='view_history_time'>{order1['time_created']}</span>
                     </div>
                 </th>
                 
