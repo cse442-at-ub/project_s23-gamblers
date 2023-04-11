@@ -20,7 +20,11 @@ class User{
             return;
         }
         $_info = $this->information;
-        $info = ['username' =>$_info['username'],'eamil'=>$_info['email'],"phone_number"=>$_info["phone_number"]]; 
+        $info = ['username' =>$_info['username'],
+                'eamil'=>$_info['email'],
+                "phone_number"=>$_info["phone_number"],
+                "bg_image"=>$_info['bg_image']
+            ]; 
         echo json_encode($info);        
     }
     // user class save the item to database;
@@ -64,6 +68,16 @@ class User{
     public function change_profile($json){
         if(!$this->is_vaild){
             return;
+        }
+    }
+    public function change_bg_image($img_name){
+        if(!$this->is_vaild){
+            return;
+        }
+        $_id = $this->information['id'];
+        $error = update_tb_col_value_where("users","bg_image",$img_name,"id = $_id");
+        if($error){
+            die($error);
         }
     }
     // save the views in view history 

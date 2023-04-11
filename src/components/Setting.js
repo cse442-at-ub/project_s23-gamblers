@@ -34,7 +34,8 @@ function Setting(){
 
     const [guest, setGuest] = useState(true)
     const [guestName, setGuestName] = useState('Guest')
-
+    // TODO: dummy data, need actual data from server
+    const [bg, setBg] = useState('')
     function fetchUserHandler() {
         axios.get(`https://localhost/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
             console.log(response.data)
@@ -42,7 +43,9 @@ function Setting(){
                 setGuest(true)
             }
             if (response.status === 200) {
+                console.log(response.data)
                 setGuest(false)
+                setBg(response.data.bg_image)
                 setGuestName(response.data.username)
             }
         })
@@ -85,7 +88,9 @@ function Setting(){
                 <button onClick={()=>setButtonPopup(true)} className='LogOut'>
                     <span className='LogOutFont'>Log Out</span>
                 </button>
-                    <div className='Icon'>
+                    <div className='Icon' style={{ 
+                        backgroundImage: `url(${"https://localhost/"+bg})`,
+                        }}>
                         <div className='circle'>
                             <img className='img1' src={img1} alt='icon' />
                         </div>

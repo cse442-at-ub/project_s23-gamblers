@@ -151,6 +151,7 @@
         $sql = "UPDATE $tb SET $col = $value
                     WHERE $where";
         $conn->query($sql);
+        
         if ($conn->error){
             die( "Error: " . $conn->error );
         }
