@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import axios from "axios";
 import "./PostForm.css"
-
+import toast, { Toaster } from "react-hot-toast";
 function PostForm(){
     const url ="https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/post_item.php"
     const [postimage,setPostImage] = useState('')
@@ -33,6 +33,7 @@ function PostForm(){
         console.log(fd)
         axios.post(url,fd,{withCredentials:true})
         .then(res=>{
+            toast.success('Successfully toasted!')
             console.log(res.data)
         })
     }
@@ -54,13 +55,17 @@ function PostForm(){
     return (
         <div className="post_main">
             <div className="sub_main">
+                <Toaster
+                position="top-center"
+                reverseOrder={false}
+                />
             <form onSubmit={(e)=>submit(e)}>
                 <div className="form-group">
                     <h1>Item Description</h1>
                 </div>
                 <div className="form-group">
                 <label >Item Name</label>
-                <input className="form-controll" onChange={(e)=>handle(e)} id="item_name" value={data.name} placeholder="name" type="text"></input>
+                <input className="form-controll" onChange={(e)=>handle(e)} id="item_name" value={data.item_name} placeholder="name" type="text"></input>
                 </div>
                 <div className="form-group">
                 <label>Item Description</label>
