@@ -1,4 +1,4 @@
-import "./EditHome.css"
+
 import { useState } from 'react';
 import PopUp from "./PopUpWindow";
 import EditWindow from "./EditWindow";

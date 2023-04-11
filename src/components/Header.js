@@ -1,4 +1,3 @@
-import './Header.css'
 import {Col,Navbar,Container} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar';
