@@ -9,6 +9,8 @@ import { useState } from 'react'
 import UserAgreement from './components/UserAgreement'
 import Setting from './components/Setting'
 import Buying from "./components/Buying"
+import PostForm from "./components/PostForm";
+import Report from "./components/Report"
 function App() {
   const [login, setLogin] = useState(false)
 
@@ -27,7 +29,10 @@ function App() {
           <Route path='/UserAgreement' element={<UserAgreement />} />
           <Route path='/Verify' element={<Verify />} />
           <Route path="/Setting" element={<Setting/>}></Route>
-          <Route path="/buying" element={<Buying/>}></Route>
+          <Route path="/history" element={<Buying/>}></Route>
+          <Route path="/postform" element={<PostForm/>}></Route>
+          
+          <Route path="/report" element={<Report />}></Route>
         </Routes>
       </BrowserRouter>
 
@@ -37,3 +42,4 @@ function App() {
 }
 
 export default App;
+ 
