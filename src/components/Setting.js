@@ -1,39 +1,25 @@
 import './Setting.css'
+import {Form,Col,Container,Row} from 'react-bootstrap/';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import LogOut from './LogOut'
+import { Link } from 'react-router-dom';
 import {useState, useEffect} from 'react'
 import img1 from '../image/icon/unnamed.jpg'
+import bg_change from '../assets/images/another-change-4.png'
 import PopUp from "./PopUp"
 import EditWindow from './EditWindow'
-import { useCallback } from 'react'
 import axios from 'axios'
 
 
 function Setting(){
     
-    //const [buttonEditPopup, setEditPopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [uid, setUid] = useState("")
-    // const [user, setUser] = useState([])
-    //function handleChange(newV){
-        //setEditPopup(newV)
-    //}
 
-    // useEffect(()=>{
-    //     handlerGetUser()
-    // },[])
-    // const handlerGetUser = () => {
-    //     axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/2`, "").then(function(response) {
-    //         setUser(response.data);
-    //     });
-    // }
-    // const handleLookChange = (event) =>{
-    //     setUid(event.target.value)
-    //     console.log(uid);
-    //     console.log(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/${uid}`);
-    // }
 
     const [guest, setGuest] = useState(true)
     const [guestName, setGuestName] = useState('Guest')
+    const [click_bg_ch, setClick_bg_ch] = useState(false)
     // TODO: dummy data, need actual data from server
     const [bg, setBg] = useState('')
     function fetchUserHandler() {
@@ -54,82 +40,125 @@ function Setting(){
         fetchUserHandler()
     }, [])
 
-    // const fetchUserHandler = useCallback(async () => {
-    //     try {
-            
-    //         const response = await fetch('https://localhost/api/userinfo.php', { credentials: 'include' })
-    //         console.log(response.data)
-    //         if (!response.ok) {
-    //             throw new Error('Something went wrong!')
-    //         }
-    //         if (response.status === 401) {
-    //             setGuest(true)
-    //         }
-    //         if (response.status === 200) {
-    //             setGuest(false)
-    //         }
 
-    //     } catch (error) {
-    //         throw new Error('Something went wrong!')
-    //     }
-    // }, []);
 
 
    
-
     return(
         <div className='Background'>
             <div className='Mainpage'>
-                <a href='/' >
-                <button type='button' className='Back' >
-                    <span className='BackFont'>Back</span>
-                </button>
-                </a>
-                <button onClick={()=>setButtonPopup(true)} className='LogOut'>
-                    <span className='LogOutFont'>Log Out</span>
-                </button>
-                    <div className='Icon' style={{ 
-                        backgroundImage: `url(${"https://localhost/"+bg})`,
-                        }}>
-                        <div className='circle'>
-                            <img className='img1' src={img1} alt='icon' />
-                        </div>
-                        <div className='Username'>
-
-                        <span className='UsernameFont'>{guestName}</span>
-                        </div>
-                    
-                    </div>
-                    <div className='cardposition'>
-                    <button className="card">
-                        <a href='\iteminfo' >
-                        <img className='img2' src={img1} alt=""/>
-                        <div className="container">
-                            <h4><b>Item Name</b></h4> 
-                        </div>
-                        </a> 
-                    </button> 
-                </div>
-                <div className='Iconw'>
-
-                <a href='/profile' >
-                    <button type='button' className='Edituserprofile'>Edit User Profile</button>
-                        <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
-                    </LogOut>
-                    </a>
-
-
-                </div>
-                <button className='Myaccount'>
-                    <span className='MyaccountFont'>My account</span>
-                </button>
-                <a href='/profile' >
-                <button className='Profile'>
-                    <span className='ProfileFont'>Profile</span>
-                </button>   
-                </a>
+            <Container  className='mt-3 '>
+                <Row className='mt-3 mb-3 '>
+                    <Col className='setting_left' md={{ span: 4}} >
+                        <Link to='/' >
+                            <button type='button' className='Profile' >
+                                <span className='ProfileFont'>Back</span>
+                            </button>
+                        </Link>
+                        <Row className='mt-3'>
+                            <Link to='/profile' >
+                            <button className='Myaccount'>
+                                <span className='MyaccountFont'>My account</span>
+                            </button>
+                            </Link>
+                        </Row>
+                        <Row>
+                            <Link to='/profile' >
+                            <button className='Profile'>
+                                <span className='ProfileFont'>Profile</span>
+                            </button>   
+                            </Link>
+                        </Row>
+                        <Row>
+                            <Link>
+                            <button type='button' className='Profile'>
+                                <span className='ProfileFont'>Edit User Profile</span>
+                            </button>
+                            </Link>
+                        </Row>
+                        <Row className='mt-3'>
+                            <Link>
+                            <button onClick={()=>setButtonPopup(true)} className='Profile'>
+                                <span className='ProfileFont'>Log Out</span>
+                            </button>
+                            </Link>
+                        </Row>
+                        
+                    </Col>
+                    <Col md={{ span: 7}}>
+                        <Container className='mt-3 Icon' style={{ 
+                            backgroundImage: `url(${"https://localhost/"+bg})`,
+                            }}>
+                                    <Row>
+                                        <Col className='mt-5 mb-3' >
+                                            <Row>
+                                                <Col >
+                                                    <img className='img1' src={img1} alt='icon' />
+                                                </Col>
+                                                <Col >
+                                                    <span className='UsernameFont'>{guestName}</span>
+                                                </Col>
+                                            </Row>
+                                        </Col>
+                                        <Col className='mt-3 '>
+                                            <Row>
+                                                <Col ></Col>
+                                                <Col></Col>
+                                                <Col >
+                                                    <img className='bg_change_icon' src={bg_change} onClick={()=>{setClick_bg_ch(!click_bg_ch)}}/>
+                                                    {click_bg_ch ? 
+                                                    <div className="form-group">
+                                                    <form >
+                                                        <label>
+                                                            <input type="file" name="images" id="images" />
+                                                            <div className="file-dummy UsernameFont"><span> select your background image</span>
+                                                            
+                                                            </div>
+                                                        </label>           
+                                                    </form>
+                                                    </div>
+                                                : null}
+                                                </Col>                                                
+                                            </Row>
+                                            
+                                        </Col>
+                                    </Row>
+                        
+                        </Container>
+                        <Container className='setting_roll'>
+                            
+                            
+                        </Container>
+                    </Col>
+                </Row>
                 
-            </div>
+
+            </Container>
+            
+                
+                    
+                    {/* <div className='cardposition'>
+                        <button className="card">
+                            <a href='\iteminfo' >
+                            <img className='img2' src={img1} alt=""/>
+                            <div className="container">
+                                <h4><b>Item Name</b></h4> 
+                            </div>
+                            </a> 
+                        </button> 
+                    </div> */}
+                
+                    {/* <a href='/profile' >
+                        
+                        
+                    </a> */}
+                   
+                </div>
+                <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
+                        </LogOut>
+
+                
+                
         </div>
     )
 }
