@@ -1,4 +1,4 @@
-import "./PopUp.css"
+
 
 function PopUpWindow(props){
     return (props.trigger) ? (

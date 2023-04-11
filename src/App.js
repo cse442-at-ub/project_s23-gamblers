@@ -29,6 +29,7 @@ function App() {
           <Route path='/Verify' element={<Verify />} />
           <Route path="/Setting" element={<Setting/>}></Route>
           <Route path="/history" element={<Buying/>}></Route>
+          <Route path="/history" element={<Buying/>}></Route>
           <Route path="/report" element={<Report />}></Route>
         </Routes>
       </BrowserRouter>
@@ -39,3 +40,4 @@ function App() {
 }
 
 export default App;
+ 
