@@ -21,7 +21,7 @@ class User{
         }
         $_info = $this->information;
         $info = ['username' =>$_info['username'],
-                'eamil'=>$_info['email'],
+                'email'=>$_info['email'],
                 "phone_number"=>$_info["phone_number"],
                 "bg_image"=>$_info['bg_image']
             ]; 

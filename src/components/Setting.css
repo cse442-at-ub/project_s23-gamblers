@@ -11,9 +11,8 @@ border-radius: 0px;
 box-sizing: border-box;
 position: absolute;
 left: 0%;
+top:10%;
 right: 0%;
-top: 10%;
-bottom: 0%;
 background: #FFFFFF;
 border: 1px solid #000000;
 box-shadow: 0px 2px 16px rgba(75, 75, 75, 0.15);
@@ -72,7 +71,7 @@ font-family: 'Poppins';
 font-style: normal;
 font-size: 24px;
 line-height: 1.25;
-color: #FFFFFF;
+color: #000000;
 }
 .LogOut{
 
@@ -94,7 +93,7 @@ color: #FFFFFF;
 .BackFont{
 font-family: 'Poppins';
 font-style: normal;
-font-size: auto;
+font-size: 34px;
 color: #FFFFFF;
 }
 .Back{
@@ -104,7 +103,7 @@ color: #FFFFFF;
 }
 .Myaccount{
 box-sizing: border-box;
-width: 80%;
+width: 100%;
 
 background: rgb(183, 182, 182);
 border: 1px solid #2B2B2B;
@@ -117,7 +116,7 @@ color: #000000;
 }
 .Profile{
 box-sizing: border-box;
-width: 80%;
+width: 100%;
 background: #FFFFFF;
 border: 1px solid #2B2B2B;
 cursor: pointer;
@@ -168,7 +167,7 @@ border-radius: 50%;
 border: 1px solid #e9e9e9;
 }
 .setting_left{
-    border: 1px solid #000000;
+    border: 0.1px solid #000000;
 }
 .img2{
 max-width: 100%;
