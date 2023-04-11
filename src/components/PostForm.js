@@ -7,9 +7,9 @@ function PostForm(){
     const [postimage,setPostImage] = useState('')
     const [data, setData]= useState({
         item_name:"",
+        description:"",
         price:"",
         contact:"",
-        description:"",
     })
     const [test, setTest] = useState()
     function submit(e){
@@ -17,6 +17,19 @@ function PostForm(){
         const fd = new FormData()
         fd.append('images', postimage)
         fd.append('item_info',JSON.stringify(data))
+        if (data.item_name === "") {
+            window.alert('Please enter item name')
+        } else if (data.description===''){
+            window.alert('Please enter item description')
+        }else if (data.price === '') {
+            window.alert('Please enter item price')
+        }
+        else if (data.contact === '') {
+            window.alert('Please enter contact information')
+        }
+        else if (postimage === '') {
+            window.alert('Please upload a file')
+        }
         console.log(fd)
         axios.post(url,fd,{withCredentials:true})
         .then(res=>{
