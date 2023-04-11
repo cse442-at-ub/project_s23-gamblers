@@ -4,28 +4,30 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-function SearchBar() {
+function SearchBar(props) {
   const [searchText, setSearchText] = useState('');
+  const [searchData, setSearchData] = useState();
 
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
   };
 
-  const handleFormSubmit = async (event) => {
+  function handleFormSubmit(event){
     event.preventDefault();
+    axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/search',{
+      searchText
+    }).then(function(response){
+      setSearchData(response)
+    })
+  }
 
-    try {
-      const response = await axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/search', {
-        searchText,
-      });
-
-      // Handle the response as needed (e.g., update your component state, navigate to a new page, etc.)
-      console.log(response.data);
-    } catch (error) {
-      // Handle the error as needed (e.g., display an error message, log it, etc.)
-      console.error('Error while submitting search:', error);
-    }
-  };
+  function testingHandler(){
+    props.setItemData([{
+      title: "testing",
+      text: 'price: 9999  post date: 2023.3.13',
+      poster: 'testing'
+    }])
+  }
 
   return (
     <div>
@@ -36,12 +38,15 @@ function SearchBar() {
           className="mt-2 me-2 search-bar serach_input"
           aria-label="Search"
           value={searchText}
+
           onChange={handleSearchTextChange}
+          
         />
-        <Button type="submit" className="mt-2 me-2">
+        <Button type="submit" className="mt-2 me-2" style={{width:'100%'}}>
           Search
         </Button>
       </Form>
+      <button onClick={testingHandler}>testing</button>
     </div>
   );
 }

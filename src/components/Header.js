@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar';
 import UserImage from './UserImage';
 import brand_image from '../assets/images/exchange.png'
-function Header() {
+function Header(props) {
     return (
             <Navbar   className="header" variant="light"  expand="lg">
             <Container  fluid className="header">
@@ -25,7 +25,7 @@ function Header() {
                         <a href='/Login'>
                             <UserImage></UserImage> 
                         </a>  
-                        <SearchBar></SearchBar>
+                        <SearchBar setItemData={props.setItemData}></SearchBar>
                     </Container>
                 </Col>
                 
