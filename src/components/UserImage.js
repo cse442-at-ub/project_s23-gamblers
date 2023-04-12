@@ -8,8 +8,6 @@ function UserImage(){
             <img
               alt=""
               src={defaut_user_image}
-              width="100"
-              height="100"
               className="user-image"
             />
         </div>

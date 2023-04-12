@@ -20,8 +20,29 @@ class User{
             return;
         }
         $_info = $this->information;
-        $info = ['username' =>$_info['username'],'eamil'=>$_info['email'],"phone_number"=>$_info["phone_number"]]; 
+        $info = ['username' =>$_info['username'],
+                'email'=>$_info['email'],
+                "phone_number"=>$_info["phone_number"],
+                "bg_image"=>$_info['bg_image']
+            ]; 
         echo json_encode($info);        
+    }
+    public function my_items(){
+        if(!$this->is_vaild){
+            return;
+        }
+        $user_id = $this->information['id']; 
+        $result = get_tb_col_value("items","user_id",$user_id,true);
+        echo json_encode($result);
+    }
+    public function items(){
+        if(!$this->is_vaild){
+            return;
+        }
+        $user_id = $this->information['id']; 
+        $sql = "SELECT * FROM items";
+        $result = get($sql,true);
+        echo json_encode($result);
     }
     // user class save the item to database;
     public function post_item($json){
@@ -66,6 +87,16 @@ class User{
             return;
         }
     }
+    public function change_bg_image($img_name){
+        if(!$this->is_vaild){
+            return;
+        }
+        $_id = $this->information['id'];
+        $error = update_tb_col_value_where("users","bg_image",$img_name,"id = $_id");
+        if($error){
+            die($error);
+        }
+    }
     // save the views in view history 
     public function view_items($item_id){
         if(!$this->is_vaild){
@@ -75,8 +106,14 @@ class User{
         $user_id = $this->information['id'];
         $col = '(`user_id`, `item_id`, `time_created`)';
         $time_created = date("Y-m-d H:i:s");
-        $val = "('$user_id','$item_id','$time_created')";
-        insert_tb_cols_values("view_history",$col,$val);
+        $condition = "user_id = '$user_id' AND item_id = '$item_id'";
+        if(check_tb_condition_exist("view_history",$condition)){
+            update_tb_col_value_where("view_history","time_created",sql_dots($time_created),$condition);
+        }else{
+            $val = "('$user_id','$item_id','$time_created')";
+            insert_tb_cols_values("view_history",$col,$val);
+        }
+        
     }
     // join two table items and view_history to get user's history
     public function view_history(){
@@ -85,9 +122,10 @@ class User{
         }
         $user_id = $this->information['id'];
         
-        $sql = "SELECT i.item_name, i.item_price, i.item_image_dir, i.item_id
+        $sql = "SELECT i.item_name, i.item_price, i.item_image_dir, i.item_id, v.time_created
         FROM view_history v, items i
-        WHERE v.user_id  = $user_id and v.item_id = i.item_id;";
+        WHERE v.user_id  = $user_id and v.item_id = i.item_id
+        ORDER BY v.time_created DESC;";
         $views = get($sql,true);
         echo json_encode($views);
     }

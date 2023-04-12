@@ -130,13 +130,13 @@
             return $ans;
         }
     }
-    function check_tb_col_value_exist($tb,$col,$value){
-        if($value == "" || $tb == "" || $col == ""){
+    function check_tb_condition_exist($tb, $condition){
+        if($condition == "" || $tb == ""){
             die("empty argments");
         }
         $objDb = new DbConnect;
         $conn = $objDb->connect();
-        $sql = "SELECT * FROM ".$tb." WHERE ".$col."='".$value."'";
+        $sql = "SELECT * FROM ".$tb." WHERE $condition";
         $result = $conn->query($sql);
         $rows = $result->num_rows;
         if($rows == 0){
@@ -145,12 +145,21 @@
             return true;
         }
     }
+    function check_tb_col_value_exist($tb,$col,$value){
+        if($value == "" || $tb == "" || $col == ""){
+            die("empty argments");
+        }
+        
+        return check_tb_condition_exist($tb,"$col = '$value'");
+        
+    }
     function update_tb_col_value_where($tb,$col,$value,$where){
         $objDb = new DbConnect;
         $conn = $objDb->connect();
         $sql = "UPDATE $tb SET $col = $value
                     WHERE $where";
         $conn->query($sql);
+        
         if ($conn->error){
             die( "Error: " . $conn->error );
         }

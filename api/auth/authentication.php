@@ -100,6 +100,7 @@ function update_tb_col_value_where($tb,$col,$value,$where){
     $sql = "UPDATE $tb SET $col = $value
                 WHERE $where";
     $conn->query($sql);
+    return $conn->error;
 }
 function insert_tb_cols_values($tb, $cols ,$values){
     $objDb = new DbConnect;

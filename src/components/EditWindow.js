@@ -3,6 +3,7 @@ import "./EditWindow.css"
 import UserImage from './UserImage';
 import {useEffect, useState } from 'react';
 import axios from "axios";
+import bg_change from '../assets/images/bg_ch_icon.svg.svg'
 function EditWindow(props){
     const [post, setPost] = useState({});
     // const [username, setUsername] = useState("");
@@ -20,13 +21,13 @@ function EditWindow(props){
         console.log(post)
         
         if(Object.keys(post).length<3){
-            props.onChange(false)
+            // props.onChange(false)
             alert("Invaild Input!!");
             return
         }
         axios.put(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/${props.id}`, post);
         console.log("snet");
-        props.onChange(false)
+        // props.onChange(false)
     }
     const handleChange = (event) => {
         
@@ -38,11 +39,20 @@ function EditWindow(props){
     }
     return (
 
-        <div  className='window'>
+        <Container  className='window'>
             <Row>
-            <Col className="edit_header_upper" >
-                <UserImage >
-                </UserImage>
+            <Col  className="edit_header_upper" >
+                <Row>
+                    <Col>
+                        <UserImage >
+                        </UserImage>
+                    </Col>
+                    <Col>
+                        <img className='bg_change_icon' src={bg_change} />
+
+                    </Col>
+                </Row>
+                
 
             </Col>
             </Row>
@@ -69,9 +79,6 @@ function EditWindow(props){
                             </Form.Group>
                             </Row>
                             <div className="d-flex justify-content-around">
-                            <button className='mt-5 mb-5 cancel_bot'>
-                            Close
-                            </button>
                             <button className='mt-5 mb-5 save_bot'  type="submit">
                             Save
                             </button>
@@ -80,7 +87,7 @@ function EditWindow(props){
                 </Container>
                 
             </Row>
-        </div>
+        </Container>
     )
 }
 export default EditWindow

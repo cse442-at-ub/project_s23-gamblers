@@ -16,7 +16,7 @@ if ($method == 'POST'){
             $tmp_name = $_FILES["images"]["tmp_name"];
             // basename() may prevent filesystem traversal attacks;
             // further validation/sanitation of the filename may be appropriate
-            $name = 'example.png'; // TODO: now is dummy name, need to be choose by server late
+            // $name = 'example.png'; // TODO: now is dummy name, need to be choose by server late
             $name = randomStr(20).'.png';
             move_uploaded_file($tmp_name, "$uploads_dir/$name"); // save in disk after insert record to database
             $a = new User($infor['id']);
