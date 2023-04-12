@@ -15,9 +15,14 @@
         private $un = 'root';
         private $pw = 'Password123#@!';  //password for my own machine
         private $db = "cse442_2023_spring_team_m_db";
+        public $conn;
+        function __destruct(){
+            $this->conn->close();
+        }
         public function connect() {
             try{
                 $conn = new mysqli($this->hn, $this->un, $this->pw, $this->db);
+                $this->conn = $conn;
                 return $conn;
             } catch (Exception $e) {
                 $e->getMessage();
@@ -58,10 +63,14 @@
     function saveuid($uid,$id){
         
         if(!check_tb_col_value_exist("cookies","id",$id)){
-            insert_tb_cols_values("cookies","(id, uid)", "('$id', '$uid')");
+            $sql = "INSERT INTO cookies (id, uid) VALUES (?,?)";
+            get($sql,array($id,$uid));
+            // insert_tb_cols_values("cookies","(id, uid)", "('$id', '$uid')");
             
         }else{
-            update_tb_col_value_where("cookies","uid","'$uid'","id = $id");
+            $sql = $sql = "UPDATE cookies SET uid = ? WHERE id = ?";
+            get($sql,array($uid,$id));
+            // update_tb_col_value_where("cookies","uid","'$uid'","id = $id");
         }
     }
     function randomStr($len){
@@ -94,14 +103,32 @@
     
     ################## basic function ########################
     function get_tb_col_value($tb,$col,$value, $muti=false){
+        // $objDb = new DbConnect;
+        // $conn = $objDb->connect();
+        // $sql = "SELECT * FROM ".$tb." WHERE ".$col."='".$value."'";
+        $sql = "SELECT * FROM $tb WHERE $col = ?";
+        $args = array($value);
+        return get($sql,$args,$muti);
+        
+    }
+    function get($sql,$params,$muti=false){
         $objDb = new DbConnect;
         $conn = $objDb->connect();
-        $sql = "SELECT * FROM ".$tb." WHERE ".$col."='".$value."'";
-        $result = $conn->query($sql);
         if ($conn->error){
             echo "Error: " . $conn->error;
             die();
         }
+        $stmt = $conn->prepare($sql);
+        $ss = str_repeat('s', count($params));
+        if(count($params) != 0){
+            $stmt->bind_param($ss, ...$params);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if(!$result){
+            return array();
+        }
+        $stmt->close(); 
         if(!$muti)
             return $result->fetch_assoc();
         else{
@@ -112,33 +139,9 @@
             return $ans;
         }
     }
-    function get($sql,$muti=false){
-        $objDb = new DbConnect;
-        $conn = $objDb->connect();
-        $result = $conn->query($sql);
-        if ($conn->error){
-            echo "Error: " . $conn->error;
-            die();
-        }
-        if(!$muti)
-            return $result->fetch_assoc();
-        else{
-            $ans = array();
-            while($row = $result->fetch_assoc()){
-                array_push($ans,$row);
-            }
-            return $ans;
-        }
-    }
-    function check_tb_condition_exist($tb, $condition){
-        if($condition == "" || $tb == ""){
-            die("empty argments");
-        }
-        $objDb = new DbConnect;
-        $conn = $objDb->connect();
-        $sql = "SELECT * FROM ".$tb." WHERE $condition";
-        $result = $conn->query($sql);
-        $rows = $result->num_rows;
+    function check_tb_condition_exist($sql, $condition){
+        $result = get($sql,$condition,true);
+        $rows = count($result);
         if($rows == 0){
             return false;
         }else{
@@ -149,8 +152,15 @@
         if($value == "" || $tb == "" || $col == ""){
             die("empty argments");
         }
-        
-        return check_tb_condition_exist($tb,"$col = '$value'");
+        // $tb $col is not user input
+        $sql = "SELECT * FROM $tb WHERE $col = ?";
+        $result = get($sql,array($value),true);
+        $rows = count($result);
+        if($rows == 0){
+            return false;
+        }else{
+            return true;
+        }
         
     }
     function update_tb_col_value_where($tb,$col,$value,$where){

@@ -34,7 +34,7 @@ class User{
         $user_id = $this->information['id']; 
         $sql = "SELECT * FROM items WHERE user_id = $user_id and item_state = 'active'";
         // $result = get_tb_col_value("items","user_id",$user_id,true);
-        $result=get($sql,true);
+        $result=get($sql,array(),true);
         echo json_encode($result);
     }
     public function items(){
@@ -43,7 +43,7 @@ class User{
         }
         $user_id = $this->information['id']; 
         $sql = "SELECT * FROM items";
-        $result = get($sql,true);
+        $result = get($sql,array(),true);
         echo json_encode($result);
     }
     // user class save the item to database;
@@ -68,17 +68,18 @@ class User{
         $filename = '/path/to/image.jpg';
         $path_parts = pathinfo( $filename );
         // $image_name = sql_dots('/uploads/items/'.randomStr(20).'.'.$path_parts['extension']);
-        $image_name = sql_dots($json_obj['item_image']);
-        $item_description = sql_dots($json_obj['description']);
-        $item_price = sql_dots($json_obj['price']);
-        $seller = sql_dots($json_obj['contact']);
-        $date_posted = sql_dots(date("Y-m-d H:i:s"));
-        $item_name = sql_dots($json_obj['item_name']);
-        $poster_id = sql_dots($this->information['id']);
-        $item_state = sql_dots('active');
-        $val = "($poster_id, $date_posted, $item_state , $date_posted, $item_name, $image_name, $item_description, $item_price, $seller)";
-        echo $val;
-        insert_tb_cols_values($tb,$col,$val);
+        $image_name = $json_obj['item_image'];
+        $item_description = $json_obj['description'];
+        $item_price = $json_obj['price'];
+        $seller = $json_obj['contact'];
+        $date_posted = date("Y-m-d H:i:s");
+        $item_name = $json_obj['item_name'];
+        $poster_id = $this->information['id'];
+        $item_state = 'active';
+        $val = array($poster_id, $date_posted, $item_state , $date_posted, $item_name, $image_name, $item_description, $item_price, $seller);
+        $sql = "INSERT INTO items $col VALUES (?" . str_repeat(',?',count($val)-1) . ")";
+        get($sql,$val);
+        // insert_tb_cols_values($tb,$col,$val);
     }
     public function is_auth(){
         return $this->is_vaild;
@@ -94,10 +95,8 @@ class User{
             return;
         }
         $_id = $this->information['id'];
-        $error = update_tb_col_value_where("users","bg_image",$img_name,"id = $_id");
-        if($error){
-            die($error);
-        }
+        $sql = "UPDATE users SET bg_image = ? WHERE id = ?";
+        get($sql,array($img_name,$_id));
     }
     // save the views in view history 
     public function view_items($item_id){
@@ -109,11 +108,15 @@ class User{
         $col = '(`user_id`, `item_id`, `time_created`)';
         $time_created = date("Y-m-d H:i:s");
         $condition = "user_id = '$user_id' AND item_id = '$item_id'";
-        if(check_tb_condition_exist("view_history",$condition)){
-            update_tb_col_value_where("view_history","time_created",sql_dots($time_created),$condition);
+        $sql = "SELECT * FROM view_history WHERE user_id = ? AND item_id = ?";
+        if(check_tb_condition_exist($sql,array($user_id,$item_id))){
+            $sql = "UPDATE view_history SET time_created = ? WHERE user_id = ? AND item_id = ?";
+            get($sql,array($time_created,$user_id,$item_id));
+            // update_tb_col_value_where("view_history","time_created",sql_dots($time_created),$condition);
         }else{
-            $val = "('$user_id','$item_id','$time_created')";
-            insert_tb_cols_values("view_history",$col,$val);
+            // $val = "('$user_id','$item_id','$time_created')";
+            $sql = "INSERT INTO view_history $col VALUES (?,?,?)";
+            get($sql,array($user_id,$item_id,$time_created));
         }
         
     }
@@ -123,12 +126,12 @@ class User{
             return;
         }
         $user_id = $this->information['id'];
-        
+        $args = array($user_id);
         $sql = "SELECT i.item_name, i.item_price, i.item_image_dir, i.item_id, v.time_created
         FROM view_history v, items i
-        WHERE v.user_id  = $user_id and v.item_id = i.item_id and i.item_state = 'active'
+        WHERE v.user_id  = ? and v.item_id = i.item_id and i.item_state = 'active'
         ORDER BY v.time_created DESC;";
-        $views = get($sql,true);
+        $views = get($sql,$args,true);
         echo json_encode($views);
     }
 }

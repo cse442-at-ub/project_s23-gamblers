@@ -63,7 +63,7 @@ function ItemInfo(props){
     return (
         
         <div>
-            {state !== 200? <FourZeroFour></FourZeroFour>
+            {state === 404? <FourZeroFour></FourZeroFour>
             :
             <Container>
                 <Header></Header>

@@ -3,7 +3,7 @@ include_once 'user.php';
 $method = $_SERVER['REQUEST_METHOD'];
 if ($method == 'GET'){
     $sql = "SELECT * FROM items WHERE item_state = 'active'";
-    $result = get($sql,true);
+    $result = get($sql,array(),true);
     echo json_encode($result);
     die();
 }
