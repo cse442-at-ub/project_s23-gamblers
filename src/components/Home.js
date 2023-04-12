@@ -6,57 +6,11 @@ import styles from './Services.module.css'
 import Header from "./Header";
 function Home(){
 
-    const [itemData, setItemData] = useState([{
-
-        title: "Amethyst",
-        text: 'price: $20  post date: 2023.3.13',
-        poster: 'Ming'
-    },
-        {
-
-            title: "Amethyst",
-            text: 'price: $20  post date: 2023.3.13',
-            poster: 'Ming'
-        },
-        {
-
-            title: "Amethyst",
-            text: 'price: $20  post date: 2023.3.13',
-            poster: 'Ming'
-        },
-        {
-
-            title: "Amethyst",
-            text: 'price: $20  post date: 2023.3.13',
-            poster: 'Ming'
-        },
-        {
-
-            title: "Amethyst",
-            text: 'price: $20  post date: 2023.3.13',
-            poster: 'Ming'
-        },
-        {
-
-            title: "Amethyst",
-            text: 'price: $20  post date: 2023.3.13',
-            poster: 'Ming'
-        },
-        {
-
-            title: "Amethyst",
-            text: 'price: $20  post date: 2023.3.13',
-            poster: 'Ming'
-        },
-        {
-
-            title: "Amethyst",
-            text: 'price: $20  post date: 2023.3.13',
-            poster: 'Ming'
-        }])
+    const [itemData, setItemData] = useState([])
 
     function getItem(){
-        axios.get('link').then(function(response){
+        axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/all_items').then(function(response){
+            console.log(response.data)
             setItemData(response.data)
         })
     }
@@ -64,6 +18,7 @@ function Home(){
     useEffect(()=>{
         getItem()
     },[])
+
 
     return(
         <div>
@@ -76,10 +31,10 @@ function Home(){
                                 return (
                                     <div className={`${styles.services__contentitem} ${styles.text__center}`} key={index}>
                                         <div>This is image</div>
-                                        <h4 className={`${styles.text__upper} ${styles.text}`}>{service.title}</h4>
-                                        <p className={`${styles.para__text} ${styles.text__grey}`}>{service.text}</p>
-                                        <p className={`${styles.para__text} ${styles.text__grey}`}>poster: {service.poster}</p>
-                                        <a href="/iteminfo" className={`${styles.btn}  ${styles.btn__blue}`}>more info</a>
+                                        <h4 className={`${styles.text__upper} ${styles.text}`}>{service.item_name}</h4>
+                                        <p className={`${styles.para__text} ${styles.text__grey}`}>{service.item_description}</p>
+                                        <p className={`${styles.para__text} ${styles.text__grey}`}>poster: user {service.user_id}</p>
+                                        <a href={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>more info</a>
                                     </div>
                                 )
                             })

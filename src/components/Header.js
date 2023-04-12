@@ -3,7 +3,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar';
 import UserImage from './UserImage';
 import brand_image from '../assets/images/exchange.png'
+import { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 function Header(props) {
+    const [guest, setGuest] = useState(true)
+    const [guestName, setGuestName] = useState('Guest')
+
+    function fetchUserHandler() {
+        axios.get(`https://localhost/api/userinfo.php`, { withCredentials: true }).then(function (response) {
+            console.log(response.data)
+            if (response.status === 401) {
+                setGuest(true)
+            }
+            if (response.status === 200) {
+                setGuest(false)
+                setGuestName(response.data.username)
+            }
+        })
+    }
+    useEffect(() => {
+        fetchUserHandler()
+    }, [])
     return (
             <Navbar   className="header" variant="light"  expand="lg">
             <Container  fluid className="header">
@@ -21,13 +42,10 @@ function Header(props) {
                 </Col>
                 <Col >
                     <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
-                        {!guest?<a href='/setting'>
-                            <UserImage></UserImage> 
-                        </a>  
+                        {!guest ? < a href='/setting'><UserImage></UserImage></ a> : < a href='/login'><h2>Welcome Guest</h2></ a>}
+                        < a href='/login'><UserImage></UserImage></ a>
+
                         <SearchBar setItemData={props.setItemData}></SearchBar>
-                        </a> : <a href='/login'><h2>Welcome Guest</h2></a>}
-                         
-                        <SearchBar></SearchBar>
                     </Container>
                 </Col>
                 

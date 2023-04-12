@@ -1,15 +1,15 @@
-import {Col,Container,Row} from 'react-bootstrap/';
+import { Col, Container, Row } from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./ItemInfo.css"
 import axios from "axios";
-import {  useNavigate , Link} from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Header from './Header';
-import { useState , useEffect} from 'react';
-function ItemInfo(props){
+import { useState, useEffect } from 'react';
+function ItemInfo(props) {
     const [item, setItem] = useState([]);
     const [itid, setItid] = useState(undefined);
     const keyValues = window.location.search
-    
+
     const navigate = useNavigate()
     let item_id = 1;
     useEffect(() => {
@@ -19,22 +19,25 @@ function ItemInfo(props){
         item_id = (arugments.get('var'));
         handleLookItem();
 
-    },[])
-    const handleLookItem = () =>{
-        axios.get(`https://localhost/api/item.php?var=${item_id}`, "").then(function(response) {
+    }, [])
+    const handleLookItem = () => {
+
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item.php?var=${item_id}`, "").then(function (response) {
+            console.log(response.data)
             setItem(response.data);
-        //TODO: no such items
+            //TODO: no such items
         }).catch(function (error) {
             console.log(error.response.status) // 401
             console.log(error.response.data.error) //Please Authenticate or whatever returned from server
-            if(error.response.status==404){
+            if (error.response.status == 404) {
                 navigate('/')
             }
-    })}
-    const handleItemChange = (event) =>{
+        })
+    }
+    const handleItemChange = (event) => {
         setItid(event.target.value);
         console.log(itid);
-       
+
     }
 
     const [guestName, setGuestName] = useState('Guest')
@@ -53,78 +56,82 @@ function ItemInfo(props){
         fetchUserHandler()
     }, [])
 
-    function handleReport(){
+    function handleReport() {
         window.alert('A report has been sent')
-        axios.post('https://localhost/api/report.php',{
-            reporter: guestName,
-            item_id: item.item_name
+        axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/nmsl', {
+            reporter: 'jack',
+            item_id: '1'
+        }).then(function (response) {
+            console.log(response)
         })
     }
 
 
+
+
     return (
-        
+
         <div>
-    <Header></Header>
-    <Container fluid className='main-wrapper'>
-        <Row className="d-flex mt-3 mb-3">
-            <Col md={{ span: 4, offset: 2}} className="d-flex mt-3 mb-3">
-            <Container>
-            <img
-                        alt=""
-                        src="https://picsum.photos/600/600"
-                        className='item-image'
+            <Header></Header>
+            <Container fluid className='main-wrapper'>
+                <Row className="d-flex mt-3 mb-3">
+                    <Col md={{ span: 4, offset: 2 }} className="d-flex mt-3 mb-3">
+                        <Container>
+                            <img
+                                alt=""
+                                src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/" + item.item_image_dir}
+                                className='item-image'
                             />
+                        </Container>
+                    </Col>
+                    <Col md={{ span: 4, offset: 1 }}>
+                        <Row >
+                            <h1 className='text'>
+                                <span id="item_name">{item.item_name}</span>
+                            </h1>
+                        </Row>
+                        <Row>
+                            <Row><hr></hr></Row>
+                        </Row>
+                        <Row>
+                            <h2 className='text'>
+                                <span id="item_description">{item.item_description}</span>
+                            </h2>
+                        </Row>
+                        <Row>
+                            <Row><hr></hr></Row>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <h2 className='text'>
+                                    <span id="item_price">Price: </span>
+                                </h2>
+                            </Col>
+                            <Col>
+                                <h2 className='text'>
+                                    <span className='text' id="item_price_number">{item.item_price}</span>
+                                </h2>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Row><hr></hr></Row>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <h2 className='text'>
+                                    <span  >Seller contact: </span>
+                                </h2>
+                            </Col>
+                            <Col>
+                                <h2 className='text'>
+                                    <span id="item_seller">{item.item_contact}</span>
+                                </h2>
+                            </Col>
+                            <button className='reportbutton' onClick={handleReport}>Report Post</button>
+                        </Row>
+                    </Col>
+                </Row>
             </Container>
-            </Col>
-            <Col md={{ span: 4 ,offset:1 }}>
-                <Row >
-                    <h1 className='text'>
-                    <span id="item_name">{item.item_name}</span>
-                    </h1>
-                </Row>
-                <Row>
-                <Row><hr></hr></Row>
-                </Row>
-                <Row>
-                    <h2 className='text'>
-                        <span  id="item_description">{item.item_description}</span>
-                    </h2>
-                </Row>
-                <Row>
-                <Row><hr></hr></Row>
-                </Row>
-                <Row>
-                    <Col>
-                        <h2 className='text'>
-                            <span  id="item_price">Price: </span>
-                        </h2>
-                    </Col>
-                    <Col>
-                        <h2 className='text'>
-                            <span  className='text' id="item_price_number">{item.item_price}</span>
-                        </h2>
-                    </Col>
-                </Row>
-                <Row>
-                <Row><hr></hr></Row>
-                </Row>
-                <Row>
-                    <Col>
-                        <h2 className='text'>
-                            <span  >Seller contact: </span>
-                        </h2>
-                    </Col>
-                    <Col>
-                        <h2 className='text'>
-                            <span  id="item_seller">{item.item_contact}</span>
-                        </h2>
-                    </Col>
-                    <button className='reportbutton' onClick={handleReport}>Report Post</button>
-                </Row>
-            </Col>
-        </Row>
-    </Container>
         </div>
     )
 }
