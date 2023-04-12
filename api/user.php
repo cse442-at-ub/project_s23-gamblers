@@ -126,7 +126,7 @@ class User{
         
         $sql = "SELECT i.item_name, i.item_price, i.item_image_dir, i.item_id, v.time_created
         FROM view_history v, items i
-        WHERE v.user_id  = $user_id and v.item_id = i.item_id
+        WHERE v.user_id  = $user_id and v.item_id = i.item_id and i.item_state = 'active'
         ORDER BY v.time_created DESC;";
         $views = get($sql,true);
         echo json_encode($views);
