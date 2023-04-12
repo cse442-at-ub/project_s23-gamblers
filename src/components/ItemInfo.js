@@ -5,10 +5,21 @@ import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom'
 import Header from './Header';
 import { useState, useEffect } from 'react';
+import Comment from './Comment';
 function ItemInfo(props) {
     const [item, setItem] = useState([]);
     const [itid, setItid] = useState(undefined);
     const keyValues = window.location.search
+    const [commentData, setCommentData] = useState([
+        {id:0, user_id:0, item_id:0, comment_text: 'this item is good', time_created:'2023/4/11'},
+        { id: 1, user_id: 1, item_id: 1, comment_text: 'this item is good1', time_created: '2023/4/11' },
+        { id: 2, user_id: 2, item_id: 2, comment_text: 'this item is good2', time_created: '2023/4/11' },
+        { id: 3, user_id: 3, item_id: 3, comment_text: 'this item is good3', time_created: '2023/4/11' },
+        { id: 4, user_id: 4, item_id: 4, comment_text: 'this item is good4', time_created: '2023/4/11' },
+        { id: 5, user_id: 5, item_id: 5, comment_text: 'this item is good5', time_created: '2023/4/11' },
+        { id: 6, user_id: 6, item_id: 6, comment_text: 'this item is good6', time_created: '2023/4/11' },
+        { id: 7, user_id: 7, item_id: 7, comment_text: 'this item is good7', time_created: '2023/4/11' },
+    ])
 
     const navigate = useNavigate()
     let item_id = 1;
@@ -132,6 +143,9 @@ function ItemInfo(props) {
                                 </h2>
                             </Col>
                             <button className='reportbutton' onClick={handleReport}>Report Post</button>
+                        </Row>
+                        <Row>
+                            <Comment commentData={commentData}></Comment>
                         </Row>
                     </Col>
                 </Row>

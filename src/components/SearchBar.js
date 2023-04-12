@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function SearchBar(props) {
   const [searchText, setSearchText] = useState('');
-  const [searchData, setSearchData] = useState();
+
 
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
@@ -15,9 +15,9 @@ function SearchBar(props) {
   function handleFormSubmit(event){
     event.preventDefault();
     axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/search',{
-      searchText
+      searchText: searchText,
     }).then(function(response){
-      setSearchData(response)
+      props.setItemData([response.data])
     })
   }
 
