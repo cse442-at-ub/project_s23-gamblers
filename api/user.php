@@ -32,7 +32,9 @@ class User{
             return;
         }
         $user_id = $this->information['id']; 
-        $result = get_tb_col_value("items","user_id",$user_id,true);
+        $sql = "SELECT * FROM items WHERE user_id = $user_id and item_state = 'active'";
+        // $result = get_tb_col_value("items","user_id",$user_id,true);
+        $result=get($sql,true);
         echo json_encode($result);
     }
     public function items(){

@@ -163,6 +163,7 @@
         if ($conn->error){
             die( "Error: " . $conn->error );
         }
+        return $conn->error;
     }
     function insert_tb_cols_values($tb, $cols ,$values){
         $objDb = new DbConnect;
