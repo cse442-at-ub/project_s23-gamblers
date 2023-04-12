@@ -5,11 +5,12 @@ import axios from "axios";
 import {  useNavigate , Link} from 'react-router-dom'
 import Header from './Header';
 import { useState , useEffect} from 'react';
+import FourZeroFour from './FourZeroFour';
 function ItemInfo(props){
     const [item, setItem] = useState([]);
     const [loading, setLoading] = useState(false);
     const keyValues = window.location.search
-    
+    const [state, setState] = useState()
     const navigate = useNavigate()
     let item_id = 1;
     useEffect(() => {
@@ -23,12 +24,14 @@ function ItemInfo(props){
     const handleLookItem = () =>{
         axios.get(`https://localhost/api/item.php?var=${item_id}`, {withCredentials:true}).then(function(response) {
             setItem(response.data);
+            setState(200)
             console.log(item)
         //TODO: no such items
         }).catch(function (error) {
             console.log(error.response.status) // 401
             console.log(error.response.data.error) //Please Authenticate or whatever returned from server
             if(error.response.status==404){
+                setState(404)
             }
     })}
 
@@ -60,7 +63,10 @@ function ItemInfo(props){
     return (
         
         <div>
-            <Header></Header>
+            {state === 404? <FourZeroFour></FourZeroFour>
+            :
+            <Container>
+                <Header></Header>
             <Container fluid className='main-wrapper'>
                 <Row className="d-flex mt-3 mb-3">
                     
@@ -121,6 +127,8 @@ function ItemInfo(props){
                     </Col>
                 </Row>
             </Container>
+            </Container>
+            }
         </div>
         )
 }
