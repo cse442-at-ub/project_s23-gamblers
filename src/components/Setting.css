@@ -125,6 +125,7 @@ cursor: pointer;
 font-family: 'Poppins';
 font-style: normal;
 font-size: 200%;
+pointer-events: none;
 color: #000000;
 }
 .Back:hover {
