@@ -16,7 +16,7 @@ function Setting(){
     const [guestName, setGuestName] = useState('Guest')
 
     function fetchUserHandler() {
-        axios.get(`https://localhost/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
             console.log(response.data)
             if (response.status === 401) {
 

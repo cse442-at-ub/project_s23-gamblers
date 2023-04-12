@@ -5,7 +5,6 @@ import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom'
 import Header from './Header';
 import { useState, useEffect } from 'react';
-import Comment from './Comment';
 function ItemInfo(props) {
     const [item, setItem] = useState([]);
     const [itid, setItid] = useState(undefined);
@@ -20,8 +19,9 @@ function ItemInfo(props) {
         { id: 6, user_id: 6, item_id: 6, comment_text: 'this item is good6', time_created: '2023/4/11' },
         { id: 7, user_id: 7, item_id: 7, comment_text: 'this item is good7', time_created: '2023/4/11' },
     ])
-
+    const [guestName, setGuestName] = useState('Guest')
     const navigate = useNavigate()
+    
     let item_id = 1;
     useEffect(() => {
         console.log(window.location.search);
@@ -51,10 +51,10 @@ function ItemInfo(props) {
 
     }
 
-    const [guestName, setGuestName] = useState('Guest')
+    
 
     function fetchUserHandler() {
-        axios.get(`https://localhost/api/userinfo.php`, { withCredentials: true }).then(function (response) {
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`, { withCredentials: true }).then(function (response) {
             console.log(response.data)
             if (response.status === 401) {
                 setGuestName('guest')
@@ -143,9 +143,6 @@ function ItemInfo(props) {
                                 </h2>
                             </Col>
                             <button className='reportbutton' onClick={handleReport}>Report Post</button>
-                        </Row>
-                        <Row>
-                            <Comment commentData={commentData}></Comment>
                         </Row>
                     </Col>
                 </Row>

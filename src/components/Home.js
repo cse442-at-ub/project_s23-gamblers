@@ -7,11 +7,13 @@ import Header from "./Header";
 function Home(){
 
     const [itemData, setItemData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     function getItem(){
         axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/all_items').then(function(response){
             console.log(response.data)
             setItemData(response.data)
+            setIsLoading(false)
         })
     }
 
@@ -19,7 +21,10 @@ function Home(){
         getItem()
     },[])
 
-
+    if(isLoading){
+        return<p>Loading</p>
+    }
+    console.log(itemData)
     return(
         <div>
             <Header setItemData={setItemData}></Header>
@@ -30,7 +35,12 @@ function Home(){
                             itemData.map((service, index) => {
                                 return (
                                     <div className={`${styles.services__contentitem} ${styles.text__center}`} key={index}>
-                                        <div>This is image</div>
+                                        <div><img
+                                            alt=""
+                                            src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/${itemData[index].item_image_dir}`}
+                                            className='item-image'
+                                        /></div>
+                                        
                                         <h4 className={`${styles.text__upper} ${styles.text}`}>{service.item_name}</h4>
                                         <p className={`${styles.para__text} ${styles.text__grey}`}>{service.item_description}</p>
                                         <p className={`${styles.para__text} ${styles.text__grey}`}>poster: user {service.user_id}</p>
