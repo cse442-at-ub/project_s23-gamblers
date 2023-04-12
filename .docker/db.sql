@@ -141,8 +141,9 @@ CREATE TABLE IF NOT EXISTS item_comments (
 
 
 CREATE TABLE IF NOT EXISTS report (
+    report_id MEDIUMINT NOT NULL AUTO_INCREMENT,
     item_id  MEDIUMINT NOT NULL,
     reporter  MEDIUMINT NOT NULL,
-    PRIMARY KEY (item_id)
+    PRIMARY KEY (report_id)
 ) ENGINE=InnoDB;
 
