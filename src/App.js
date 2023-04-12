@@ -10,6 +10,7 @@ import UserAgreement from './components/UserAgreement'
 import Setting from './components/Setting'
 import Buying from "./components/Buying"
 import Report from "./components/Report"
+import Admin from "./components/Admin";
 function App() {
   const [login, setLogin] = useState(false)
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/history" element={<Buying/>}></Route>
           <Route path="/history" element={<Buying/>}></Route>
           <Route path="/report" element={<Report />}></Route>
+          <Route path='/admin' element={<Admin/>}></Route>
         </Routes>
       </BrowserRouter>
 

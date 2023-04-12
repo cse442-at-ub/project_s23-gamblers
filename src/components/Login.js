@@ -23,12 +23,19 @@ function Login() {
             password: password,
         },{withCredentials: true}).then(function(response){
             console.log(response)
+            if(userName==='admin'){
+                if (response.data === 'success'){
+                    window.alert('Welcom ADMIN')
+                    navigate('/admin')
+                }
+            }
             if (response.data ==='success'){
                 window.alert('login success, click ok')
                 navigate('/')
                 setUsername('')
                 setPassword('')
-            }else{
+            }
+            else{
                 window.alert('username or password incorrect')
             }
         })

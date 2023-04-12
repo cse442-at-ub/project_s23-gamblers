@@ -46,9 +46,12 @@ function ItemInfo(props) {
         axios.get(`https://localhost/api/userinfo.php`, { withCredentials: true }).then(function (response) {
             console.log(response.data)
             if (response.status === 401) {
+                setGuestName('guest')
             }
             if (response.status === 200) {
                 setGuestName(response.data.username)
+            }else{
+                setGuestName('guest')
             }
         })
     }
@@ -58,9 +61,10 @@ function ItemInfo(props) {
 
     function handleReport() {
         window.alert('A report has been sent')
+        console.log(item_id)
         axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/nmsl', {
-            reporter: 'jack',
-            item_id: '1'
+            reporter: guestName,
+            item_id: item.item_id
         }).then(function (response) {
             console.log(response)
         })
