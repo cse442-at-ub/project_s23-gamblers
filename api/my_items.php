@@ -10,8 +10,7 @@ if ($method == 'GET'){
             die();
         }
         $a = new User($infor['id']);
-        $a->info();
-        
+        $a->my_items();
         exit;
     }else{
         header('HTTP/1.0 401 Unauthorized');

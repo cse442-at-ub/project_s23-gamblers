@@ -52,7 +52,7 @@ function Register() {
         else if (enteredPhoneNumber === '') {
             window.alert('Please enter phone number')
         } else {
-            axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/register/', {
+            axios.post('https://localhost/api/register/', {
                 username: enteredUsername,
                 password: enteredPassword,
                 email: enteredEmail,

@@ -1,4 +1,4 @@
-import { Button } from 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {React} from 'react'
 import {  useNavigate , Link} from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -30,9 +30,7 @@ export default function Buying() {
     useEffect(()=>{
         get_view_history()
     }, [])
-    function get_item(id){
-        console.log(id)
-    }
+
     function rows(order1){
         return(
             <tr>
@@ -40,10 +38,11 @@ export default function Buying() {
                 <th className='table_header' key={i}>
                     <div className='box'>
                         <span className='view_history_name'>{order1['item_name']}<br></br>
-                            <Link to={'/item/'+order1['item_id']}>
-                            <img src = "https://picsum.photos/50/50" ></img>
+                            <Link to={'/iteminfo?var='+order1['item_id']}>
+                            <img className='history_item_image' src = {"https://localhost/uploads/"+order1['item_image_dir']} ></img>
                             </Link>
                         </span> 
+                        <span className='view_history_time'>{order1['time_created']}</span>
                     </div>
                 </th>
                 
@@ -52,15 +51,10 @@ export default function Buying() {
     }
   return (
         <Container>
-            <Row xs="auto">
-                <Col>
-                    <button>History</button>
-                </Col>
-            </Row>
             <table className='view_history_table'>
                 <tbody>
                     <tr>
-                        <th className='view_history_title'>Items</th>
+                        <th className='view_history_title'>History</th>
                         {/* <th className='table_header'>Order number</th>
                         <th className='table_header'>Sell date</th>
                         <th className='table_header'>Price</th>

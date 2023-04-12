@@ -7,8 +7,8 @@ function Verify() {
             <div className='loginPage'></div>
             <h1 style={{textAlign:'center'}}>A email has been sent to your email.</h1>
             <div style={{ textAlign: 'center' }}>
-               <Link to='/'>
-                <button className='RegisterButton' >Home page</button>
+               <Link to='/login'>
+                <button className='RegisterButton' >Login</button>
             </Link> 
             </div>
             

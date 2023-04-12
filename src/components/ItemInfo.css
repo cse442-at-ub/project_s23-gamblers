@@ -18,6 +18,10 @@
   object-fit: contain;
 }
 
+.reportbutton{
+  background-color: red;
+}
+
 .text{
   font-family: Skin-market-sans;
   align-items:center;
