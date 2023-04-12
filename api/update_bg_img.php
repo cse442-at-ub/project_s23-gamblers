@@ -10,6 +10,7 @@ if ($method == 'POST'){
             header('HTTP/1.0 401 Unauthorized');
             die();
         }
+        //TODO need to filter error type file, such as mp4, gif....
         if($_FILES["bg"]["error"] == UPLOAD_ERR_OK){
             $uploads_dir = '../uploads';
             $tmp_name = $_FILES["bg"]["tmp_name"];
