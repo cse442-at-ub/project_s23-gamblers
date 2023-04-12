@@ -27,6 +27,23 @@ class User{
             ]; 
         echo json_encode($info);        
     }
+    public function my_items(){
+        if(!$this->is_vaild){
+            return;
+        }
+        $user_id = $this->information['id']; 
+        $result = get_tb_col_value("items","user_id",$user_id,true);
+        echo json_encode($result);
+    }
+    public function items(){
+        if(!$this->is_vaild){
+            return;
+        }
+        $user_id = $this->information['id']; 
+        $sql = "SELECT * FROM items";
+        $result = get($sql,true);
+        echo json_encode($result);
+    }
     // user class save the item to database;
     public function post_item($json){
         if(!$this->is_vaild){
