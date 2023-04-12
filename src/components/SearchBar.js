@@ -7,27 +7,31 @@ import axios from 'axios';
 function SearchBar(props) {
   const [searchText, setSearchText] = useState('');
 
-
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
   };
-
+  console.log(searchText)
   function handleFormSubmit(event){
+    if(searchText===''){
+      window.alert('please enter something')
+      return
+    }
     event.preventDefault();
-    axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/search',{
-      searchText: searchText,
+    axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/search',{
+      keyword: searchText,
     }).then(function(response){
-      props.setItemData([response.data])
+      console.log(response)
+      props.setItemData(response.data)
     })
   }
 
-  function testingHandler(){
-    props.setItemData([{
-      title: "testing",
-      text: 'price: 9999  post date: 2023.3.13',
-      poster: 'testing'
-    }])
-  }
+  // function testingHandler(){
+  //   props.setItemData([{
+  //     title: "testing",
+  //     text: 'price: 9999  post date: 2023.3.13',
+  //     poster: 'testing'
+  //   }])
+  // }
 
   return (
     <div>
@@ -42,11 +46,11 @@ function SearchBar(props) {
           onChange={handleSearchTextChange}
           
         />
-        <Button type="submit" className="mt-2 me-2" style={{width:'100%'}}>
+        <Button type="submit" className="mt-2 me-2" style={{width:'100%'}} onClick={handleFormSubmit}>
           Search
         </Button>
       </Form>
-      <button onClick={testingHandler}>testing</button>
+      {/* <button onClick={testingHandler}>testing</button> */}
     </div>
   );
 }
