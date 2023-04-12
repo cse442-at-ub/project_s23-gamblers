@@ -11,7 +11,8 @@ import EditWindow from './EditWindow'
 import axios from 'axios'
 import Buying from './Buying';
 import UserImage from './UserImage';
-
+import PostForm from './PostForm'
+import MyPost from './MyPost';
 function Setting(){
     
     const [buttonPopup, setButtonPopup] = useState(false);
@@ -79,13 +80,29 @@ function Setting(){
                         <Buying></Buying>
                     </Container>
                 )
+            case 4:
+                return(
+                    <Container className='mt-3'>
+                        <PostForm></PostForm>
+                    </Container>
+                )
+            case 5:
+                return(
+                    <Container className='mt-3'>
+                        <MyPost></MyPost>
+                    </Container>
+                )
             default:
                 return (<div>
 
                     </div>);
         }
     }
-
+    function nav_color(e){
+        // console.log( document.getElementsById("ch_bar"))
+        // document.getElementsById("ch_bar").forEach(i => console.log(i))
+        // e.target.style.backgroundColor ="rgba(183, 182, 182, 182)"
+    }
     return(
         <div className='Background'>
             <Container className='Mainpage'>
@@ -102,23 +119,33 @@ function Setting(){
 
                         </Row>
                         <Row className='mt-3'>
-                            <button className='Myaccount' onClick={() =>{setNav_case(0)}}>
+                            <button className='Profile' id="ch_bar" onClick={() =>{setNav_case(0)}}>
                                 <span className='MyaccountFont'>My account</span>
                             </button>
                         </Row>
                         <Row>
-                            <button className='Profile' onClick={() =>{setNav_case(1)}}>
-                                <span className='ProfileFont'>Profile</span>
+                            <button className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(1); nav_color(e)}}>
+                                <span className='ProfileFont' >Profile</span>
                             </button>   
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' onClick={() =>{setNav_case(2)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(2); nav_color(e)}} >
                                 <span className='ProfileFont'>Edit User Profile</span>
                             </button>
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' onClick={() =>{setNav_case(3)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(3); nav_color(e)}} >
                                 <span className='ProfileFont'>View History</span>
+                            </button>
+                        </Row>
+                        <Row>
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(4); nav_color(e)}} >
+                                <span className='ProfileFont'>Upload</span>
+                            </button>
+                        </Row>
+                        <Row>
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(5); nav_color(e)}} >
+                                <span className='ProfileFont'>My items</span>
                             </button>
                         </Row>
                         <Row className='mt-3'>
