@@ -3,16 +3,19 @@ include_once 'user.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $entityBody = file_get_contents('php://input');
 if ($method == 'GET'){
-    $dump = json_decode($entityBody, true);
-    $sql = "SELECT u.username, c.comment_text, c.time_created 
+    $query = array();
+    parse_str($_SERVER['QUERY_STRING'], $query);
+    // axios get can't sent data
+    //$dump = json_decode($entityBody, true);
+    $sql = "SELECT u.username, c.comment_text, c.time_created
             FROM item_comments c, users u
             WHERE c.user_id = u.id AND c.item_id = ?
             ORDER BY c.time_created DESC";
-    if(!isset($dump['item_id'])){
+    if(!isset($query['item_id'])){
         header('HTTP/1.0 403 Forbidden');
         die();
     }
-    $item_id = $dump['item_id'];
+    $item_id = $query['item_id'];
     $result = get($sql,array($item_id),true);
     echo json_encode($result);
     die();
