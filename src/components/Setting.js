@@ -177,6 +177,11 @@ function Setting(){
                                                     <form onSubmit={(e)=>{
                                                         e.preventDefault();
                                                         const fd = new FormData()
+
+                                                        if(bgUpload === undefined){
+                                                            alert("please select image");
+                                                            return;
+                                                        }
                                                         fd.append('bg',bgUpload)
                                                         console.log(fd)
                                                         const cfg = {
@@ -187,6 +192,7 @@ function Setting(){
                                                         };
                                                             axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_bg_img.php",fd,cfg)
                                                         .then(res=>{
+                                                            alert("success");
                                                             console.log(res.data)
                                                         })
                                                     }}>

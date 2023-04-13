@@ -26,7 +26,7 @@ function ItemInfo(props){
     }, [])
     const handleLookItem = () => {
 
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item.php?var=${item_id}`, "").then(function (response) {
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item.php?var=${item_id}`, { withCredentials: true }).then(function (response) {
             console.log(response.data)
             console.log(item.item_id)
             setState(200)
@@ -61,12 +61,15 @@ function ItemInfo(props){
     }, [])
 
     function handleReport() {
+        let itemid = 1
         window.alert('A report has been sent')
-        console.log(item_id)
-        console.log(guestName)
+        const a = window.location.search;
+        const arugments = new URLSearchParams(a);
+        itemid = (arugments.get('var'));
+        console.log(itemid)
         axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/nmsl', {
             reporter: guestName,
-            item_id: item_id
+            item_id: itemid
         }).then(function (response) {
             console.log(response)
         })
