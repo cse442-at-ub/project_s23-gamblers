@@ -21,7 +21,7 @@ function EditWindow(props){
         fd.append('profile_image',profile_image)
         console.log(fd)
         
-        axios.post("https://localhost/api/update_profile_img.php",fd,cfg)
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_profile_img.php",fd,cfg)
         .then(res=>{
             console.log(res.data)
         })
@@ -36,7 +36,7 @@ function EditWindow(props){
             alert("Invaild Input!!");
             return
         }
-        axios.put("https://localhost/api/update_profile.php", post,cfg);
+        axios.put("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_profile.php", post,cfg);
         console.log("snet");
         // props.onChange(false)
     }

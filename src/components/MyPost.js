@@ -7,7 +7,7 @@ import {Col,Container,Row} from 'react-bootstrap/';
 export default function MyPost() {
     const [myItem ,setMyItem] = useState([]);
     const get_items_history = () => {
-        axios.get(`https://localhost/api/my_items.php`,{withCredentials: true}).then(function(response) {
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/my_items.php`,{withCredentials: true}).then(function(response) {
             console.log(response.data);
             setMyItem(response.data)
         }).catch(function (error) {
@@ -31,7 +31,7 @@ export default function MyPost() {
                     <div className='box'>
                         <span className='view_history_name'>{order1['item_name']}<br></br>
                             <Link to={'/iteminfo?var='+order1['item_id']}>
-                            <img className='history_item_image' src = {"https://localhost/uploads/"+order1['item_image_dir']} ></img>
+                                <img className='history_item_image' src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/"+order1['item_image_dir']} ></img>
                             </Link>
                         </span> 
                         <span className='view_history_time'>{order1['date_posted']}</span>

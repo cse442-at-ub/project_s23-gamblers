@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import './Forgot.css'
 
 function Forgot() {
     return (

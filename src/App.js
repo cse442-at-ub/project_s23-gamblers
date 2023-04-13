@@ -11,6 +11,7 @@ import Setting from './components/Setting'
 import Buying from "./components/Buying"
 import PostForm from "./components/PostForm";
 import Report from "./components/Report"
+import Admin from "./components/Admin";
 function App() {
   const [login, setLogin] = useState(false)
 
@@ -30,9 +31,8 @@ function App() {
           <Route path='/Verify' element={<Verify />} />
           <Route path="/Setting" element={<Setting/>}></Route>
           <Route path="/history" element={<Buying/>}></Route>
-          <Route path="/postform" element={<PostForm/>}></Route>
-          
           <Route path="/report" element={<Report />}></Route>
+          <Route path='/admin' element={<Admin/>}></Route>
         </Routes>
       </BrowserRouter>
 
@@ -42,3 +42,4 @@ function App() {
 }
 
 export default App;
+ 
