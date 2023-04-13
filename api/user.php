@@ -23,7 +23,8 @@ class User{
         $info = ['username' =>$_info['username'],
                 'email'=>$_info['email'],
                 "phone_number"=>$_info["phone_number"],
-                "bg_image"=>$_info['bg_image']
+                "bg_image"=>$_info['bg_image'],
+                "pf_image"=>$_info['icon_image']
             ]; 
         echo json_encode($info);        
     }
@@ -99,6 +100,14 @@ class User{
         $_id = $this->information['id'];
         $sql = "UPDATE users SET username = ?, email = ?, phone_number = ? WHERE id = $_id";
         get($sql,array($new_username,$new_email,$new_phone));
+    }
+    public function change_pf_image($img_name){
+        if(!$this->is_vaild){
+            return;
+        }
+        $_id = $this->information['id'];
+        $sql = "UPDATE users SET icon_image = ? WHERE id = ?";
+        get($sql,array($img_name,$_id));
     }
     public function change_bg_image($img_name){
         if(!$this->is_vaild){

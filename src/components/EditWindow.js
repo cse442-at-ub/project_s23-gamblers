@@ -21,7 +21,7 @@ function EditWindow(props){
         fd.append('profile_image',profile_image)
         console.log(fd)
         
-        axios.post("https://localhost/api/update_profile_img.php",fd,cfg)
+        axios.post("https://localhost/api/profile_image.php",fd,cfg)
         .then(res=>{
             console.log(res.data)
         })
@@ -64,7 +64,7 @@ function EditWindow(props){
                             <form className='form-group' onSubmit={submit_profile_image}>
                                 <label>
                                     <input type="file" name="bg_images" id="images" onChange={(e)=>{setProfile_image(e.target.files[0])}}/>
-                                    <div className="file-dummy UsernameFont" ><span> select your background image</span>
+                                    <div className="file-dummy UsernameFont" ><span> select your profile image</span>
                                     
                                     </div>
                                     <button className="post_button"> Upload Post</button>

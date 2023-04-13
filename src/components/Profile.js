@@ -22,9 +22,9 @@ function Profile(){
     
     return(
         <div className=''>
-            <td className='information_font'>username:{user.username}</td><tr/>
-            <td className='information_font'>email:{user.email}</td><tr/>
-            <td className='information_font'>phoneNumber:{user.phone_number}</td><tr/>
+            <td className='information_font'>Username:{user.username}</td><tr/>
+            <td className='information_font'>Email:{user.email}</td><tr/>
+            <td className='information_font'>Phone Number:{user.phone_number}</td><tr/>
         </div>
 
                  
