@@ -20,12 +20,15 @@ function Admin() {
         getReport()
     },[])
 
-    function deleteHandler(){
-        axios.delete(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item.php?var=${report.item_id}`)
+    function deleteHandler(e){
+      axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/delete.php`,{
+          item_id: e
+        }).then(function(response){
+          console.log(response)
+        })
     }
 
     function viewHandler(e){
-        console.log(report.item_id)
         navigate(`/iteminfo?var=${e}`)
     }
 
@@ -37,7 +40,7 @@ function Admin() {
                 <br></br>
                 <br></br>
                 <h1>{report.reporter} reported post: {report.item_id}</h1>
-                <button className='LoginButton' style={{backgroundColor:'red'}}onClick={deleteHandler}>Delete</button>
+                <button className='LoginButton' style={{backgroundColor:'red'}}onClick={()=>deleteHandler(report.item_id)}>Delete</button>
                 <button className='LoginButton' onClick={()=>{viewHandler(report.item_id)}}>View Post</button>
                 <br></br>
                 <br></br>

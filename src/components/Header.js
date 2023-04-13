@@ -37,13 +37,13 @@ function Header(props) {
                             height="60"
                             className="d-inline-block align-top"
                             />
-                        </Navbar.Brand> 
+                        </Navbar.Brand>
                     </Container>
                 </Col>
                 <Col >
                     <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
                         {!guest ? < a href='/setting'><UserImage></UserImage></ a> : < a href='/login'><h2>Welcome Guest</h2></ a>}
-                        < a href='/login'><UserImage></UserImage></ a>
+                       
 
                         <SearchBar setItemData={props.setItemData}></SearchBar>
                     </Container>

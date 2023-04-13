@@ -10,7 +10,7 @@ function Home(){
     const [isLoading, setIsLoading] = useState(true)
 
     function getItem(){
-        axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/all_items').then(function(response){
+        axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/all_item').then(function(response){
             console.log(response.data)
             setItemData(response.data)
             setIsLoading(false)

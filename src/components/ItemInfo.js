@@ -73,9 +73,10 @@ function ItemInfo(props) {
     function handleReport() {
         window.alert('A report has been sent')
         console.log(item_id)
+        console.log(guestName)
         axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/nmsl', {
             reporter: guestName,
-            item_id: item.item_id
+            item_id: item_id
         }).then(function (response) {
             console.log(response)
         })
