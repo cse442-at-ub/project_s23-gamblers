@@ -18,12 +18,18 @@ function EditWindow(props){
     const submit_profile_image = (e) =>{
         e.preventDefault()
         const fd = new FormData()
+        if(profile_image === undefined){
+            alert("please select image");
+            return;
+        }
         fd.append('profile_image',profile_image)
         console.log(fd)
         
         axios.post("https://localhost/api/profile_image.php",fd,cfg)
         .then(res=>{
-            console.log(res.data)
+            alert("success");
+        }).catch(function(error){
+            alert(error);
         })
     }
 
@@ -43,6 +49,7 @@ function EditWindow(props){
         }
         axios.post("https://localhost/api/update_profile.php", post,{withCredentials:true});
         console.log("snet");
+        alert("sent");
         // props.onChange(false)
     }
     const handleChange = (event) => {   
