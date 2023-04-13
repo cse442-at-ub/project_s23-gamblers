@@ -6,16 +6,27 @@ import axios from "axios";
 import bg_change from '../assets/images/bg_ch_icon.svg.svg'
 function EditWindow(props){
     const [post, setPost] = useState({});
+    const [change_image, setChange_image] = useState(false)
     // const [username, setUsername] = useState("");
-
-    useEffect(() => {
-        getUser();
-    }, [])
-    function getUser() {
-        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/`, post).then(function(response){
-            console.log(response.data);
-        });
+    const [profile_image, setProfile_image] = useState()
+    const cfg = {
+        withCredentials:true,
+        headers: {
+            'content-type': 'multipart/form-data',
+        },
+    };
+    const submit_profile_image = (e) =>{
+        e.preventDefault()
+        const fd = new FormData()
+        fd.append('profile_image',profile_image)
+        console.log(fd)
+        
+        axios.post("https://localhost/api/update_profile_img.php",fd,cfg)
+        .then(res=>{
+            console.log(res.data)
+        })
     }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(post)
@@ -25,17 +36,12 @@ function EditWindow(props){
             alert("Invaild Input!!");
             return
         }
-        axios.put(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/${props.id}`, post);
+        axios.put("https://localhost/api/update_profile.php", post,cfg);
         console.log("snet");
         // props.onChange(false)
     }
-    const handleChange = (event) => {
-        
-        // if(event.target.name === "username"){
-        //     setUsername(event.target.value)
-        // }
+    const handleChange = (event) => {   
         setPost(vals => ({ ...vals, [event.target.name]: event.target.value }));
-    
     }
     return (
 
@@ -48,8 +54,19 @@ function EditWindow(props){
                         </UserImage>
                     </Col>
                     <Col>
-                        <img className='bg_change_icon' src={bg_change} />
-
+                        <img className='bg_change_icon' src={bg_change} onClick={()=>{setChange_image(!change_image)}}/>
+                        {change_image?
+                            <form className='form-group' onSubmit={submit_profile_image}>
+                                <label>
+                                    <input type="file" name="bg_images" id="images" onChange={(e)=>{setProfile_image(e.target.files[0])}}/>
+                                    <div className="file-dummy UsernameFont" ><span> select your background image</span>
+                                    
+                                    </div>
+                                    <button className="post_button"> Upload Post</button>
+                                </label>           
+                            </form>
+                        :
+                            null}
                     </Col>
                 </Row>
                 
