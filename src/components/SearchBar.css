@@ -1,6 +1,7 @@
 .search-bar{
-    padding-left: 40px;
-    border-radius: 43.0504px
+    padding-left: 80px;
+    border-radius: 43.0504px;
+    
 }
 
 
@@ -9,3 +10,4 @@
     background-size: contain;
     background-color:white;
 }
+

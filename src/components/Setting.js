@@ -28,10 +28,10 @@ function Setting(){
     const [bg, setBg] = useState('')
     
     function fetchUserHandler() {
-        axios.get(`https://localhost/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
+        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
             console.log(response.data)
             if (response.status === 401) {
-                setGuest(true)
+
             }
             if (response.status === 200) {
                 console.log(response.data)
@@ -159,7 +159,7 @@ function Setting(){
                     </Col>
                     <Col md={{ span: 7}}>
                         <Container className='mt-3 Icon' style={{ 
-                            backgroundImage: `url(${"https://localhost/"+bg})`,
+                                backgroundImage: `url(${"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/"+bg})`,
                             }}>
                                     <Row>
                                         <Col className='mt-5 mb-3' >
@@ -185,7 +185,7 @@ function Setting(){
                                                                 'content-type': 'multipart/form-data',
                                                             },
                                                         };
-                                                        axios.post("https://localhost/api/update_bg_img.php",fd,cfg)
+                                                            axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_bg_img.php",fd,cfg)
                                                         .then(res=>{
                                                             console.log(res.data)
                                                         })

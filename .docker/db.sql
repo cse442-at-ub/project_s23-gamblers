@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     last_login TIMESTAMP (0) DEFAULT NULL,
     role tinyint(1) NOT NULL,
     username varchar(32) NOT NULL,
+    icon_image VARCHAR(32) NOT NULL,
     hash varchar(80) NOT NULL,
     state varchar(32) NOT NULL,
 	email varchar(32) NOT NULL,
@@ -28,6 +29,7 @@ CREATE TABLE IF NOT EXISTS items (
     item_state varchar(80) NOT NULL,
     last_modify datetime(6) DEFAULT NULL,
     item_name TEXT NOT NULL,
+    view_count MEDIUMINT DEFAULT 0,
     item_image_dir varchar(80) NOT NULL,
     item_description TEXT NOT NULL,
     item_price INT NOT NULL,
@@ -143,7 +145,7 @@ CREATE TABLE IF NOT EXISTS item_comments (
 CREATE TABLE IF NOT EXISTS report (
     report_id MEDIUMINT NOT NULL AUTO_INCREMENT,
     item_id  MEDIUMINT NOT NULL,
-    reporter  MEDIUMINT NOT NULL,
+    reporter  VARCHAR(32) NOT NULL,
     PRIMARY KEY (report_id)
 ) ENGINE=InnoDB;
 
