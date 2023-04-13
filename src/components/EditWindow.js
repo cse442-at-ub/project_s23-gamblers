@@ -29,14 +29,19 @@ function EditWindow(props){
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(post)
-        
-        if(Object.keys(post).length<3){
+        console.log(Object.keys(post))
+        let has_empty = false
+        Object.keys(post).map( x =>{
+            console.log(post[x])
+            has_empty |= ( post[x] === "") | post[x].includes(' ')  
+            }
+        )
+        if(has_empty){
             // props.onChange(false)
             alert("Invaild Input!!");
             return
         }
-        axios.put("https://localhost/api/update_profile.php", post,cfg);
+        axios.post("https://localhost/api/update_profile.php", post,{withCredentials:true});
         console.log("snet");
         // props.onChange(false)
     }
