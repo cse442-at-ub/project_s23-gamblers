@@ -18,26 +18,38 @@ function EditWindow(props){
     const submit_profile_image = (e) =>{
         e.preventDefault()
         const fd = new FormData()
+        if(profile_image === undefined){
+            alert("please select image");
+            return;
+        }
         fd.append('profile_image',profile_image)
         console.log(fd)
         
-        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_profile_img.php",fd,cfg)
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/profile_image.php",fd,cfg)
         .then(res=>{
-            console.log(res.data)
+            alert("success");
+        }).catch(function(error){
+            alert(error);
         })
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(post)
-        
-        if(Object.keys(post).length<3){
+        console.log(Object.keys(post))
+        let has_empty = false
+        Object.keys(post).map( x =>{
+            console.log(post[x])
+            has_empty |= ( post[x] === "") | post[x].includes(' ')  
+            }
+        )
+        if(has_empty){
             // props.onChange(false)
             alert("Invaild Input!!");
             return
         }
         axios.put("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_profile.php", post,cfg);
         console.log("snet");
+        alert("sent");
         // props.onChange(false)
     }
     const handleChange = (event) => {   
@@ -59,7 +71,7 @@ function EditWindow(props){
                             <form className='form-group' onSubmit={submit_profile_image}>
                                 <label>
                                     <input type="file" name="bg_images" id="images" onChange={(e)=>{setProfile_image(e.target.files[0])}}/>
-                                    <div className="file-dummy UsernameFont" ><span> select your background image</span>
+                                    <div className="file-dummy UsernameFont" ><span> select your profile image</span>
                                     
                                     </div>
                                     <button className="post_button"> Upload Post</button>
