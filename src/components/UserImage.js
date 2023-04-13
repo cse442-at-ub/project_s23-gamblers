@@ -9,7 +9,11 @@ function UserImage(){
         axios.get(`https://localhost/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
             if (response.status === 200) {
                 console.log(response.data.pf_image)
-                setUser_img('https://localhost/'+response.data.pf_image)
+                if(response.data.pf_image !== null){
+                    setUser_img('https://localhost/'+response.data.pf_image)
+                }else{
+                    setUser_img(defaut_user_image)
+                }
             }
         })
     }
