@@ -47,9 +47,12 @@ function EditWindow(props){
             alert("Invaild Input!!");
             return
         }
-        axios.put("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_profile.php", post,cfg);
-        console.log("snet");
-        alert("sent");
+        console.log(post)
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_profile.php", JSON.stringify(post),{withCredentials:true}).then(res=>{
+            alert("sent");
+        }).catch(function(error){
+            alert(error);
+        });
         // props.onChange(false)
     }
     const handleChange = (event) => {   
