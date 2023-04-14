@@ -36,11 +36,26 @@ export default function MyPost() {
                         </span> 
                         <span className='view_history_time'>{order1['date_posted']}</span>
                     </div>
+                    <button style={{backgroundColor:'red'}} onClick={()=>deleteHandler(order1['item_id'])}>Delete</button>
                 </th>
                 
             </tr>
         )
     }
+    function deleteHandler(e){
+        console.log(e)
+        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/delete.php`,{
+            item_id: e
+          }).then(function(response){
+            if(response.status === 200){
+              window.alert('Post remove successful')
+            }
+            else{
+              window.alert('Bad connection')
+            }
+          })
+      }
+  
   return (
     <Container>
             <Row xs="auto">

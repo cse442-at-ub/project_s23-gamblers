@@ -17,6 +17,7 @@ switch($method){
             $result = $conn->query($sql);
             $rows = $result->num_rows;
             if($rows!=0){
+                header('HTTP/1.1 400 BAD REQUEST');
                 die("username already exise");
             }
             $sql = 'INSERT INTO users (last_login, role, state, date_created,email, username, hash ,phone_number)
