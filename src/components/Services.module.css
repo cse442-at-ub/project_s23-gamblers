@@ -58,22 +58,31 @@
   
   /* section */
   .section__title{
+    text-transform: capitalize;
     margin-bottom: 4rem;
     color: var(--black-color);
     font-weight: 600;
     letter-spacing: 1px;
-    font-size: 4rem;
+    font-size: 3rem;
   }
   .section__padding{
     padding: 10rem 0;
   }
   
   /* texts and paras */
-  .para__text{
+  .para_text_smaller{
     line-height: 1.7;
-    font-weight: 300;
+    font-weight: 400;
     opacity: 0.95;
     letter-spacing: 1px;
+    font-size: 1.2rem;
+  }
+  .para__text{
+    line-height: 1.7;
+    font-weight: 500;
+    opacity: 0.95;
+    letter-spacing: 1px;
+    font-size: 2rem;
   }
   .text__center{
     text-align: center;
@@ -96,16 +105,6 @@
   .text__grey{
     color: var(--grey-color);
   }
-  
-  /* fonts */
-  .fw__2{font-weight: 200;}
-  .fw__2{font-weight: 300;}
-  .fw__2{font-weight: 400;}
-  .fw__2{font-weight: 500;}
-  .fw__2{font-weight: 600;}
-  .fw__2{font-weight: 700;}
-  .fw__2{font-weight: 800;}
-  
   /* bgs and colors */
   .bg__blue{
     background-color: var(--robin-blue-color);
