@@ -41,10 +41,11 @@ function Home(){
                                             className='item-image'
                                         /></div>
                                         
-                                        <h4 className={`${styles.text__upper} ${styles.text}`}>{service.item_name}</h4>
+                                        <h4 className={`${styles.section__title} ${styles.text}`}>{service.item_name}</h4>
                                         <p className={`${styles.para__text} ${styles.text__grey}`}>{service.item_description}</p>
-                                        <p className={`${styles.para__text} ${styles.text__grey}`}>poster: user {service.user_id}</p>
-                                        <a href={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>more info</a>
+                                        <p className={`${styles.para__text} ${styles.text__grey}`}>poster: {service.user_id}</p>
+                                        <p className={`${styles.para_text_smaller} ${styles.text__grey}`}>View: {service.view_count}</p>
+                                        <a href={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>MORE INFO</a>
                                     </div>
                                 )
                             })
