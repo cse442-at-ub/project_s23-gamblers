@@ -25,6 +25,8 @@ border-radius: 68px;
   }
 .Icon{
 background: #66C5FB;
+background-size: contain;
+
 resize: vertical;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-top-left-radius: 36px;

@@ -17,7 +17,7 @@ function Setting(){
     
     const [buttonPopup, setButtonPopup] = useState(false);
     const [uid, setUid] = useState("")
-    const [nav_case,setNav_case] = useState(0)
+    const [nav_case,setNav_case] = useState(1)
 
     const [guest, setGuest] = useState(true)
     const [guestName, setGuestName] = useState('Guest')
@@ -117,11 +117,6 @@ function Setting(){
                         </button>
                         </Link>
 
-                        </Row>
-                        <Row className='mt-3'>
-                            <button className='Profile' id="ch_bar" onClick={() =>{setNav_case(0)}}>
-                                <span className='MyaccountFont'>My account</span>
-                            </button>
                         </Row>
                         <Row>
                             <button className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(1); nav_color(e)}}>
