@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     last_login TIMESTAMP (0) DEFAULT NULL,
     role tinyint(1) NOT NULL,
     username varchar(32) NOT NULL,
-    icon_image VARCHAR(32) NOT NULL,
+    icon_image VARCHAR(32) DEFAULT NULL,
     hash varchar(80) NOT NULL,
     state varchar(32) NOT NULL,
 	email varchar(32) NOT NULL,

@@ -23,7 +23,8 @@ class User{
         $info = ['username' =>$_info['username'],
                 'email'=>$_info['email'],
                 "phone_number"=>$_info["phone_number"],
-                "bg_image"=>$_info['bg_image']
+                "bg_image"=>$_info['bg_image'],
+                "pf_image"=>$_info['icon_image']
             ]; 
         echo json_encode($info);        
     }
@@ -85,10 +86,37 @@ class User{
         return $this->is_vaild;
     }
     // TODO: user sent request to update his profile
-    public function change_profile($json){
+    public function change_profile($json_obj){
         if(!$this->is_vaild){
             return;
         }
+        $new_username = $json_obj['username'];
+        $new_email = $json_obj['email'];
+        $new_phone = $json_obj['phoneNumber'];
+        if(check_tb_col_value_exist("users","username",$new_username)){
+            header('HTTP/1.0 403 Forbidden');
+            die();
+        }
+        $_id = $this->information['id'];
+        $sql = "UPDATE users SET username = ?, email = ?, phone_number = ? WHERE id = $_id";
+        get($sql,array($new_username,$new_email,$new_phone));
+    }
+    public function add_comment($item_id,$comment){
+        if(!$this->is_vaild){
+            return;
+        }
+        $_id = $this->information['id'];
+        $sql = "INSERT INTO `item_comments`(`user_id`, `item_id`, `comment_text`, `time_created`) VALUES (?,?,?,?)";
+        get($sql,array($_id,$item_id,$comment,date("Y-m-d H:i:s")));
+    }
+
+    public function change_pf_image($img_name){
+                if(!$this->is_vaild){
+                    return;
+                }
+                $_id = $this->information['id'];
+                $sql = "UPDATE users SET icon_image = ? WHERE id = ?";
+                get($sql,array($img_name,$_id));
     }
     public function change_bg_image($img_name){
         if(!$this->is_vaild){

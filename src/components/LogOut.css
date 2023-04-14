@@ -17,7 +17,7 @@ background: #66C5FB;
 }
 .logoutmain{
 position: absolute;
-width: 100%;
+min-width: 100%;
 height: 119px;
 left: 0px;
 top: 227px;
@@ -52,7 +52,7 @@ color: #FFFFFF;
 }
 .cancelbutton{
 position: absolute;
-width: 18%;
+min-width: 18%;
 height: 61px;
 left: 60%;
 top: 30%;
@@ -68,7 +68,7 @@ color: #FFFFFF;
 }
 .logoutbutton{
 position: absolute;
-width: 18%;            
+min-width: 18%;            
 height: 61px;             
 left: 80%;
 top: 30%;
