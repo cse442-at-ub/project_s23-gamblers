@@ -27,6 +27,7 @@ function Login() {
                 if (response.data === 'success'){
                     window.alert('Welcom ADMIN')
                     navigate('/admin')
+                    return
                 }
             }
             if (response.data ==='success'){
