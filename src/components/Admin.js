@@ -24,7 +24,12 @@ function Admin() {
       axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/delete.php`,{
           item_id: e
         }).then(function(response){
-          console.log(response)
+          if(response.status === 200){
+            window.alert('Post remove successful')
+          }
+          else{
+            window.alert('Bad connection')
+          }
         })
     }
 
@@ -34,7 +39,7 @@ function Admin() {
 
   return (
     <div>
-      {report.map((report, index)=>{
+      {report.slice(0).reverse().map((report, index)=>{
         return(
             <div key={index}>
                 <br></br>
