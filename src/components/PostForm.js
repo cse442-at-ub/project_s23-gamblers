@@ -13,14 +13,14 @@ function PostForm(){
         const fd = new FormData()
         fd.append('images', postimage)
         fd.append('item_info',JSON.stringify(data))
-        if (data.item_name === "") {
+        if (data.item_name === "" || data.item_name===undefined) {
             toast.error('Please enter item name')
-        } else if (data.description===''){
+        } else if (data.description===''|| data.description===undefined){
             toast.error('Please enter item description')
-        }else if (data.price === '') {
+        }else if (data.price === ''|| data.price===undefined) {
             toast.error('Please enter item price')
         }
-        else if (data.contact === '') {
+        else if (data.contact === ''|| data.contact===undefined) {
             toast.error('Please enter contact information')
         }
         else if (postimage === '') {
