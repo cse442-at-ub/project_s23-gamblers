@@ -34,7 +34,8 @@ function Admin() {
     }
 
     function viewHandler(e){
-        navigate(`/iteminfo?var=${e}`)
+      window.open(`/iteminfo?var=${e}`)
+      
     }
 
   return (
