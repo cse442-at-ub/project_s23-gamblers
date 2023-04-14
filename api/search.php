@@ -1,36 +1,34 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Search.php</title>
-</head>
-<body>
-	  <h1 align="center">Search</h1>
-	  <form action="" method="post" name="indexf">
-		    <p align="center"><input type="text" name="sel"/><input type ="submit" value="search" name="selsub" /></p>
-            <table align="center" border="1px" cellspacing="0px" width="800px">
-                <tr><th>item_id</th><th>poster_id</th><th>date_posted</th><th>item_state</th><th>	last_modify</th><th>item_name</th><th>item_image_dir</th><th>item_description</th><th>item_price</th><th>item_contact</th></tr>
 <?php
-    $link=mysqli_connect('db','root','Password123#@!','cse442_2023_spring_team_m_db');
-    if(!$link){
-      exit('gg!');
+include_once 'database/db_connect.php';
+
+// $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+$entityBody = file_get_contents('php://input');
+$dump = json_decode($entityBody,true);
+$keyword = $dump['keyword'];
+if (empty($keyword)) {
+    echo json_encode(['error' => 'Keyword is required']);
+    exit;
+}
+$result = search_items($keyword);
+echo json_encode($result);
+function search_items($keyword) {
+    $objDb = new DbConnect;
+    $conn = $objDb->connect();
+    $escaped_keyword = $conn->real_escape_string($keyword);
+    // $sql = "SELECT * FROM items
+    //         WHERE item_name LIKE '%$escaped_keyword%'
+    //         OR item_description LIKE '%$escaped_keyword%'";
+    $sql = "SELECT * FROM items WHERE item_state = 'active' AND (item_name LIKE '%$escaped_keyword%' OR item_description LIKE '%$escaped_keyword%')";
+    $result = $conn->query($sql);
+    if ($conn->error) {
+        echo "Error: " . $conn->error;
+        die();
     }
-    if(empty($_POST["selsub"])){
-      $res=mysqli_query($link,"select * from items order by item_id");
+    $items = [];
+    while ($row = $result->fetch_assoc()) {
+        array_push($items, $row);
     }
-    else{
-      $sel= $_POST["sel"];
-      $res=mysqli_query($link,"select * from items where item_id like '%$sel%' or item_name like '%$sel%' or item_description like '%$sel%'");
-    }
-    while($row=mysqli_fetch_array($res)){
-      echo '<tr>';
-      echo "<td>$row[0]</td><td>$row[1]</td><td>$row[2]</td><td>$row[3]</td><td>$row[4]</td><td>$row[5]</td><td>$row[6]</td><td>$row[7]</td><td>$row[8]</td><td>$row[9]</td>";
-      echo '</tr>';
-    }
+    
+    return $items;
+}
 ?>
-        </table>
-    </form>
-  </body>
-</html>
-
-
