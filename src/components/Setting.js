@@ -50,7 +50,7 @@ function Setting(){
 
 
     function renderSwitch(param) {
-        nav_color()
+        nav_color(a)
 
         switch(param) {
             case 0:
