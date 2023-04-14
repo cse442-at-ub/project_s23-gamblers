@@ -10,6 +10,8 @@ if ($method == 'GET'){
         header("HTTP/1.0 404 Not Found");
         die();
     }
+    $sql = "UPDATE items SET view_count = view_count+1 WHERE item_id = ?";
+    get($sql,array($query['var']));
     echo json_encode($item);
     if(isset($_COOKIE['uid'])){
         $uid = $_COOKIE['uid'];
