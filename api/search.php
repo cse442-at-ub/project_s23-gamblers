@@ -15,9 +15,10 @@ function search_items($keyword) {
     $objDb = new DbConnect;
     $conn = $objDb->connect();
     $escaped_keyword = $conn->real_escape_string($keyword);
-    $sql = "SELECT * FROM items
-            WHERE item_name LIKE '%$escaped_keyword%'
-            OR item_description LIKE '%$escaped_keyword%'";
+    // $sql = "SELECT * FROM items
+    //         WHERE item_name LIKE '%$escaped_keyword%'
+    //         OR item_description LIKE '%$escaped_keyword%'";
+    $sql = "SELECT * FROM items WHERE item_state = 'active' AND (item_name LIKE '%$escaped_keyword%' OR item_description LIKE '%$escaped_keyword%')";
     $result = $conn->query($sql);
     if ($conn->error) {
         echo "Error: " . $conn->error;
