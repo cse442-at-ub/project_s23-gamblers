@@ -43,6 +43,7 @@ function Setting(){
         })
     }
     useEffect(() => {
+        
         fetchUserHandler()
     }, [])
 
@@ -50,8 +51,8 @@ function Setting(){
 
 
     function renderSwitch(param) {
+        
         nav_color()
-
         switch(param) {
             case 0:
                 return (<div>
@@ -102,12 +103,13 @@ function Setting(){
         }
     }
     function nav_color(e){
+        a = document.getElementsByClassName('Profile')
+        if(a.length === 0){
+            return
+        }
         for (let i = 0; i < a.length; i++) {
             a[i].style.background = 'white'
         }
-        a[nav_case-1].style.background = 'grey'
-        a[nav_case-1].style.background = 'grey'
-        a[nav_case-1].style.background = 'grey'
         a[nav_case-1].style.background = 'grey'
     }
     return(
