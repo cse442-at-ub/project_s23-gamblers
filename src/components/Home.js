@@ -24,6 +24,7 @@ function Home(){
     if(isLoading){
         return<p>Loading</p>
     }
+    
     console.log(itemData)
     return(
         <div>
@@ -43,7 +44,7 @@ function Home(){
                                         
                                         <h4 className={`${styles.text__upper} ${styles.text}`}>{service.item_name}</h4>
                                         <p className={`${styles.para__text} ${styles.text__grey}`}>{service.item_description}</p>
-                                        <p className={`${styles.para__text} ${styles.text__grey}`}>poster: user {service.user_id}</p>
+                                        <p className={`${styles.para__text} ${styles.text__grey}`}>${service.item_price} </p>
                                         <a href={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>more info</a>
                                     </div>
                                 )
