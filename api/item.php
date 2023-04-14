@@ -6,7 +6,7 @@ if ($method == 'GET'){
     parse_str($_SERVER['QUERY_STRING'], $query);
     
     $item = get_tb_col_value("items","item_id",$query['var']);
-    if(!$item){
+    if(!$item || $item['item_state'] != 'acitve'){
         header("HTTP/1.0 404 Not Found");
         die();
     }
