@@ -26,6 +26,7 @@ function Setting(){
 
     // TODO: dummy data, need actual data from server
     const [bg, setBg] = useState('')
+    let a = document.getElementsByClassName('Profile')
     
     function fetchUserHandler() {
         axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
@@ -49,6 +50,8 @@ function Setting(){
 
 
     function renderSwitch(param) {
+        nav_color()
+
         switch(param) {
             case 0:
                 return (<div>
@@ -99,9 +102,13 @@ function Setting(){
         }
     }
     function nav_color(e){
-        // console.log( document.getElementsById("ch_bar"))
-        // document.getElementsById("ch_bar").forEach(i => console.log(i))
-        // e.target.style.backgroundColor ="rgba(183, 182, 182, 182)"
+        for (let i = 0; i < a.length; i++) {
+            a[i].style.background = 'white'
+        }
+        a[nav_case-1].style.background = 'grey'
+        a[nav_case-1].style.background = 'grey'
+        a[nav_case-1].style.background = 'grey'
+        a[nav_case-1].style.background = 'grey'
     }
     return(
         <div className='Background'>
@@ -119,27 +126,27 @@ function Setting(){
 
                         </Row>
                         <Row>
-                            <button className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(1); nav_color(e)}}>
+                            <button className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(1)}}>
                                 <span className='ProfileFont' >Profile</span>
                             </button>   
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(2); nav_color(e)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(2)}} >
                                 <span className='ProfileFont'>Edit User Profile</span>
                             </button>
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(3); nav_color(e)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(3)}} >
                                 <span className='ProfileFont'>View History</span>
                             </button>
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(4); nav_color(e)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(4)}} >
                                 <span className='ProfileFont'>Upload</span>
                             </button>
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(5); nav_color(e)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(5)}} >
                                 <span className='ProfileFont'>My items</span>
                             </button>
                         </Row>
