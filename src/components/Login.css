@@ -7,8 +7,9 @@
 }
 
 .frame12{
-    background: #BEE8FF;
-    height: 100vh;
+    background-color: #BEE8FF;
+    height: 150vh;
+    width: 200vh;
 }
 
 .formBlock{
