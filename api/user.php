@@ -93,7 +93,7 @@ class User{
         $new_username = $json_obj['username'];
         $new_email = $json_obj['email'];
         $new_phone = $json_obj['phoneNumber'];
-        if(check_tb_col_value_exist("users","username",$new_username)){
+        if(check_tb_col_value_exist("users","username",$new_username) && $this->information['username'] != $new_username){
             header('HTTP/1.0 403 Forbidden');
             die();
         }

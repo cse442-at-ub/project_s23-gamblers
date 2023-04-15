@@ -22,9 +22,13 @@ function EditWindow(props){
             alert("please select image");
             return;
         }
+        let type = profile_image.name.split('.').at(-1)
+        let size = profile_image.size
+        if(!image_file_check(type,size)){
+            return
+        }
         fd.append('profile_image',profile_image)
         console.log(fd)
-        
         axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/profile_image.php",fd,cfg)
         .then(res=>{
             alert("success");
@@ -32,7 +36,18 @@ function EditWindow(props){
             alert(error);
         })
     }
-
+    function image_file_check(file_type,size){
+        let acceptable = ['jpg','jpeg','png']
+        if(!acceptable.includes(file_type)){
+            alert("Wrong image type, try jpg or png")
+            return false
+        }
+        if( size > 2000000){
+            alert("Too large, try image small than 2mb")
+            return false
+        }
+        return true
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(Object.keys(post))
