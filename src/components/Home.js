@@ -42,7 +42,7 @@ function Home(){
                                             className='item-image'
                                         /></div>
                                         
-                                        <h4 className={`${styles.text__upper} ${styles.text}`}>{service.item_name}</h4>
+                                        <h4 className={`${styles.section__title} ${styles.text}`}>{service.item_name}</h4>
                                         <p className={`${styles.para__text} ${styles.text__grey}`}>{service.item_description}</p>
                                         <p className={`${styles.para__text} ${styles.text__grey}`}>${service.item_price} </p>
                                         <a href={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>more info</a>
