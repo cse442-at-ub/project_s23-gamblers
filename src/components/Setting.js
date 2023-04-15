@@ -1,8 +1,7 @@
 import './Setting.css'
 import {Form,Col,Container,Row} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LogOut from './LogOut'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {useState, useEffect} from 'react'
 import img1 from '../image/icon/unnamed.jpg'
 import bg_change from '../assets/images/bg_ch_icon.svg.svg'
@@ -14,8 +13,8 @@ import UserImage from './UserImage';
 import PostForm from './PostForm'
 import MyPost from './MyPost';
 function Setting(){
-    
-    const [buttonPopup, setButtonPopup] = useState(false);
+    const navigate = useNavigate()
+
     const [uid, setUid] = useState("")
     const [nav_case,setNav_case] = useState(1)
 
@@ -43,15 +42,27 @@ function Setting(){
         })
     }
     useEffect(() => {
+        
         fetchUserHandler()
     }, [])
-
+    function image_file_check(file_type,size){
+        let acceptable = ['jpg','jpeg','png']
+        if(!acceptable.includes(file_type)){
+            alert("Wrong image type, try jpg or png")
+            return false
+        }
+        if( size > 2000000){
+            alert("Too large, try image small than 2mb")
+            return false
+        }
+        return true
+    }
 
 
 
     function renderSwitch(param) {
-        nav_color(a)
-
+        
+        nav_color()
         switch(param) {
             case 0:
                 return (<div>
@@ -101,13 +112,25 @@ function Setting(){
                     </div>);
         }
     }
+
+    function logoutHandler() {
+        axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/logout',{withCredentials:true}).then(function(response){
+            console.log(response)
+            if(response.status === 200){
+                window.alert('logout successful')
+                navigate('/')
+            }
+        })
+
+    }
     function nav_color(e){
+        a = document.getElementsByClassName('Profile')
+        if(a.length === 0){
+            return
+        }
         for (let i = 0; i < a.length; i++) {
             a[i].style.background = 'white'
         }
-        a[nav_case-1].style.background = 'grey'
-        a[nav_case-1].style.background = 'grey'
-        a[nav_case-1].style.background = 'grey'
         a[nav_case-1].style.background = 'grey'
     }
     return(
@@ -151,7 +174,7 @@ function Setting(){
                             </button>
                         </Row>
                         <Row className='mt-3'>
-                            <button onClick={()=>setButtonPopup(true)} className='Profile'>
+                            <button onClick={logoutHandler} className='Profile'>
 
                                 <span className='ProfileFont'>Log Out</span>
 
@@ -179,13 +202,18 @@ function Setting(){
                                                     <form onSubmit={(e)=>{
                                                         e.preventDefault();
                                                         const fd = new FormData()
-
                                                         if(bgUpload === undefined){
                                                             alert("please select image");
                                                             return;
                                                         }
+                                                        let type = bgUpload.name.split(".").at(-1)
+                                                        let size = bgUpload.size
+                                                        console.log(type)
+                                                        console.log(size)
+                                                        if(!image_file_check(type,size)){
+                                                            return
+                                                        }
                                                         fd.append('bg',bgUpload)
-                                                        console.log(fd)
                                                         const cfg = {
                                                             withCredentials:true,
                                                             headers: {
@@ -199,7 +227,7 @@ function Setting(){
                                                         })
                                                     }}>
                                                         <label>
-                                                            <input type="file" name="bg_images" id="images" onChange={(e)=>{setBgUpload(e.target.files[0]); console.log("image changed",bgUpload)}}/>
+                                                            <input type="file" name="bg_images" id="images" onChange={(e)=>{setBgUpload(e.target.files[0])}}/>
                                                             <div className="file-dummy UsernameFont" ><span> select your background image</span>
                                                             
                                                             </div>
@@ -224,28 +252,8 @@ function Setting(){
                 
 
             </Container>
-            
-                
-                    
-                    {/* <div className='cardposition'>
-                        <button className="card">
-                            <a href='\iteminfo' >
-                            <img className='img2' src={img1} alt=""/>
-                            <div className="container">
-                                <h4><b>Item Name</b></h4> 
-                            </div>
-                            </a> 
-                        </button> 
-                    </div> */}
-                
-                    {/* <a href='/profile' >
-                        
-                        
-                    </a> */}
-                   
                 </Container>
-                <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
-                        </LogOut>
+                
 
                 
                 

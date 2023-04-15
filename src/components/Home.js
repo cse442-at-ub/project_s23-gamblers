@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import React from "react";
 import styles from './Services.module.css'
 import Header from "./Header";
+import { Link } from 'react-router-dom';
 function Home(){
 
     const [itemData, setItemData] = useState([])
@@ -42,10 +43,11 @@ function Home(){
                                             className='item-image'
                                         /></div>
                                         
-                                        <h4 className={`${styles.text__upper} ${styles.text}`}>{service.item_name}</h4>
+                                        <h4 className={`${styles.section__title} ${styles.text}`}>{service.item_name}</h4>
                                         <p className={`${styles.para__text} ${styles.text__grey}`}>{service.item_description}</p>
                                         <p className={`${styles.para__text} ${styles.text__grey}`}>${service.item_price} </p>
-                                        <a href={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>more info</a>
+                                        <p className={`${styles.para_text_smaller} ${styles.text__grey}`}>View: {service.view_count}</p>
+                                        <Link to={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>more info</Link>
                                     </div>
                                 )
                             })
