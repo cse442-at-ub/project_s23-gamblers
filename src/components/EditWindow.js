@@ -3,46 +3,103 @@ import "./EditWindow.css"
 import UserImage from './UserImage';
 import {useEffect, useState } from 'react';
 import axios from "axios";
+import bg_change from '../assets/images/bg_ch_icon.svg.svg'
 function EditWindow(props){
     const [post, setPost] = useState({});
+    const [change_image, setChange_image] = useState(false)
     // const [username, setUsername] = useState("");
-
-    useEffect(() => {
-        getUser();
-    }, [])
-    function getUser() {
-        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/`, post).then(function(response){
-            console.log(response.data);
-        });
+    const [profile_image, setProfile_image] = useState()
+    const cfg = {
+        withCredentials:true,
+        headers: {
+            'content-type': 'multipart/form-data',
+        },
+    };
+    const submit_profile_image = (e) =>{
+        e.preventDefault()
+        const fd = new FormData()
+        if(profile_image === undefined){
+            alert("please select image");
+            return;
+        }
+        let type = profile_image.name.split('.').at(-1)
+        let size = profile_image.size
+        if(!image_file_check(type,size)){
+            return
+        }
+        fd.append('profile_image',profile_image)
+        console.log(fd)
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/profile_image.php",fd,cfg)
+        .then(res=>{
+            alert("success");
+        }).catch(function(error){
+            alert(error);
+        })
+    }
+    function image_file_check(file_type,size){
+        let acceptable = ['jpg','jpeg','png']
+        if(!acceptable.includes(file_type)){
+            alert("Wrong image type, try jpg or png")
+            return false
+        }
+        if( size > 2000000){
+            alert("Too large, try image small than 2mb")
+            return false
+        }
+        return true
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(post)
-        
-        if(Object.keys(post).length<3){
-            props.onChange(false)
+        console.log(Object.keys(post))
+        let has_empty = false
+        Object.keys(post).map( x =>{
+            console.log(post[x])
+            has_empty |= ( post[x] === "") | post[x].includes(' ')  
+            }
+        )
+        if(has_empty){
+            // props.onChange(false)
             alert("Invaild Input!!");
             return
         }
-        axios.put(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update/user/${props.id}`, post);
-        console.log("snet");
-        props.onChange(false)
+        console.log(post)
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_profile.php", JSON.stringify(post),{withCredentials:true}).then(res=>{
+            alert("sent");
+        }).catch(function(error){
+            alert(error);
+        });
+        // props.onChange(false)
     }
-    const handleChange = (event) => {
-        
-        // if(event.target.name === "username"){
-        //     setUsername(event.target.value)
-        // }
+    const handleChange = (event) => {   
         setPost(vals => ({ ...vals, [event.target.name]: event.target.value }));
-    
     }
     return (
 
-        <div  className='window'>
+        <Container  className='window'>
             <Row>
-            <Col className="edit_header_upper" >
-                <UserImage >
-                </UserImage>
+            <Col  className="edit_header_upper" >
+                <Row>
+                    <Col>
+                        <UserImage >
+                        </UserImage>
+                    </Col>
+                    <Col>
+                        <img className='bg_change_icon' src={bg_change} onClick={()=>{setChange_image(!change_image)}}/>
+                        {change_image?
+                            <form className='form-group' onSubmit={submit_profile_image}>
+                                <label>
+                                    <input type="file" name="bg_images" id="images" onChange={(e)=>{setProfile_image(e.target.files[0])}}/>
+                                    <div className="file-dummy UsernameFont" ><span> select your profile image</span>
+                                    
+                                    </div>
+                                    <button className="post_button"> Upload Post</button>
+                                </label>           
+                            </form>
+                        :
+                            null}
+                    </Col>
+                </Row>
+                
 
             </Col>
             </Row>
@@ -69,9 +126,6 @@ function EditWindow(props){
                             </Form.Group>
                             </Row>
                             <div className="d-flex justify-content-around">
-                            <button className='mt-5 mb-5 cancel_bot'>
-                            Close
-                            </button>
                             <button className='mt-5 mb-5 save_bot'  type="submit">
                             Save
                             </button>
@@ -80,7 +134,7 @@ function EditWindow(props){
                 </Container>
                 
             </Row>
-        </div>
+        </Container>
     )
 }
 export default EditWindow

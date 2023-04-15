@@ -17,13 +17,18 @@ switch($method){
             $result = $conn->query($sql);
             $rows = $result->num_rows;
             if($rows!=0){
+                header('HTTP/1.1 400 BAD REQUEST');
                 die("username already exise");
             }
-            $sql = 'INSERT INTO users (email, username, hash ,phoneNumber)
-                    VALUES (?,?,?,?)';
+            $sql = 'INSERT INTO users (last_login, role, state, date_created,email, username, hash ,phone_number)
+                    VALUES (?,?,?,?,?,?,?,?)';
             $process = $conn->prepare($sql);
             $pwd_hash = password_hash($dump['password'], PASSWORD_DEFAULT);
-            $process->bind_param("ssss",$dump['email'],$dump['username'],$pwd_hash,$dump['phone']);
+            $last_login = date("Y-m-d H:i:s");
+            $role = '0';
+            $state = 'user';
+            $date_created = date("Y-m-d H:i:s");
+            $process->bind_param("ssssssss", $last_login , $role, $state, $date_created, $dump['email'],$dump['username'],$pwd_hash,$dump['phone']);
             $process->execute();
             echo "New user created";
             $process->close();

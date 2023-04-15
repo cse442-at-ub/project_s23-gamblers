@@ -11,23 +11,28 @@ border-radius: 0px;
 box-sizing: border-box;
 position: absolute;
 left: 0%;
+top:10%;
 right: 0%;
-top: 10%;
-bottom: 0%;
 background: #FFFFFF;
 border: 1px solid #000000;
 box-shadow: 0px 2px 16px rgba(75, 75, 75, 0.15);
 border-radius: 68px;
 }
+.bg_change_icon{
+    width: 20px;
+    color:aliceblue;
+    border: 0.5px solid white;
+  }
 .Icon{
-position: absolute;
-width: 40%;
-height: 33%;
-left: 50%;
-top: 10%;
 background: #66C5FB;
+background-size: contain;
+
+resize: vertical;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 36px;
+border-top-left-radius: 36px;
+border-top-right-radius: 36px;
+
+min-height: 200px;
 }   
 .Iconw{
 position: absolute;
@@ -66,19 +71,20 @@ left: 50%;
 text-align: right;
 font-family: 'Poppins';
 font-style: normal;
-font-size: 40px;
-color: #FFFFFF;
+font-size: 24px;
+line-height: 1.25;
+color: #000000;
 }
 .LogOut{
-position: absolute;
-width: 15%;
-height: 7%;
-left: 3%;
-top: 88%;
+
+bottom: 1%;
 border-radius: 30px;
 background: #66C5FB;
 cursor: pointer;
 border: none;
+}
+.setting_bar{
+    margin-left: -250px
 }
 .LogOutFont{
 font-family: 'Poppins';
@@ -89,44 +95,30 @@ color: #FFFFFF;
 .BackFont{
 font-family: 'Poppins';
 font-style: normal;
-font-size: 32px;
+font-size: 34px;
 color: #FFFFFF;
 }
 .Back{
-position: absolute;
-width: 15%;
-height: 7%;
-left: 3%;
-top: 3%;
-border-radius: 30px;
-background: #66C5FB;
-cursor: pointer;
-border: none;
+    border-radius: 30px;
+    background: #66C5FB;
+    border: none;
 }
 .Myaccount{
 box-sizing: border-box;
-position: absolute;
-left: 4.35%;
-right: 71.85%;
-top: 11.04%;
-bottom: 82.31%;
+width: 100%;
+
 background: rgb(183, 182, 182);
 border: 1px solid #2B2B2B;
-cursor: pointer;
 }
 .MyaccountFont{
 font-family: 'Poppins';
 font-style: normal;
-font-size: 32px;
+font-size: 200%;
 color: #000000;
 }
 .Profile{
 box-sizing: border-box;
-position: absolute;
-left: 4.35%;
-right: 71.85%;
-top: 17.69%;
-bottom: 75.66%;
+width: 100%;
 background: #FFFFFF;
 border: 1px solid #2B2B2B;
 cursor: pointer;
@@ -134,7 +126,8 @@ cursor: pointer;
 .ProfileFont{
 font-family: 'Poppins';
 font-style: normal;
-font-size: 32px;
+font-size: 200%;
+pointer-events: none;
 color: #000000;
 }
 .Back:hover {
@@ -153,22 +146,31 @@ background-color: rgb(100, 135, 175);
 background-color: rgb(100, 135, 175);
 }
 .circle{
-position: relative;
-height: 150px;
+position:inherit;
 width: 150px;
-left: 5%;
-right: 70%;
-top: 10%;
-bottom: 75%;
+left: 50px;
+top: 50px;
 background-color: #bbb;
+border:1px solid white;
 border-radius: 50%;
 display: inline-block;
 }
+.setting_roll{
+    background-color: gainsboro;
+    resize: vertical;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-bottom-left-radius: 36px;
+    border-bottom-right-radius: 36px;
+    min-height: 500px;
+}
 .img1{
-max-width: 100%;
-max-height: 100%;
+width: 80%;
+object-fit: cover;
 border-radius: 50%;
-display: block;
+border: 1px solid #e9e9e9;
+}
+.setting_left{
+    border: 0.1px solid #000000;
 }
 .img2{
 max-width: 100%;

@@ -58,15 +58,20 @@ function Register() {
                 email: enteredEmail,
                 phone: enteredPhoneNumber,
             }).then(function (response) {
-                console.log(response)
+                if (response.status === 200) {
+                    setEnteredUsername('')
+                    setEnteredPassword('')
+                    setEnteredEmail('')
+                    setEnteredPhoneNumber('')
+                    setConfirmPassword('')
+                    setCheck(false)
+                    navigate(`/verify`)
+                }
+                
+            }).catch(function(error){
+                window.alert('The username has been taken')
             })
-            setEnteredUsername('')
-            setEnteredPassword('')
-            setEnteredEmail('')
-            setEnteredPhoneNumber('')
-            setConfirmPassword('')
-            setCheck(false)
-            navigate(`/verify`)
+
         }
 
     }
@@ -115,7 +120,7 @@ function Register() {
                     </div>
                     <br></br>
                     <div>
-                        <input type='checkbox' value={check} onChange={checkHandler} style={{height:'20px', width:'20px' }}/>
+                        <input type='checkbox' value={check} onChange={checkHandler} style={{ height: '20px', width: '20px' }} />
                         <span onClick={() => setPopup(true)} className='div'>UserAgreement</span>
                         <UserAgreement trigger={popup} setPopup={setPopup}></UserAgreement>
                     </div>
