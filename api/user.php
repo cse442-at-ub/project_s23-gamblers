@@ -25,14 +25,14 @@ class User{
                 "phone_number"=>$_info["phone_number"],
                 "bg_image"=>$_info['bg_image'],
                 "pf_image"=>$_info['icon_image']
-            ]; 
-        echo json_encode($info);        
+            ];
+        echo json_encode($info);
     }
     public function my_items(){
         if(!$this->is_vaild){
             return;
         }
-        $user_id = $this->information['id']; 
+        $user_id = $this->information['id'];
         $sql = "SELECT * FROM items WHERE user_id = $user_id and item_state = 'active'";
         // $result = get_tb_col_value("items","user_id",$user_id,true);
         $result=get($sql,array(),true);
@@ -42,7 +42,7 @@ class User{
         if(!$this->is_vaild){
             return;
         }
-        $user_id = $this->information['id']; 
+        $user_id = $this->information['id'];
         $sql = "SELECT * FROM items";
         $result = get($sql,array(),true);
         echo json_encode($result);
@@ -54,8 +54,8 @@ class User{
         }
         $tb = 'items';
         $col = '(
-                `user_id`, 
-                `date_posted`, 
+                `user_id`,
+                `date_posted`,
                 `item_state`,
                 `last_modify`,
                 `item_name`,
@@ -63,7 +63,7 @@ class User{
                 `item_description`,
                 `item_price`,
                 `item_contact`)';
-        // dummy 
+        // dummy
         $json_obj = json_decode($json,true);
         print_r($json_obj);
         $filename = '/path/to/image.jpg';
@@ -93,7 +93,7 @@ class User{
         $new_username = $json_obj['username'];
         $new_email = $json_obj['email'];
         $new_phone = $json_obj['phoneNumber'];
-        if(check_tb_col_value_exist("users","username",$new_username)){
+        if(check_tb_col_value_exist("users","username",$new_username) && $this->information['username'] != $new_username){
             header('HTTP/1.0 403 Forbidden');
             die();
         }
@@ -111,22 +111,30 @@ class User{
     }
 
     public function change_pf_image($img_name){
-                if(!$this->is_vaild){
-                    return;
-                }
-                $_id = $this->information['id'];
-                $sql = "UPDATE users SET icon_image = ? WHERE id = ?";
-                get($sql,array($img_name,$_id));
+        if(!$this->is_vaild){
+            return;
+        }
+        $old_bg_image = $this->information['icon_image'];
+        if(unlink('../'.$old_bg_image)){
+                echo "../".$old_bg_image." removed";
+        }
+        $_id = $this->information['id'];
+        $sql = "UPDATE users SET icon_image = ? WHERE id = ?";
+        get($sql,array($img_name,$_id));
     }
     public function change_bg_image($img_name){
         if(!$this->is_vaild){
             return;
         }
+        $old_bg_image = $this->information['bg_image'];
+        if(unlink('../'.$old_bg_image)){
+                echo "../".$old_bg_image." removed";
+        }
         $_id = $this->information['id'];
         $sql = "UPDATE users SET bg_image = ? WHERE id = ?";
         get($sql,array($img_name,$_id));
     }
-    // save the views in view history 
+    // save the views in view history
     public function view_items($item_id){
         if(!$this->is_vaild){
             return;
@@ -146,7 +154,7 @@ class User{
             $sql = "INSERT INTO view_history $col VALUES (?,?,?)";
             get($sql,array($user_id,$item_id,$time_created));
         }
-        
+
     }
     // join two table items and view_history to get user's history
     public function view_history(){

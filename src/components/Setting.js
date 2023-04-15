@@ -45,7 +45,18 @@ function Setting(){
         
         fetchUserHandler()
     }, [])
-
+    function image_file_check(file_type,size){
+        let acceptable = ['jpg','jpeg','png']
+        if(!acceptable.includes(file_type)){
+            alert("Wrong image type, try jpg or png")
+            return false
+        }
+        if( size > 2000000){
+            alert("Too large, try image small than 2mb")
+            return false
+        }
+        return true
+    }
 
 
 
@@ -191,13 +202,18 @@ function Setting(){
                                                     <form onSubmit={(e)=>{
                                                         e.preventDefault();
                                                         const fd = new FormData()
-
                                                         if(bgUpload === undefined){
                                                             alert("please select image");
                                                             return;
                                                         }
+                                                        let type = bgUpload.name.split(".").at(-1)
+                                                        let size = bgUpload.size
+                                                        console.log(type)
+                                                        console.log(size)
+                                                        if(!image_file_check(type,size)){
+                                                            return
+                                                        }
                                                         fd.append('bg',bgUpload)
-                                                        console.log(fd)
                                                         const cfg = {
                                                             withCredentials:true,
                                                             headers: {
@@ -211,7 +227,7 @@ function Setting(){
                                                         })
                                                     }}>
                                                         <label>
-                                                            <input type="file" name="bg_images" id="images" onChange={(e)=>{setBgUpload(e.target.files[0]); console.log("image changed",bgUpload)}}/>
+                                                            <input type="file" name="bg_images" id="images" onChange={(e)=>{setBgUpload(e.target.files[0])}}/>
                                                             <div className="file-dummy UsernameFont" ><span> select your background image</span>
                                                             
                                                             </div>
@@ -236,25 +252,6 @@ function Setting(){
                 
 
             </Container>
-            
-                
-                    
-                    {/* <div className='cardposition'>
-                        <button className="card">
-                            <a href='\iteminfo' >
-                            <img className='img2' src={img1} alt=""/>
-                            <div className="container">
-                                <h4><b>Item Name</b></h4> 
-                            </div>
-                            </a> 
-                        </button> 
-                    </div> */}
-                
-                    {/* <a href='/profile' >
-                        
-                        
-                    </a> */}
-                   
                 </Container>
                 
 

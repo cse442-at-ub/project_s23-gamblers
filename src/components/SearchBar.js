@@ -33,8 +33,8 @@ function SearchBar(props) {
   //   }])
   // }
   
-  let currentLocation = window.location.href
-  if (currentLocation != 'http://localhost:3000/'){
+  let a = window.location.pathname.split('/')
+  if (a[a.length-1] == 'iteminfo'){
     return <div></div>
   }else{
     return (

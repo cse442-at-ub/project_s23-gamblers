@@ -1,5 +1,4 @@
 <?php
-
 include_once '../database/db_connect.php';
 $objDb = new DbConnect;
 $conn = $objDb->connect();
@@ -9,37 +8,30 @@ switch($method){
     case "POST":
         if(empty($_POST)){
             $dump = json_decode($entityBody, true);
-            if($dump['email'] == "" || $dump['username'] == "" || 
-                $dump['password'] == "" || $dump['phone'] == ""){
+            if($dump['username'] == "" || $dump['password'] == ""){
                 die("one of you information is empty");
             }
-            $sql = "SELECT * FROM users WHERE username='".$dump['username']."'";
-            $result = $conn->query($sql);
-            $rows = $result->num_rows;
-            if($rows!=0){
-                die("username already exise");
-            }
-            $sql = 'INSERT INTO users (last_login, role, state, date_created,email, username, hash ,phone_number)
-                    VALUES (?,?,?,?,?,?,?,?)';
-            $process = $conn->prepare($sql);
-            $pwd_hash = password_hash($dump['password'], PASSWORD_DEFAULT);
-            $last_login = date("Y-m-d H:i:s");
-            $role = '0';
-            $state = 'user';
-            $date_created = date("Y-m-d H:i:s");
-            $process->bind_param("ssssssss", $last_login , $role, $state, $date_created, $dump['email'],$dump['username'],$pwd_hash,$dump['phone']);
-            $process->execute();
-            if($process){
-                echo json_encode(['status' => 'success', 'message' => 'New user created']);
+            if (check_user_password($dump['username'],$dump['password'])){
+                $data = get_by_username($dump['username']);
+                $uid = randomStr(80);
+                saveuid($uid,$data['id']);
+                setcookie('uid', $uid, [
+                    'expires' => time() + 86400,
+                    'path' => '/',
+                    'secure' => true,
+                    'httponly' => true,
+                    'samesite' => 'None',
+                ]);
+
+                echo "success";
             }else{
-                echo json_encode(['status' => 'error', 'message' => 'fail']);
+                echo "fail";
             }
         }else{
-            
+
         }
-        
+
         break;
     default:
         echo " you should use POST";
 }
-?>
