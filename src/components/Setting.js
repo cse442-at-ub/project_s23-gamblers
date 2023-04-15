@@ -1,8 +1,7 @@
 import './Setting.css'
 import {Form,Col,Container,Row} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LogOut from './LogOut'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {useState, useEffect} from 'react'
 import img1 from '../image/icon/unnamed.jpg'
 import bg_change from '../assets/images/bg_ch_icon.svg.svg'
@@ -14,8 +13,8 @@ import UserImage from './UserImage';
 import PostForm from './PostForm'
 import MyPost from './MyPost';
 function Setting(){
-    
-    const [buttonPopup, setButtonPopup] = useState(false);
+    const navigate = useNavigate()
+
     const [uid, setUid] = useState("")
     const [nav_case,setNav_case] = useState(1)
 
@@ -102,6 +101,17 @@ function Setting(){
                     </div>);
         }
     }
+
+    function logoutHandler() {
+        axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/logout',{withCredentials:true}).then(function(response){
+            console.log(response)
+            if(response.status === 200){
+                window.alert('logout successful')
+                navigate('/')
+            }
+        })
+
+    }
     function nav_color(e){
         a = document.getElementsByClassName('Profile')
         if(a.length === 0){
@@ -153,7 +163,7 @@ function Setting(){
                             </button>
                         </Row>
                         <Row className='mt-3'>
-                            <button onClick={()=>setButtonPopup(true)} className='Profile'>
+                            <button onClick={logoutHandler} className='Profile'>
 
                                 <span className='ProfileFont'>Log Out</span>
 
@@ -246,8 +256,7 @@ function Setting(){
                     </a> */}
                    
                 </Container>
-                <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
-                        </LogOut>
+                
 
                 
                 
