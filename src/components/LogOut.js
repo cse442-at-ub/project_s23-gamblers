@@ -1,6 +1,6 @@
 import React from "react"
 import './LogOut.css'
-
+import { Link } from "react-router-dom";
 function LogOut(props){
     return(props.trigger)?(
         <div className="popup">
@@ -11,11 +11,11 @@ function LogOut(props){
                 <button className='cancelbutton' onClick={()=>props.setTrigger(false)}>
                     <span className='cancelfont'>Cancel</span>
                 </button>
-                <a href="\login">
+                <Link to="\login">
                 <button className='logoutbutton' >
                     <span className='logoutfont'>Log Out</span>
                 </button>
-                </a>
+                </Link>
             </div>
         </div>
         </div>
