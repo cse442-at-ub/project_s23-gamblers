@@ -113,16 +113,7 @@ function Setting(){
         }
     }
 
-    function logoutHandler() {
-        axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/logout',{withCredentials:true}).then(function(response){
-            console.log(response)
-            if(response.status === 200){
-                window.alert('logout successful')
-                navigate('/')
-            }
-        })
 
-    }
     function nav_color(e){
         a = document.getElementsByClassName('Profile')
         if(a.length === 0){
@@ -133,6 +124,18 @@ function Setting(){
         }
         a[nav_case-1].style.background = 'grey'
     }
+
+    function logoutHandler() {
+        axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/logout', { withCredentials: true }).then(function (response) {
+            console.log(response)
+            if (response.status === 200) {
+                window.alert('logout successful')
+                navigate('/')
+            }
+        })
+
+    }
+    
     return(
         <div className='Background'>
             <Container className='Mainpage'>
