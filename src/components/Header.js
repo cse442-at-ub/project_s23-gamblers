@@ -6,13 +6,15 @@ import { Link } from 'react-router-dom';
 import brand_image from '../assets/images/exchange.png'
 import { useState } from 'react';
 import axios from 'axios';
+import "./Header.css";
 import { useEffect } from 'react';
+import  favorites_icon from  '../assets/images/item_defual_like.svg'
 function Header(props) {
     const [guest, setGuest] = useState(true)
     const [guestName, setGuestName] = useState('Guest')
 
     function fetchUserHandler() {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`, { withCredentials: true }).then(function (response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`, { withCredentials: true }).then(function (response) {
             console.log(response)
             if (response.status === 401) {
                 setGuest(true)
@@ -48,6 +50,12 @@ function Header(props) {
                     <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
                         {!guest ? < Link to='/setting'><UserImage></UserImage></Link> : < Link to='/login'><h2>Welcome Guest</h2></ Link>}
                         <SearchBar setItemData={props.setItemData}></SearchBar>
+                        {!guest ?
+                                <Link to='/favorites'> 
+                                    <img className='favorites_icon_svg' src={favorites_icon}></img>
+                                </Link>
+                            : 
+                            null}
                     </Container>
                 </Col>
                 

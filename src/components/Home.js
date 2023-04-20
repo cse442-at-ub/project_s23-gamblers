@@ -11,7 +11,7 @@ function Home(){
     const [isLoading, setIsLoading] = useState(true)
 
     function getItem(){
-        axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/all_item').then(function(response){
+        axios.get(process.env.REACT_APP_BASENAME+'api/all_item').then(function(response){
             console.log(response.data)
             setItemData(response.data)
             setIsLoading(false)
@@ -39,7 +39,7 @@ function Home(){
                                     <div className={`${styles.services__contentitem} ${styles.text__center}`} key={index}>
                                         <div><img
                                             alt=""
-                                            src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/${itemData[index].item_image_dir}`}
+                                            src={process.env.REACT_APP_BASENAME+`uploads/${itemData[index].item_image_dir}`}
                                             className='item-image'
                                         /></div>
                                         

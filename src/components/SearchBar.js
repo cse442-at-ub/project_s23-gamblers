@@ -17,7 +17,7 @@ function SearchBar(props) {
       return
     }
     event.preventDefault();
-    axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/search',{
+    axios.post(process.env.REACT_APP_BASENAME+'api/search',{
       keyword: searchText,
     }).then(function(response){
       console.log(response)

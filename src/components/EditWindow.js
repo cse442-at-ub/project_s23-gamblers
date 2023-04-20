@@ -29,7 +29,7 @@ function EditWindow(props){
         }
         fd.append('profile_image',profile_image)
         console.log(fd)
-        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/profile_image.php",fd,cfg)
+        axios.post(process.env.REACT_APP_BASENAME+"api/profile_image.php",fd,cfg)
         .then(res=>{
             alert("success");
         }).catch(function(error){
@@ -63,7 +63,7 @@ function EditWindow(props){
             return
         }
         console.log(post)
-        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_profile.php", JSON.stringify(post),{withCredentials:true}).then(res=>{
+        axios.post(process.env.REACT_APP_BASENAME+"api/update_profile.php", JSON.stringify(post),{withCredentials:true}).then(res=>{
             alert("sent");
         }).catch(function(error){
             alert(error);

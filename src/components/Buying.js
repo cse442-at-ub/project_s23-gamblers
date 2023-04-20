@@ -16,7 +16,7 @@ export default function Buying() {
         orders.push(order2)
     }
     const get_view_history = () => {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/view_history.php`,{withCredentials: true}).then(function(response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/view_history.php`,{withCredentials: true}).then(function(response) {
             console.log(response.data);
             setViews(response.data)
         }).catch(function (error) {
@@ -39,7 +39,7 @@ export default function Buying() {
                     <div className='box'>
                         <span className='view_history_name'>{order1['item_name']}<br></br>
                             <Link to={'/iteminfo?var='+order1['item_id']}>
-                                <img className='history_item_image' src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/"+order1['item_image_dir']} ></img>
+                                <img className='history_item_image' src={process.env.REACT_APP_BASENAME+"uploads/"+order1['item_image_dir']} ></img>
                             </Link>
                         </span> 
                         <span className='view_history_time'>{order1['time_created']}</span>

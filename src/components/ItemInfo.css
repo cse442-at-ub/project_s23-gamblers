@@ -17,7 +17,10 @@
   height: 100%;
   object-fit: contain;
 }
-
+.add_like_icon{
+  width: 40px;
+  height: 40px;
+}
 .reportbutton{
   background-color: red;
 }

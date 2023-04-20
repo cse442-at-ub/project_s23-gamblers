@@ -12,7 +12,7 @@ function EditHome(){
     }
     const handlerGetUser = (event) => {
         event.preventDefault()
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/${uid}`, "").then(function(response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/user/${uid}`, "").then(function(response) {
             // console.log(response.data);
             setUser(response.data);
             console.log(user);
@@ -21,7 +21,7 @@ function EditHome(){
     const handleLookChange = (event) =>{
         setUid(event.target.value)
         console.log(uid);
-        console.log(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/user/${uid}`);
+        console.log(process.env.REACT_APP_BASENAME+`api/user/${uid}`);
     }
     return (
         <div>

@@ -8,7 +8,7 @@ function Profile(){
     const [user, setUser] = useState(undefined)
     const handlerGetUser = (event) => {
         
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`, {withCredentials:true}).then(function(response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`, {withCredentials:true}).then(function(response) {
             setUser(response.data);
             console.log(user);
         });

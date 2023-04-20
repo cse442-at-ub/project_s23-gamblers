@@ -11,7 +11,7 @@ function Comment(){
     item_id = (arugments.get('var'));
     const navigate = useNavigate()
 
-    const url ="https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/comments"
+    const url =process.env.REACT_APP_BASENAME+"api/comments"
     const [currentComment, setCurrentComment]= useState('')
     const [comment, setComment] = useState([])
 
@@ -52,7 +52,7 @@ function Comment(){
     }
 
     function fecthCommentHandler(){
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/comments.php?item_id=${item_id}`,{withCredentials:true}).then(function(response){
+        axios.get(process.env.REACT_APP_BASENAME+`api/comments.php?item_id=${item_id}`,{withCredentials:true}).then(function(response){
             console.log(response)
             setComment(response.data)
         })
