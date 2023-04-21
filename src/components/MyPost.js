@@ -4,8 +4,10 @@ import {  useNavigate , Link} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import {Col,Container,Row} from 'react-bootstrap/';
+import PostForm from './PostForm';
 export default function MyPost() {
     const [myItem ,setMyItem] = useState([]);
+    const [popup, setPopup] = useState(false)
     const get_items_history = () => {
         axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/my_items.php`,{withCredentials: true}).then(function(response) {
             console.log(response.data);
@@ -23,8 +25,14 @@ export default function MyPost() {
         },
         []
     )
+
+    function editHandler(){
+        setPopup(true)
+    }
+
     function rows(order1){
-        return(
+        console.log(order1)
+        if(!popup){return(
             <tr>
                 {/* {order1['item_name']} */}
                 <th className='table_header' key={order1['item_id']}>
@@ -37,10 +45,16 @@ export default function MyPost() {
                         <span className='view_history_time'>{order1['date_posted']}</span>
                     </div>
                     <button style={{backgroundColor:'red'}} onClick={()=>deleteHandler(order1['item_id'])}>Delete</button>
+                    <button style={{ backgroundColor: 'green' }} onClick={() => editHandler(order1)}>Edit</button>
                 </th>
-                
+            
             </tr>
-        )
+        )}else{
+            return(
+                <PostForm data={order1}/>
+            )
+        }
+        
     }
     function deleteHandler(e){
         console.log(e)
