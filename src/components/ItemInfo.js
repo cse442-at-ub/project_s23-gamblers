@@ -23,19 +23,16 @@ function ItemInfo(props){
         const arugments = new URLSearchParams(a);
         item_id = (arugments.get('var'));
         handleLookItem();
-
     }, [])
     const handleLookItem = () => {
 
         axios.get(process.env.REACT_APP_BASENAME+`api/item.php?var=${item_id}`, { withCredentials: true }).then(function (response) {
-            console.log(response.data)
-            console.log(item.item_id)
             setState(200)
             setItem(response.data);
+            setLike(response.data.islike    )
+            console.log(item)
             //TODO: no such items
         }).catch(function (error) {
-            console.log(error.response.status) // 401
-            console.log(error.response.data.error) //Please Authenticate or whatever returned from server
             if (error.response.status == 404) {
                 setState(404)
             }
@@ -68,14 +65,30 @@ function ItemInfo(props){
         const arugments = new URLSearchParams(a);
         itemid = (arugments.get('var'));
         console.log(itemid)
-        axios.post(process.env.REACT_APP_BASENAME+'api/nmsl', {
+        axios.post(process.env.REACT_APP_BASENAME+'api/nmsl', JSON.stringify({
             reporter: guestName,
             item_id: itemid
-        }).then(function (response) {
+        })).then(function (response) {
             console.log(response)
         })
     }
-
+    function change_like() {
+        const a = window.location.search;
+        const arugments = new URLSearchParams(a);
+        let itemid = (arugments.get('var'));
+        axios.post(
+            process.env.REACT_APP_BASENAME+'api/likeitem', 
+            {
+                islike: like,
+                item_id: itemid
+            },
+            {
+                withCredentials:true
+            }
+            ).then(function (response) {
+            console.log(response)
+        })
+    }
 
 
 
@@ -97,7 +110,7 @@ function ItemInfo(props){
                                     </Row>
                                     <Row>
                                         <Col className='mt-3'>
-                                            <img className='add_like_icon' src={like?liked_svg:like_defaut_svg} onClick={()=>{setLike(!like)}}></img>
+                                            <img className='add_like_icon' src={like?liked_svg:like_defaut_svg} onClick={()=>{setLike(!like);change_like()}}></img>
                                         </Col>
                                     </Row>
                                 </Container>
