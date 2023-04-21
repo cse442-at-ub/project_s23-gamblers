@@ -9,6 +9,7 @@ import axios from 'axios';
 import "./Header.css";
 import { useEffect } from 'react';
 import  favorites_icon from  '../assets/images/item_defual_like.svg'
+import  favorites_icon_in from '../assets/images/item_liked.svg'
 function Header(props) {
     const [guest, setGuest] = useState(true)
     const [guestName, setGuestName] = useState('Guest')
@@ -24,6 +25,11 @@ function Header(props) {
                 setGuestName(response.data.username)
             }
         })
+    }
+    let a = window.location.pathname.split('/')
+    let is_in_favorite = false;
+    if (a[a.length-1] == 'favorites'){
+        is_in_favorite = true;
     }
     useEffect(() => {
         fetchUserHandler()
@@ -52,14 +58,12 @@ function Header(props) {
                         <SearchBar setItemData={props.setItemData}></SearchBar>
                         {!guest ?
                                 <Link to='/favorites'> 
-                                    <img className='favorites_icon_svg' src={favorites_icon}></img>
+                                    <img className='favorites_icon_svg' src={is_in_favorite? favorites_icon_in:favorites_icon}></img>
                                 </Link>
                             : 
                             null}
                     </Container>
                 </Col>
-                
-                
             </Container>
             </Navbar>
     )

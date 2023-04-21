@@ -185,6 +185,7 @@ class User{
         }
         if(!array_search(strval($item_id),$likes,true)){
             // if not like the item before
+            
             array_push($likes, $item_id);
         }else{
             // if liked, then swip it
@@ -198,6 +199,12 @@ class User{
     }
     public function islike($item_id){
         return $this->likes($item_id,false);
+    }
+    public function like_items_id(){
+        $sql = "SELECT likes FROM users WHERE id = ?";
+        $user_id = $this->information['id'];
+        $likes = get($sql, array($user_id));
+        return $likes['likes'];
     }
 }
 

@@ -78,10 +78,10 @@ function ItemInfo(props){
         let itemid = (arugments.get('var'));
         axios.post(
             process.env.REACT_APP_BASENAME+'api/likeitem', 
-            {
+            JSON.stringify({
                 islike: like,
                 item_id: itemid
-            },
+            }),
             {
                 withCredentials:true
             }

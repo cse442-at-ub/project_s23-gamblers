@@ -34,7 +34,7 @@ function SearchBar(props) {
   // }
   
   let a = window.location.pathname.split('/')
-  if (a[a.length-1] == 'iteminfo'){
+  if (a[a.length-1] != ''){
     return <div></div>
   }else{
     return (
