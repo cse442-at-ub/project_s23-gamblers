@@ -138,6 +138,9 @@
   .btn__blue{
     background-color: var(--robin-blue-color);
   }
+  .btn__red{
+    background-color: var(--robin-red-color);
+  }
   .btn__blue:hover{
     background-color: #0fb9b4;
   }
@@ -155,6 +158,7 @@
 :root{
   --font-base: 'Poppins', sans-serif;
   --robin-blue-color: #10c9c3;
+  --robin-red-color: #c91010;
   --black-color: #141414;
   --grey-color: #8e8e8e;
   --white-color: #fff;
