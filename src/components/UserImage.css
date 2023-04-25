@@ -3,3 +3,9 @@
     width: 100px;
     height: 100px;
 }
+@media screen and (max-width: 450px) {
+    .user_imagez {
+        width: 50px;
+        height: 50px;
+    }
+}

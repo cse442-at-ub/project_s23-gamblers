@@ -28,7 +28,7 @@ function Setting(){
     let a = document.getElementsByClassName('Profile')
     
     function fetchUserHandler() {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`,{ withCredentials: true }).then(function (response) {
             console.log(response.data)
             if (response.status === 401) {
 
@@ -114,7 +114,7 @@ function Setting(){
     }
 
     function logoutHandler() {
-        axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/logout',{withCredentials:true}).then(function(response){
+        axios.post(process.env.REACT_APP_BASENAME+'api/logout',{withCredentials:true}).then(function(response){
             console.log(response)
             if(response.status === 200){
                 window.alert('logout successful')
@@ -184,7 +184,7 @@ function Setting(){
                     </Col>
                     <Col md={{ span: 7}}>
                         <Container className='mt-3 Icon' style={{ 
-                                backgroundImage: `url(${"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/"+bg})`,
+                                backgroundImage: `url(${process.env.REACT_APP_BASENAME+bg})`,
                             }}>
                                     <Row>
                                         <Col className='mt-5 mb-3' >
@@ -220,7 +220,7 @@ function Setting(){
                                                                 'content-type': 'multipart/form-data',
                                                             },
                                                         };
-                                                            axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_bg_img.php",fd,cfg)
+                                                            axios.post(process.env.REACT_APP_BASENAME+"api/update_bg_img.php",fd,cfg)
                                                         .then(res=>{
                                                             alert("success");
                                                             console.log(res.data)

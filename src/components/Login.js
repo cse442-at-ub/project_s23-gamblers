@@ -18,7 +18,7 @@ function Login() {
 
     function submitHandler(event) {
         event.preventDefault()
-        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/login/`,{
+        axios.post(process.env.REACT_APP_BASENAME+`api/login/`,{
             username: userName,
             password: password,
         },{withCredentials:true}).then(function(response){

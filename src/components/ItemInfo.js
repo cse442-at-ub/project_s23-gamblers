@@ -7,14 +7,15 @@ import Header from './Header';
 import { useState , useEffect} from 'react';
 import FourZeroFour from './FourZeroFour';
 import Comment from './Comment';
+import like_defaut_svg from '../assets/images/item_defual_like.svg'
+import liked_svg from '../assets/images/item_liked.svg'
 function ItemInfo(props){
     const [item, setItem] = useState([]);
     const [loading, setLoading] = useState(false);
     const keyValues = window.location.search
     const [state, setState] = useState()
     const [guestName, setGuestName] = useState('Guest')
-    const navigate = useNavigate()
-    
+    const [like , setLike] = useState(false)    
     let item_id = 1;
     useEffect(() => {
         console.log(window.location.search);
@@ -22,19 +23,16 @@ function ItemInfo(props){
         const arugments = new URLSearchParams(a);
         item_id = (arugments.get('var'));
         handleLookItem();
-
     }, [])
     const handleLookItem = () => {
 
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item.php?var=${item_id}`, { withCredentials: true }).then(function (response) {
-            console.log(response.data)
-            console.log(item.item_id)
+        axios.get(process.env.REACT_APP_BASENAME+`api/item.php?var=${item_id}`, { withCredentials: true }).then(function (response) {
             setState(200)
             setItem(response.data);
+            setLike(response.data.islike    )
+            console.log(item)
             //TODO: no such items
         }).catch(function (error) {
-            console.log(error.response.status) // 401
-            console.log(error.response.data.error) //Please Authenticate or whatever returned from server
             if (error.response.status == 404) {
                 setState(404)
             }
@@ -44,7 +42,7 @@ function ItemInfo(props){
     
 
     function fetchUserHandler() {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`, { withCredentials: true }).then(function (response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`, { withCredentials: true }).then(function (response) {
             console.log(response.data)
             if (response.status === 401) {
                 setGuestName('guest')
@@ -67,14 +65,30 @@ function ItemInfo(props){
         const arugments = new URLSearchParams(a);
         itemid = (arugments.get('var'));
         console.log(itemid)
-        axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/nmsl', {
+        axios.post(process.env.REACT_APP_BASENAME+'api/nmsl', JSON.stringify({
             reporter: guestName,
             item_id: itemid
-        }).then(function (response) {
+        })).then(function (response) {
             console.log(response)
         })
     }
-
+    function change_like() {
+        const a = window.location.search;
+        const arugments = new URLSearchParams(a);
+        let itemid = (arugments.get('var'));
+        axios.post(
+            process.env.REACT_APP_BASENAME+'api/likeitem', 
+            JSON.stringify({
+                islike: like,
+                item_id: itemid
+            }),
+            {
+                withCredentials:true
+            }
+            ).then(function (response) {
+            console.log(response)
+        })
+    }
 
 
 
@@ -87,12 +101,20 @@ function ItemInfo(props){
                         <Row className="d-flex mt-3 mb-3">
                             <Col md={{ span: 4, offset: 2 }} className="d-flex mt-3 mb-3">
                                 <Container>
-                                    <img
-                                        alt=""
-                                        src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/" + item.item_image_dir}
-                                        className='item-image'
-                                    />
+                                    <Row>
+                                        <img
+                                            alt=""
+                                            src={process.env.REACT_APP_BASENAME+"uploads/" + item.item_image_dir}
+                                            className='item-image'
+                                        />
+                                    </Row>
+                                    <Row>
+                                        <Col className='mt-3'>
+                                            <img className='add_like_icon' src={like?liked_svg:like_defaut_svg} onClick={()=>{setLike(!like);change_like()}}></img>
+                                        </Col>
+                                    </Row>
                                 </Container>
+                                
                             </Col>
                             <Col md={{ span: 4, offset: 1 }}>
                                 <Row >

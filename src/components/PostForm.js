@@ -4,7 +4,7 @@ import "./PostForm.css"
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from 'react-router-dom'
 function PostForm(){
-    const url ="https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/post_item.php"
+    const url =process.env.REACT_APP_BASENAME+"api/post_item.php"
     const navigate = useNavigate()
     const [postimage,setPostImage] = useState('')
     const [data, setData]= useState([])

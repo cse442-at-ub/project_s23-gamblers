@@ -170,6 +170,42 @@ class User{
         $views = get($sql,$args,true);
         echo json_encode($views);
     }
+
+    public function likes($item_id, $ch=true){
+        $sql = "SELECT likes FROM users WHERE id = ?";
+        $user_id = $this->information['id'];
+        $likes = get($sql, array($user_id));
+        // likes is string like id1,id2,...
+        $likes = explode(",",$likes['likes']);
+        /*
+             id1,id2,... => [id1,id2,,,,,]
+        */
+        if(!$ch){
+            return array_search(strval($item_id),$likes,true);
+        }
+        if(!array_search(strval($item_id),$likes,true)){
+            // if not like the item before
+            
+            array_push($likes, $item_id);
+        }else{
+            // if liked, then swip it
+            $likes = array_diff($likes,[$item_id]);
+        }
+        // [id1,id2,,,,,] => id1,id2,... 
+        $likes = implode(",", $likes);
+        // save it to database
+        $sql = "UPDATE users SET likes = ? WHERE id = ?";
+        get($sql,array($likes,$user_id));
+    }
+    public function islike($item_id){
+        return $this->likes($item_id,false);
+    }
+    public function like_items_id(){
+        $sql = "SELECT likes FROM users WHERE id = ?";
+        $user_id = $this->information['id'];
+        $likes = get($sql, array($user_id));
+        return $likes['likes'];
+    }
 }
 
 ?>
