@@ -19,12 +19,23 @@ class User{
         if(!$this->is_vaild){
             return;
         }
+        $likes = $this->like_items_id();
+        $result = [];
+        if($likes){
+            $likes = trim($likes,",");
+            $sql = "SELECT * 
+                    FROM items 
+                    WHERE item_state = 'deleted' AND
+                    item_id IN ($likes)";
+            $result = get($sql,array(),true);
+        }
         $_info = $this->information;
         $info = ['username' =>$_info['username'],
                 'email'=>$_info['email'],
                 "phone_number"=>$_info["phone_number"],
                 "bg_image"=>$_info['bg_image'],
-                "pf_image"=>$_info['icon_image']
+                "pf_image"=>$_info['icon_image'],
+                "noti" => $result!=[]
             ];
         echo json_encode($info);
     }

@@ -10,10 +10,12 @@ import "./Header.css";
 import { useEffect } from 'react';
 import  favorites_icon from  '../assets/images/item_defual_like.svg'
 import  favorites_icon_in from '../assets/images/item_liked.svg'
+import bell_ring from '../assets/images/bell-svgrepo-com.svg'
+import bell from '../assets/images/notification-bell-svgrepo-com.svg'
 function Header(props) {
     const [guest, setGuest] = useState(true)
     const [guestName, setGuestName] = useState('Guest')
-
+    const [noti, setNoti] = useState(false)
     function fetchUserHandler() {
         axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`, { withCredentials: true }).then(function (response) {
             console.log(response)
@@ -23,6 +25,7 @@ function Header(props) {
             if (response.status === 200) {
                 setGuest(false)
                 setGuestName(response.data.username)
+                setNoti(response.data.noti)
             }
         })
     }
@@ -57,9 +60,14 @@ function Header(props) {
                         {!guest ? < Link to='/setting'><UserImage></UserImage></Link> : < Link to='/login'><h2>Welcome Guest</h2></ Link>}
                         <SearchBar setItemData={props.setItemData}></SearchBar>
                         {!guest ?
-                                <Link to='/favorites'> 
-                                    <img className='favorites_icon_svg' src={is_in_favorite? favorites_icon_in:favorites_icon}></img>
-                                </Link>
+                                <div>
+                                    <Link to='/notification'>
+                                    <img className='noti_bell_svg' src={noti?bell_ring:bell}></img>
+                                    </Link>:
+                                    <Link to='/favorites'> 
+                                        <img className='favorites_icon_svg' src={is_in_favorite? favorites_icon_in:favorites_icon}></img>
+                                    </Link>
+                                </div>
                             : 
                             null}
                     </Container>

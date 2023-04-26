@@ -13,6 +13,7 @@ import PostForm from "./components/PostForm";
 import Report from "./components/Report"
 import Admin from "./components/Admin";
 import Favorites from "./components/Favorites";
+import Notification from "./components/Notification";
 function App() {
   const [login, setLogin] = useState(false)
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/report" element={<Report />}></Route>
           <Route path='/admin' element={<Admin/>}></Route>
           <Route path='/favorites' element={<Favorites/>}></Route>
+          <Route path='/notification' element={<Notification/>}></Route>
         </Routes>
       </BrowserRouter>
 
