@@ -194,9 +194,12 @@ function ItemInfo(props){
                                         null
                                     }
                                      <img className='arrow_svg' src={right_arrow} onClick={()=>{right()}}></img>
-                                        <Row>
-                                            <Col className='mt-3'>                     
+                                        <Row> 
+                                            <Col className='mt-3'>     
+                                            {post?                   
                                                 <img className='add_like_icon' src={like?liked_svg:like_defaut_svg} onClick={()=>{setLike(!like);change_like()}}></img>
+                                                :
+                                                null}
                                             </Col>
                                             <Row>
                                             <Col>
