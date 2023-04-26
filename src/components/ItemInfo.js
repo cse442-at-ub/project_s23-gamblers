@@ -186,33 +186,31 @@ function ItemInfo(props){
                         <Row className="d-flex mt-3 mb-3">
                             <Col md={{ span: 4, offset: 2 }} className="d-flex mt-3 mb-3">
                                 <Col>       
-                                    {images[0]?
                                     <Row>
-                                        <img className='arrow_svg' src={left_arrow} onClick={()=>{left()}}></img>
+                                    <img className='arrow_svg' src={left_arrow} onClick={()=>{left()}}></img>
+                                    {images[0]?
                                         <img className='item-image' src={images[index]['img']} alt='' />
-                                        <img className='arrow_svg' src={right_arrow} onClick={()=>{right()}}></img>
+                                        :
+                                        null
+                                    }
+                                     <img className='arrow_svg' src={right_arrow} onClick={()=>{right()}}></img>
                                         <Row>
                                             <Col className='mt-3'>                     
                                                 <img className='add_like_icon' src={like?liked_svg:like_defaut_svg} onClick={()=>{setLike(!like);change_like()}}></img>
                                             </Col>
                                             <Row>
                                             <Col>
+                                            {post?
                                                 <label>
                                                     <img className='plus_svg' src={plus_icon}></img>Add Image
                                                     <input type='file' onChange={handleMultipleUpload}></input>
                                                 </label>
+                                                :
+                                                null}
                                             </Col>
                                             </Row>
                                         </Row>
                                     </Row>
-                                        :
-                                        null
-                                    }
-                                    {post?
-                                    <div>
-                                            </div>
-                                    :
-                                    null}
                                     
                                 </Col>
                                     
