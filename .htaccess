@@ -1,0 +1,10 @@
+RewriteEngine on
+
+# Add index.php to URLs ending with a slash
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+?)/$ $1/index.php [L]
+
+# Add .php to all other requests
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.+)$ $1.php [L]
