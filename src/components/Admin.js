@@ -3,14 +3,13 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 function Admin() {
     const navigate = useNavigate()
     const [report, setReport] = useState([
     
     ])
     function getReport(){
-        axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/get_table').then(function(response){
+        axios.get(process.env.REACT_APP_BASENAME+'api/get_table').then(function(response){
             console.log(response.data)
             setReport(response.data)
         })
@@ -21,7 +20,7 @@ function Admin() {
     },[])
 
     function deleteHandler(e){
-      axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/delete.php`,{
+      axios.post(process.env.REACT_APP_BASENAME+`api/delete.php`,{
           item_id: e
         }).then(function(response){
           if(response.status === 200){
@@ -34,7 +33,8 @@ function Admin() {
     }
 
     function viewHandler(e){
-        navigate(`/iteminfo?var=${e}`)
+      window.open(`/iteminfo?var=${e}`)
+      
     }
 
   return (

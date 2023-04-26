@@ -4,7 +4,7 @@ import "./PostForm.css"
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from 'react-router-dom'
 function PostForm(){
-    const url ="https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/post_item.php"
+    const url =process.env.REACT_APP_BASENAME+"api/post_item.php"
     const navigate = useNavigate()
     const [postimage,setPostImage] = useState('')
     const [data, setData]= useState([])
@@ -26,7 +26,11 @@ function PostForm(){
         else if (postimage === '') {
             toast.error('Please upload a file')
         }else{
-        console.log(fd)
+        let type = postimage.name.split('.').at(-1)
+        let size = postimage.size
+        if(!image_file_check(type,size)){
+            return
+        }
         axios.post(url,fd,{withCredentials:true})
         .then(res=>{
             if(res.status===200){
@@ -39,7 +43,18 @@ function PostForm(){
         })
     }
     }
-
+    function image_file_check(file_type,size){
+        let acceptable = ['jpg','jpeg','png']
+        if(!acceptable.includes(file_type)){
+            alert("Wrong image type, try jpg or png")
+            return false
+        }
+        if( size > 2000000){
+            alert("Too large, try image small than 2mb")
+            return false
+        }
+        return true
+    }
     function handle(e){
         const newdata = {...data}
         newdata[e.target.id] = e.target.value

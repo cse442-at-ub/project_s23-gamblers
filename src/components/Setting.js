@@ -1,8 +1,7 @@
 import './Setting.css'
 import {Form,Col,Container,Row} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LogOut from './LogOut'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {useState, useEffect} from 'react'
 import img1 from '../image/icon/unnamed.jpg'
 import bg_change from '../assets/images/bg_ch_icon.svg.svg'
@@ -14,8 +13,8 @@ import UserImage from './UserImage';
 import PostForm from './PostForm'
 import MyPost from './MyPost';
 function Setting(){
-    
-    const [buttonPopup, setButtonPopup] = useState(false);
+    const navigate = useNavigate()
+
     const [uid, setUid] = useState("")
     const [nav_case,setNav_case] = useState(1)
 
@@ -26,9 +25,10 @@ function Setting(){
 
     // TODO: dummy data, need actual data from server
     const [bg, setBg] = useState('')
+    let a = document.getElementsByClassName('Profile')
     
     function fetchUserHandler() {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`,{ withCredentials: true }).then(function (response) {
             console.log(response.data)
             if (response.status === 401) {
 
@@ -42,13 +42,27 @@ function Setting(){
         })
     }
     useEffect(() => {
+        
         fetchUserHandler()
     }, [])
-
+    function image_file_check(file_type,size){
+        let acceptable = ['jpg','jpeg','png']
+        if(!acceptable.includes(file_type)){
+            alert("Wrong image type, try jpg or png")
+            return false
+        }
+        if( size > 2000000){
+            alert("Too large, try image small than 2mb")
+            return false
+        }
+        return true
+    }
 
 
 
     function renderSwitch(param) {
+        
+        nav_color()
         switch(param) {
             case 0:
                 return (<div>
@@ -98,10 +112,26 @@ function Setting(){
                     </div>);
         }
     }
+
+    function logoutHandler() {
+        axios.post(process.env.REACT_APP_BASENAME+'api/logout',{withCredentials:true}).then(function(response){
+            console.log(response)
+            if(response.status === 200){
+                window.alert('logout successful')
+                navigate('/')
+            }
+        })
+
+    }
     function nav_color(e){
-        // console.log( document.getElementsById("ch_bar"))
-        // document.getElementsById("ch_bar").forEach(i => console.log(i))
-        // e.target.style.backgroundColor ="rgba(183, 182, 182, 182)"
+        a = document.getElementsByClassName('Profile')
+        if(a.length === 0){
+            return
+        }
+        for (let i = 0; i < a.length; i++) {
+            a[i].style.background = 'white'
+        }
+        a[nav_case-1].style.background = 'grey'
     }
     return(
         <div className='Background'>
@@ -119,32 +149,32 @@ function Setting(){
 
                         </Row>
                         <Row>
-                            <button className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(1); nav_color(e)}}>
+                            <button className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(1)}}>
                                 <span className='ProfileFont' >Profile</span>
                             </button>   
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(2); nav_color(e)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(2)}} >
                                 <span className='ProfileFont'>Edit User Profile</span>
                             </button>
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(3); nav_color(e)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(3)}} >
                                 <span className='ProfileFont'>View History</span>
                             </button>
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(4); nav_color(e)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(4)}} >
                                 <span className='ProfileFont'>Upload</span>
                             </button>
                         </Row>
                         <Row>
-                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(5); nav_color(e)}} >
+                            <button type='button' className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(5)}} >
                                 <span className='ProfileFont'>My items</span>
                             </button>
                         </Row>
                         <Row className='mt-3'>
-                            <button onClick={()=>setButtonPopup(true)} className='Profile'>
+                            <button onClick={logoutHandler} className='Profile'>
 
                                 <span className='ProfileFont'>Log Out</span>
 
@@ -154,7 +184,7 @@ function Setting(){
                     </Col>
                     <Col md={{ span: 7}}>
                         <Container className='mt-3 Icon' style={{ 
-                                backgroundImage: `url(${"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/"+bg})`,
+                                backgroundImage: `url(${process.env.REACT_APP_BASENAME+bg})`,
                             }}>
                                     <Row>
                                         <Col className='mt-5 mb-3' >
@@ -172,27 +202,32 @@ function Setting(){
                                                     <form onSubmit={(e)=>{
                                                         e.preventDefault();
                                                         const fd = new FormData()
-
                                                         if(bgUpload === undefined){
                                                             alert("please select image");
                                                             return;
                                                         }
+                                                        let type = bgUpload.name.split(".").at(-1)
+                                                        let size = bgUpload.size
+                                                        console.log(type)
+                                                        console.log(size)
+                                                        if(!image_file_check(type,size)){
+                                                            return
+                                                        }
                                                         fd.append('bg',bgUpload)
-                                                        console.log(fd)
                                                         const cfg = {
                                                             withCredentials:true,
                                                             headers: {
                                                                 'content-type': 'multipart/form-data',
                                                             },
                                                         };
-                                                            axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_bg_img.php",fd,cfg)
+                                                            axios.post(process.env.REACT_APP_BASENAME+"api/update_bg_img.php",fd,cfg)
                                                         .then(res=>{
                                                             alert("success");
                                                             console.log(res.data)
                                                         })
                                                     }}>
                                                         <label>
-                                                            <input type="file" name="bg_images" id="images" onChange={(e)=>{setBgUpload(e.target.files[0]); console.log("image changed",bgUpload)}}/>
+                                                            <input type="file" name="bg_images" id="images" onChange={(e)=>{setBgUpload(e.target.files[0])}}/>
                                                             <div className="file-dummy UsernameFont" ><span> select your background image</span>
                                                             
                                                             </div>
@@ -217,28 +252,8 @@ function Setting(){
                 
 
             </Container>
-            
-                
-                    
-                    {/* <div className='cardposition'>
-                        <button className="card">
-                            <a href='\iteminfo' >
-                            <img className='img2' src={img1} alt=""/>
-                            <div className="container">
-                                <h4><b>Item Name</b></h4> 
-                            </div>
-                            </a> 
-                        </button> 
-                    </div> */}
-                
-                    {/* <a href='/profile' >
-                        
-                        
-                    </a> */}
-                   
                 </Container>
-                <LogOut trigger={buttonPopup} setTrigger={setButtonPopup}>
-                        </LogOut>
+                
 
                 
                 
