@@ -14,6 +14,7 @@ import Report from "./components/Report"
 import Admin from "./components/Admin";
 import Favorites from "./components/Favorites";
 import Notification from "./components/Notification";
+import Email from "./components/Email";
 function App() {
   const [login, setLogin] = useState(false)
 
@@ -37,6 +38,7 @@ function App() {
           <Route path='/admin' element={<Admin/>}></Route>
           <Route path='/favorites' element={<Favorites/>}></Route>
           <Route path='/notification' element={<Notification/>}></Route>
+          <Route path='/email' element={<Email/>}></Route>
         </Routes>
       </BrowserRouter>
 
