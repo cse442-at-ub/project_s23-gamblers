@@ -1,5 +1,7 @@
 import {Col,Navbar,Container} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, Button } from 'react-bootstrap';
+import Notice from './Notice'
 import SearchBar from './SearchBar';
 import UserImage from './UserImage';
 import { Link } from 'react-router-dom';
@@ -10,7 +12,11 @@ import { useEffect } from 'react';
 function Header(props) {
     const [guest, setGuest] = useState(true)
     const [guestName, setGuestName] = useState('Guest')
+    const [popup, setPopup] = useState(false)
 
+    function togglePopup() {
+        setPopup(!popup);
+    }
     function fetchUserHandler() {
         axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`, { withCredentials: true }).then(function (response) {
             console.log(response)
@@ -23,6 +29,7 @@ function Header(props) {
             }
         })
     }
+
     useEffect(() => {
         fetchUserHandler()
     }, [])
@@ -44,10 +51,14 @@ function Header(props) {
                         </Link>
                     </Container>
                 </Col>
+                
                 <Col >
                     <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
                         {!guest ? < Link to='/setting'><UserImage></UserImage></Link> : < Link to='/login'><h2>Welcome Guest</h2></ Link>}
                         <SearchBar setItemData={props.setItemData}></SearchBar>
+                        
+                        <Button type="submit" className="mt-2 me-2" style={{ width: '10%' }} onClick={togglePopup}>Notice</Button>
+                        <Notice trigger={popup} setPopup={setPopup}></Notice>
                     </Container>
                 </Col>
                 
