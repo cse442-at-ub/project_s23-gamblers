@@ -18,7 +18,7 @@ if ($method == 'POST'){
             $likes = $a->likes($item['item_id']);
             echo "success";
         }
-
+        die();
     }
     else{
         header('HTTP/1.0 401 Unauthorized');
@@ -37,8 +37,8 @@ else if ($method == 'GET'){
                 die();
             }
             $likes = trim($likes,",");
-            $sql = "SELECT * 
-                    FROM items 
+            $sql = "SELECT *
+                    FROM items
                     WHERE item_state = 'active' AND
                     item_id IN ($likes)";
             $result = get($sql,array(),true);
