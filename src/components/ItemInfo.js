@@ -34,7 +34,7 @@ function ItemInfo(props){
         handleLookItem();
     }, [])
     const get_items_history = () => {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/my_items.php`,{withCredentials: true}).then(function(response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/my_items.php`,{withCredentials: true}).then(function(response) {
             let myItem = response.data
             console.log(window.location.search);
             const a = window.location.search;
@@ -68,10 +68,10 @@ function ItemInfo(props){
             const galleryImages = []
             galleryImages.push(
             {
-                'img': 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/'+response.data.item_image_dir
+                'img': process.env.REACT_APP_BASENAME+'uploads/'+response.data.item_image_dir
             })
             for (let i = 0; i< response.data.item_images.length;i++){
-                galleryImages.push({'img':'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/'+response.data.item_images[i]['image_name']})
+                galleryImages.push({'img':process.env.REACT_APP_BASENAME+'uploads/'+response.data.item_images[i]['image_name']})
             }
             setImages(galleryImages)
             setTotalindex(response.data.item_images.length)
@@ -88,12 +88,14 @@ function ItemInfo(props){
     function fetchUserHandler() {
         axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`, { withCredentials: true }).then(function (response) {
             console.log(response.data)
-            if (response.status === 401) {
-                setGuestName('guest')
-            }
+
             if (response.status === 200) {
                 setGuestName(response.data.username)
             }else{
+                setGuestName('guest')
+            }
+        }).catch((error)=>{
+            if (error.response.status === 401) {
                 setGuestName('guest')
             }
         })
@@ -142,7 +144,7 @@ function ItemInfo(props){
         formData.append('add_image', event.target.files[0])
         console.log(formData)
         console.log(item.user_id)
-        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item.php?var=${item_id}`, formData,{withCredentials:true})
+        axios.post(process.env.REACT_APP_BASENAME+`api/item.php?var=${item_id}`, formData,{withCredentials:true})
             .then(res=>{
             if(res.status===200){
                 toast.success('Successfully upload!')
