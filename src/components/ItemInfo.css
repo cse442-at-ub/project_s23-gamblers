@@ -13,8 +13,8 @@
   }
 
 .item-image{
-  width: 65%;
-  height: 65%;
+  width: 400px;
+  height: 400px;
   object-fit: contain;
 }
 .add_like_icon{
@@ -22,7 +22,11 @@
   height: 40px;
 }
 .reportbutton{
+  margin-top: 4px;
   background-color: red;
+  width: 30%;
+  height: 80%;
+  border-radius: 50%;
 }
 
 .text{
@@ -31,14 +35,25 @@
   text-align:center
 }
 
-.arrow_svg{
+.arrow_svgL{
   width:40px;
   height:40px;
   margin: auto;    
-    display: block;
+  display: block;
+
+}
+.arrow_svgR {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  display: block;
+
 }
 
-.arrow_svg:hover{
+.arrow_svgL:hover{
+  cursor: pointer;
+}
+.arrow_svgR:hover {
   cursor: pointer;
 }
 
