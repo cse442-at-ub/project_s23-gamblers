@@ -189,13 +189,13 @@ function ItemInfo(props){
                             <Col md={{ span: 4, offset: 2 }} className="d-flex mt-3 mb-3">
                                 <Col>       
                                     <Row>
-                                    <img className='arrow_svg' src={left_arrow} onClick={()=>{left()}}></img>
+                                    <img className='arrow_svgL' src={left_arrow} onClick={()=>{left()}}></img>
                                     {images[0]?
                                         <img className='item-image' src={images[index]['img']} alt='' />
                                         :
                                         null
                                     }
-                                     <img className='arrow_svg' src={right_arrow} onClick={()=>{right()}}></img>
+                                     <img className='arrow_svgR' src={right_arrow} onClick={()=>{right()}}></img>
                                         <Row> 
                                             <Col className='mt-3'>     
                                             {guestName!=="guest"?                   
@@ -203,6 +203,12 @@ function ItemInfo(props){
                                                 :
                                                 null}
                                             </Col>
+                                            <br></br>
+                                            <br></br>
+                                            <br></br>
+                                            <br></br>
+                                            <br></br>
+                                            <button className='reportbutton' onClick={handleReport}>Report Post</button>
                                             <Row>
                                             <Col>
                                             {post?
@@ -264,11 +270,12 @@ function ItemInfo(props){
                                             <span id="item_seller">{item.item_contact}</span>
                                         </h2>
                                     </Col>
-                                    <button className='reportbutton' onClick={handleReport}>Report Post</button>
                                 </Row>
                                 <Row>
+                                    <h2 style={{marginLeft:'200px', color:'blue' }}>Comment section:</h2>
                                     <Comment></Comment>
                                 </Row>
+         
                             </Col>
                         </Row>
                     </Container></div>
