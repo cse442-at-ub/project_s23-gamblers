@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import './Email.css'
 
 // npm i @emailjs/browser
 
