@@ -64,14 +64,14 @@ function Login() {
                 <form className='form' onSubmit={submitHandler}>
                     <div className='usernameL'>
                         <label name='username' className='blue'>Username</label>
-                        <Link to='/Forgot' className='forgotL'>Forgot Username</Link>
+                    
                     </div>
                     <div>
                         <input type='text' id='Username' className='input' value={userName} onChange={usernameHandler} />
                     </div>
                     <div className='passwordL'>
                         <label name='Password' className='blue'>Password</label>
-                        <Link to='/Forgot' className='forgotL'>Forgot Password</Link>
+             
                     </div>
                     <div>
                         <input type='password' id='opening-text' className='input' value={password} onChange={passwordHandler} />
