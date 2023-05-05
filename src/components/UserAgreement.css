@@ -15,18 +15,31 @@
     position: relative;
     padding: 32px;
     width: 100%;
-    font-size: small;
+    font-size:large;
     /* max-width: 640px; */
     background-color: #fff;
 }
 
 .popup-inner .close-btn{
     position: absolute;
+    
     top: 16px;
     right: 16px;
 }
 
-.btn{
+.agree_btn{
     background-color: #66C5FB;
     font-size: 30px;
+    width: 40%;
+    margin-left: 30%;
+    align-items: center;
+    text-align: center;
 }
+.FZzsk{
+    align-items: center;
+}   
+.ZZF{
+    height: 400px;
+    background: #aaa;
+    overflow-y: scroll;
+    }
