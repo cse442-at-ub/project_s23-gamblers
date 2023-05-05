@@ -46,11 +46,11 @@ function PostForm(){
     function image_file_check(file_type,size){
         let acceptable = ['jpg','jpeg','png']
         if(!acceptable.includes(file_type)){
-            alert("Wrong image type, try jpg or png")
+            toast.error("Wrong image type, try jpg or png")
             return false
         }
         if( size > 2000000){
-            alert("Too large, try image small than 2mb")
+            toast.error("Too large, try image small than 2mb")
             return false
         }
         return true
