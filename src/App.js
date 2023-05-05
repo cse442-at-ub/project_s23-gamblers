@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
-import Forgot from './components/Forgot'
 import Verify from './components/Verify'
 import { useState } from 'react'
 import UserAgreement from './components/UserAgreement'
@@ -29,7 +28,6 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/Login' element={<Login />} />
           <Route path='/Register' element={<Register />} />
-          <Route path='/Forgot' element={<Forgot />} />
           <Route path='/UserAgreement' element={<UserAgreement />} />
           <Route path='/Verify' element={<Verify />} />
           <Route path="/Setting" element={<Setting/>}></Route>
