@@ -65,3 +65,11 @@
 .plus_svg:hover{
   cursor: pointer;
 }
+
+
+
+.iteminfoIteminfo{
+  text-align: center;
+  background-color: rgb(237, 234, 234);
+  border-radius: 10px;
+}

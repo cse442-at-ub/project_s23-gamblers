@@ -1,5 +1,15 @@
+.commentSection{
+    background-color: rgb(237, 234, 234);
+    border-radius:  10px;
+}
+
+.commentComment{
+    text-align: center;
+}
+
 .comment-group {
     width: 67%;
+    
 }
 
 .comment_button{
