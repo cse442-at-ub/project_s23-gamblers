@@ -133,7 +133,7 @@ function Setting(){
         a[nav_case-1].style.background = 'grey'
     }
     return(
-        <div className='Background'>
+        <Container fluid className='Background'>
             <Toaster
                 position="top-center"
                 reverseOrder={false}
@@ -261,7 +261,7 @@ function Setting(){
 
                 
                 
-        </div>
+        </Container>
     )
 }
 
