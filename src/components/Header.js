@@ -54,7 +54,7 @@ function Header(props) {
                             </Navbar.Brand>
                         </Link>
                     </Container>
-                    <Link to='/email' style={{backgroundColor:'green'}}>Complain</Link>
+                    <Link to='/email' ><button style={{ backgroundColor: 'white'}}>Complain</button></Link>
                 </Col>
                 <Col >
                     <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
