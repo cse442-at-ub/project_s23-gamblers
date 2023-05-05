@@ -208,7 +208,6 @@ function ItemInfo(props){
                                             <br></br>
                                             <br></br>
                                             <br></br>
-                                            <button className='reportbutton' onClick={handleReport}>Report Post</button>
                                             <Row>
                                             <Col>
                                             {post?
@@ -276,6 +275,7 @@ function ItemInfo(props){
                                 </Row>
                                 <br></br>
                                 <br></br>
+                                <button className='reportbutton' onClick={handleReport}>Report Post</button>
                                 <br></br>
                                 <br></br>
                                 <br></br>

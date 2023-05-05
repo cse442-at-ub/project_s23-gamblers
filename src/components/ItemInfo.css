@@ -13,8 +13,8 @@
   }
 
 .item-image{
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   object-fit: contain;
 }
 .add_like_icon{
@@ -24,9 +24,9 @@
 .reportbutton{
   margin-top: 4px;
   background-color: red;
-  width: 10%;
-  height: 80%;
-  border-radius: 50%;
+  height: 7%;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .text{
