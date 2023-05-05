@@ -8,7 +8,7 @@
 
 .frame12{
     background-color: #BEE8FF;
-    height: 120vh;
+    min-height: 100vh;
     width: 100vw;
     min-width: 100px;
 
