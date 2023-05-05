@@ -64,13 +64,17 @@ function Comment() {
     }
 
     return (
-        <div>
+        <div className="commentSection">
             <Toaster
                 position="top-center"
                 reverseOrder={false}
             />
             <br></br>
-
+            <br></br>
+            <h1 className="commentComment">comment</h1>
+            <br></br>
+            <br></br>
+            
             <div>
                 {comment.map((comment, index) => {
                     return (
@@ -98,7 +102,9 @@ function Comment() {
                     </div>
                 </div>
             </form>
-           
+           <br></br>
+            <br></br>
+            <br></br>
             
         </div>
     )

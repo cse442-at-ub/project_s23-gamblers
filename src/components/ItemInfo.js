@@ -227,7 +227,10 @@ function ItemInfo(props){
                                     
                                 
                             </Col>
-                            <Col md={{ span: 4, offset: 1 }}>
+                            <Col md={{ span: 4, offset: 1 }} >
+                                <Row className='iteminfoIteminfo'><h1>ItemInfo</h1></Row>
+                                <br></br>
+                                <br></br>
                                 <Row >
                                     <h1 className='text'>
                                         <span id="item_name">{item.item_name}</span>
@@ -271,8 +274,12 @@ function ItemInfo(props){
                                         </h2>
                                     </Col>
                                 </Row>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
                                 <Row>
-                                    <h2 style={{marginLeft:'200px', color:'blue' }}>Comment section:</h2>
                                     <Comment></Comment>
                                 </Row>
          
