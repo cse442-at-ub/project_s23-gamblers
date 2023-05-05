@@ -4,6 +4,7 @@ import UserImage from './UserImage';
 import {useEffect, useState } from 'react';
 import axios from "axios";
 import bg_change from '../assets/images/bg_ch_icon.svg.svg'
+import toast, { Toaster } from "react-hot-toast";
 function EditWindow(props){
     const [post, setPost] = useState({});
     const [change_image, setChange_image] = useState(false)
@@ -19,7 +20,7 @@ function EditWindow(props){
         e.preventDefault()
         const fd = new FormData()
         if(profile_image === undefined){
-            alert("please select image");
+            toast.error("please select image");
             return;
         }
         let type = profile_image.name.split('.').at(-1)
@@ -31,19 +32,22 @@ function EditWindow(props){
         console.log(fd)
         axios.post(process.env.REACT_APP_BASENAME+"api/profile_image.php",fd,cfg)
         .then(res=>{
-            alert("success");
+            toast.success("success")
+            setTimeout(function () {
+                window.location.reload();
+            }, 1800);
         }).catch(function(error){
-            alert(error);
+            toast.error(error)
         })
     }
     function image_file_check(file_type,size){
         let acceptable = ['jpg','jpeg','png']
         if(!acceptable.includes(file_type)){
-            alert("Wrong image type, try jpg or png")
+            toast.error("Wrong image type, try jpg or png")
             return false
         }
         if( size > 2000000){
-            alert("Too large, try image small than 2mb")
+            toast.error("Too large, try image smaller than 2mb")
             return false
         }
         return true
@@ -51,7 +55,7 @@ function EditWindow(props){
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(Object.keys(post))
-        let has_empty = false
+        let has_empty = Object.keys(post).length !== 3
         Object.keys(post).map( x =>{
             console.log(post[x])
             has_empty |= ( post[x] === "") | post[x].includes(' ')  
@@ -59,14 +63,17 @@ function EditWindow(props){
         )
         if(has_empty){
             // props.onChange(false)
-            alert("Invaild Input!!");
+            toast.error("Invaild Input!!")
             return
         }
         console.log(post)
         axios.post(process.env.REACT_APP_BASENAME+"api/update_profile.php", JSON.stringify(post),{withCredentials:true}).then(res=>{
-            alert("sent");
+            toast.success("sent")
+            setTimeout(function () {
+                window.location.reload();
+            }, 1800);
         }).catch(function(error){
-            alert(error);
+            toast.error(error)
         });
         // props.onChange(false)
     }
@@ -76,6 +83,10 @@ function EditWindow(props){
     return (
 
         <Container  className='window'>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                />
             <Row>
             <Col  className="edit_header_upper" >
                 <Row>
@@ -92,7 +103,7 @@ function EditWindow(props){
                                     <div className="file-dummy UsernameFont" ><span> select your profile image</span>
                                     
                                     </div>
-                                    <button className="post_button"> Upload Post</button>
+                                    <button className="editpost_button"> Upload Post</button>
                                 </label>           
                             </form>
                         :

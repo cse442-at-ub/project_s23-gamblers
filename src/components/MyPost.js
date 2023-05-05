@@ -4,6 +4,7 @@ import {  useNavigate , Link} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import {Col,Container,Row} from 'react-bootstrap/';
+import toast, { Toaster } from "react-hot-toast";
 export default function MyPost() {
     const [myItem ,setMyItem] = useState([]);
     const get_items_history = () => {
@@ -48,16 +49,23 @@ export default function MyPost() {
             item_id: e
           }).then(function(response){
             if(response.status === 200){
-              window.alert('Post remove successful')
+                toast.success('Post remove successful')
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1800);
             }
             else{
-              window.alert('Bad connection')
+                toast.error('Bad connection')
             }
           })
       }
   
   return (
     <Container>
+        <Toaster
+                position="top-center"
+                reverseOrder={false}
+                />
             <Row xs="auto">
                 <Col>
                 </Col>

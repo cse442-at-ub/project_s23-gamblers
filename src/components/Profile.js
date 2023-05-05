@@ -1,10 +1,10 @@
-import './Profile.css'
-import {useState} from 'react'
-import axios from 'axios'
-import { React,useEffect } from 'react'
-import {Container} from 'react-bootstrap/';
-import 'bootstrap/dist/css/bootstrap.min.css';
-function Profile(){
+import {Form,Col,Container,Row} from 'react-bootstrap/';
+import "./Profile.css"
+import UserImage from './UserImage';
+import {useEffect, useState } from 'react';
+import axios from "axios";
+import bg_change from '../assets/images/bg_ch_icon.svg.svg'
+function Profile(props){
     const [user, setUser] = useState(undefined)
     const handlerGetUser = (event) => {
         
@@ -21,15 +21,46 @@ function Profile(){
     if(user === undefined){
         return null;
     }
-    
-    return(
-        <Container>
-            <td className='information_font'>Username:{user.username}</td><tr/>
-            <td className='information_font'>Email:{user.email}</td><tr/>
-            <td className='information_font'>Phone Number:{user.phone_number}</td><tr/>
+    return (
+
+        <Container  className='window'>
+            <Row>
+            <Col  className="profileedit_header_upper" >
+                <Row>
+                    <Col>
+                        <UserImage >
+                        </UserImage>
+                    </Col>
+                </Row>
+            </Col>
+            </Row>
+            <Row>
+                <Container fluid className="profileedit_header_lower d-flex justify-content-center">
+                        <Form className='from_layout mt-3 mb-3'>
+                            <Row>
+                            <Form.Group className="d-flex mt-5" controlId="formUserName">
+                                        <Form.Label className='profileedit_txt'> User Name:</Form.Label> 
+                                        <div className='profileedit_txt' >{user.username}</div>
+                                </Form.Group>
+                            </Row>
+                                
+                            <Row>
+                            <Form.Group  className='d-flex mt-3'controlId="formEmail">
+                                    <Form.Label className='profileedit_txt'> Email:</Form.Label>
+                                    <div className='profileedit_txt' >{user.email}</div>
+                            </Form.Group>
+                            </Row>
+                            <Row>
+                            <Form.Group className="d-flex mt-3 mb-5" controlId="formPhoneNumer">
+                                    <Form.Label className='profileedit_txt'> Phone Number:</Form.Label>
+                                    <div className='profileedit_txt' >{user.phone_number}</div>
+                            </Form.Group>
+                            </Row>
+                        </Form>
+                </Container>
+                
+            </Row>
         </Container>
-                 
     )
 }
-
 export default Profile

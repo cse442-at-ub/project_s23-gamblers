@@ -22,7 +22,9 @@ border-radius: 68px;
     width: 20px;
     color:aliceblue;
     border: 0.5px solid white;
+    cursor: pointer;
   }
+
 .Icon{
 background: #66C5FB;
 background-size: contain;
@@ -98,8 +100,15 @@ font-style: normal;
 font-size: 34px;
 color: #FFFFFF;
 }
+.inmiddle {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
 .Back{
-    border-radius: 30px;
+    width: 100px;
+    border-radius: 20px;
     background: #66C5FB;
     border: none;
 }
@@ -196,3 +205,4 @@ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 .container {
 padding: 2px 16px;
 }
+
