@@ -29,10 +29,12 @@ function Home(){
     
     if(filter===0){
         return(
-            <div>
+            <div className={`${styles.bg__whitesmoke}`}>
                 <Header setItemData={setItemData}></Header>
+                <div className={`${styles.flex__center} ${styles.bg__whitesmoke}`}>
                 <button className={`${styles.btn}  ${styles.btn__blue}`} onClick={()=>setFilter(1)}>$50 OR LOWER</button>
-                <button className={`${styles.btn}  ${styles.btn__blue}`} onClick={()=>setFilter(0)}>SHOWALL</button>
+                <button className={`${styles.btn}  ${styles.btn__blue} `} onClick={()=>setFilter(0)}>SHOWALL</button>
+                </div>
                 <div className={`${styles.section__padding} ${styles.bg__whitesmoke}`} >
                     <div className={styles.container}>
                         <div className={`${styles.services__content} ${styles.grid}`}>
@@ -62,10 +64,12 @@ function Home(){
         )
     }else if(filter===1){
         return(
-            <div>
+            <div className={`${styles.bg__whitesmoke}`}>
                 <Header setItemData={setItemData}></Header>
+                <div className={`${styles.flex__center} ${styles.bg__whitesmoke}`}>
                 <button className={`${styles.btn}  ${styles.btn__blue}`} onClick={()=>setFilter(1)}>$50 OR LOWER</button>
                 <button className={`${styles.btn}  ${styles.btn__blue}`} onClick={()=>setFilter(0)}>SHOWALL</button>
+                </div>
                 <div className={`${styles.section__padding} ${styles.bg__whitesmoke}`} >
                     <div className={styles.container}>
                         <div className={`${styles.services__content} ${styles.grid}`}>
@@ -97,8 +101,5 @@ function Home(){
             </div>
         )
     }
-
-
-    
 }
 export default Home
