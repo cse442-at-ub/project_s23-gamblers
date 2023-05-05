@@ -89,7 +89,9 @@ export default function MyPost() {
                     <tr>
                         <th className='view_history_title'> Items posted</th>
                     </tr>
+                    <div className='view_history_table'>
                         {myItem.map(item=>rows(item))}
+                        </div>
                 </tbody>
             </table>
         </Container>

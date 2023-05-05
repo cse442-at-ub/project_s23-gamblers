@@ -61,7 +61,9 @@ export default function Buying() {
                         <th className='table_header'>Seller</th>
                         <th className='table_header'>Status</th> */}
                     </tr>
+                    <div className='view_history_table'>
                         {views.map(item=>rows(item))}
+                        </div>
                 </tbody>
             </table>
         </Container>

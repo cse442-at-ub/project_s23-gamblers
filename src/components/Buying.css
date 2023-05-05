@@ -30,5 +30,28 @@ font-size: 30px;
 } 
 
 .view_history_table{
-border-radius:  20px;
+height: 400px;
+background: #aaa;
+overflow-y: scroll;
+}
+
+/* width */
+.view_history_table::-webkit-scrollbar {
+  overflow-y: scroll;
+  width: 10px;
+}
+
+/* Track */
+.view_history_table::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+.view_history_table::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+.view_history_table ::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
