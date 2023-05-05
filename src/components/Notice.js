@@ -1,0 +1,83 @@
+import React, { useState, useEffect } from 'react';
+import './Notice.css';
+import axios from 'axios';
+
+function Notice(props) {
+  const [editMode, setEditMode] = useState(false);
+  const [noticeContent, setNoticeContent] = useState('');
+
+  function clickHandler() {
+    props.setPopup(false);
+  }
+
+  function changeHandler() {
+    setEditMode(true);
+  }
+
+  function saveHandler() {
+    axios
+      .post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php', {
+        information: noticeContent,
+      })
+      .then((response) => {
+        if (response.data.status === 'success') {
+          setEditMode(false);
+        }
+      });
+  }
+
+  function fetchNoticeContent() {
+    axios
+      .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
+      .then((response) => {
+        setNoticeContent(response.data.information);
+      });
+  }
+
+  useEffect(() => {
+    fetchNoticeContent();
+  }, [props.trigger]);
+
+  return props.trigger ? (
+    <div className="popup">
+      <div>
+        <div className="popup-inner">
+          {!editMode ? (
+                        <textarea
+                        value={noticeContent}
+                        onChange={(e) => setNoticeContent(e.target.value)}
+                        rows={10}
+                        cols={50}
+                      ></textarea>
+          ) : (
+            <textarea
+              value={noticeContent}
+              onChange={(e) => setNoticeContent(e.target.value)}
+              rows={10}
+              cols={50}
+            ></textarea>
+          )}
+          <br></br>
+          <br></br>
+          {editMode ? (
+            <button onClick={saveHandler} className="btn">
+              Save
+            </button>
+          ) : (
+            <button onClick={changeHandler} className="btn">
+              Edit
+            </button>
+          )}
+          &nbsp;&nbsp;
+          <button onClick={clickHandler} className="btn">
+            Back
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : (
+    ''
+  );
+}
+
+export default Notice;

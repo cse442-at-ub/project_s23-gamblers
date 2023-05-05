@@ -1,7 +1,9 @@
 import {Col,Navbar,Container} from 'react-bootstrap/';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, Button } from 'react-bootstrap';
 import SearchBar from './SearchBar';
 import UserImage from './UserImage';
+import Notice from './Notice';
 import { Link } from 'react-router-dom';
 import brand_image from '../assets/images/exchange.png'
 import { useState } from 'react';
@@ -16,6 +18,8 @@ function Header(props) {
     const [guest, setGuest] = useState(true)
     const [guestName, setGuestName] = useState('Guest')
     const [noti, setNoti] = useState(false)
+    const [popup, setPopup] = useState(false)
+    const [noticeContent, setNoticeContent] = useState('');
     function fetchUserHandler() {
         axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`, { withCredentials: true }).then(function (response) {
             console.log(response)
@@ -29,6 +33,26 @@ function Header(props) {
             }
         })
     }
+    function togglePopup() {
+        setPopup(!popup);
+    }
+    function fetchNoticeHandler() {
+        axios
+          .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
+          .then((response) => {
+            if (response.data) {
+              setNoticeContent(response.data.information);
+            }
+          });
+      }
+      
+      function fetchNoticeContent() {
+        axios
+          .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
+          .then((response) => {
+            setNoticeContent(response.data.information);
+          });
+      }
     let a = window.location.pathname.split('/')
     let is_in_favorite = false;
     if (a[a.length-1] == 'favorites'){
@@ -36,6 +60,8 @@ function Header(props) {
     }
     useEffect(() => {
         fetchUserHandler()
+        fetchNoticeHandler();
+        fetchNoticeContent();
     }, [])
     console.log(guest)
     return (
@@ -70,7 +96,11 @@ function Header(props) {
                                     </Link>
                                 </div>
                             : 
-                            null}
+                        null}
+                        <Button type="submit" className="mt-2 me-2" style={{ width: '10%' }} onClick={togglePopup}>
+                        Notice
+                        </Button>
+                        <Notice trigger={popup} setPopup={setPopup} noticeContent={noticeContent} updateNoticeContent={setNoticeContent} />
                     </Container>
                 </Col>
             </Container>
