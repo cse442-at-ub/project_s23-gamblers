@@ -5,7 +5,8 @@ function Verify() {
     return (
         <div className='frame12'>
             <div className='loginPage'></div>
-            <h1 style={{textAlign:'center'}}>Thank you for register, please login now</h1>
+            <br></br>
+            <h1 style={{textAlign:'center'}}>Register success</h1>
             <div style={{ textAlign: 'center' }}>
                <Link to='/login'>
                 <button className='RegisterButton' >Login</button>
