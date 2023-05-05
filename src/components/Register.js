@@ -136,7 +136,7 @@ function Register() {
                             </button>
                         </Row>
                         <Row>
-                            <span className='zzzf usernameL'>
+                            <span className='zzzy usernameL'>
                                 <Link  to='/Login'>Already have an acoount? Click to Login!</Link>
                             </span>
                         </Row>
