@@ -43,7 +43,7 @@ export default function MyPost() {
                                 <img className='history_item_image' src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/"+order1['item_image_dir']} ></img>
                             </Link>
                         </span> 
-                        <span className='view_history_time'>{order1['date_posted']}</span>
+                        <span className='view_history_time'>{order1['date_posted'].slice(0,19)}</span>
                     </div>
                     <button style={{backgroundColor:'red'}} onClick={()=>deleteHandler(order1['item_id'])}>Delete</button>
                     <button style={{ backgroundColor: 'green' }} onClick={() => editHandler(order1)}>Edit</button>
@@ -87,7 +87,7 @@ export default function MyPost() {
             <table className='view_history_table'>
                 <tbody>
                     <tr>
-                        <th className='view_history_title'> Items posted</th>
+                        <th className='view_history_title'>Posted</th>
                     </tr>
                     <div className='view_history_table'>
                         {myItem.map(item=>rows(item))}
