@@ -45,7 +45,7 @@ function Home(){
                                             <div><img
                                                 alt=""
                                                 src={process.env.REACT_APP_BASENAME+`uploads/${itemData[index].item_image_dir}`}
-                                                className='item-image'
+                                                className={`${styles.postimage}`}
                                             /></div>
                                             
                                             <h4 className={`${styles.section__title} ${styles.text}`}>{service.item_name}</h4>
@@ -81,7 +81,7 @@ function Home(){
                                                 <div><img
                                                     alt=""
                                                     src={process.env.REACT_APP_BASENAME+`uploads/${itemData[index].item_image_dir}`}
-                                                    className='item-image'
+                                                    className={`${styles.postimage}`}
                                                 /></div>
                                                 
                                                 <h4 className={`${styles.section__title} ${styles.text}`}>{service.item_name}</h4>
