@@ -71,8 +71,11 @@ function Header(props) {
                                 />
                             </Navbar.Brand>
                         </Link>
-                    </Container>
-                    <Link to='/email' ><button style={{ backgroundColor: 'white'}}>Complain</button></Link>
+                    </Container>                    
+                    <Button type="submit" style={{height:'40%', fontSize: 15,backgroundColor: '#10c9c3'}} onClick={togglePopup}>
+                        Notice
+                    </Button>
+                    <Notice trigger={popup} setPopup={setPopup} noticeContent={noticeContent} onClick={fetchNoticeContent} updateNoticeContent={setNoticeContent} />
                 </Col>
                 <Col >
                     <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
@@ -89,10 +92,6 @@ function Header(props) {
                                 </div>
                             : 
                         null}
-                        <Button type="submit" className="mt-2 me-2" style={{ width: '10%' }} onClick={togglePopup}>
-                        Notice
-                        </Button>
-                        <Notice trigger={popup} setPopup={setPopup} noticeContent={noticeContent} onClick={fetchNoticeContent} updateNoticeContent={setNoticeContent} />
                     </Container>
                 </Col>
             </Container>
