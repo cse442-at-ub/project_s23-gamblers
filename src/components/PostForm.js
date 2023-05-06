@@ -4,7 +4,7 @@ import "./PostForm.css"
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from 'react-router-dom'
 function PostForm(props) {
-    const url = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/post_item.php"
+    const url = process.env.REACT_APP_BASENAME+"/api/post_item.php"
     const navigate = useNavigate()
     const [postimage, setPostImage] = useState('')
     const [data, setData] = useState([])
@@ -17,7 +17,7 @@ function PostForm(props) {
     function editHandler() {
         if (Object.keys(props).length != 0) {
             setEdit(true)
-            axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/item.php?var=${props.data.item_id}`,
+            axios.get(process.env.REACT_APP_BASENAME+`api/item.php?var=${props.data.item_id}`,
                 { withCredentials: true }).then(function (response) {
                     console.log(response)
                     const newdata = { ...data }
@@ -67,7 +67,7 @@ function PostForm(props) {
                         }, 1800);
                         console.log(res.data)
                         if (edit) {
-                            axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/delete.php`, {
+                            axios.post(process.env.REACT_APP_BASENAME+`api/delete.php`, {
                                 item_id: props.data.item_id
                             })
                         }
