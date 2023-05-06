@@ -50,7 +50,7 @@ function SearchBar(props) {
             onChange={handleSearchTextChange}
 
           />
-          <Button type="submit" className="mt-2 me-2" style={{ width: '100%' }} onClick={handleFormSubmit}>
+          <Button type="submit" className="mt-2 me-2" style={{ fontSize: 15,width: '100%' }} onClick={handleFormSubmit}>
             Search
           </Button>
         </Form>
