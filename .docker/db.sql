@@ -150,3 +150,8 @@ CREATE TABLE IF NOT EXISTS report (
     PRIMARY KEY (report_id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS notice (
+    notice_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    infomation  TEXT NOT NULL,
+    PRIMARY KEY (notice_id)
+) ENGINE=InnoDB;
