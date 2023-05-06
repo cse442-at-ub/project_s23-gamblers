@@ -8,10 +8,17 @@ function Notice(props) {
 
   function clickHandler() {
     props.setPopup(false);
+    fetchNoticeContent();
   }
-
-  function changeHandler() {
-    setEditMode(true);
+  function fetchNoticeContent() {
+    axios
+      .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
+      .then((response) => {
+        setNoticeContent(response.data.infomation);
+      });
+  }
+  function editHandler() {
+    setEditMode(!editMode);
   }
 
   function saveHandler() {
@@ -22,41 +29,27 @@ function Notice(props) {
       .then((response) => {
         if (response.data.status === 'success') {
           setEditMode(false);
+          props.updateNoticeContent(noticeContent);
         }
       });
   }
 
-  function fetchNoticeContent() {
-    axios
-      .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
-      .then((response) => {
-        setNoticeContent(response.data.information);
-      });
-  }
-
   useEffect(() => {
+    setNoticeContent(props.noticeContent);
     fetchNoticeContent();
-  }, [props.trigger]);
+  }, []);
 
   return props.trigger ? (
     <div className="popup">
       <div>
         <div className="popup-inner">
-          {!editMode ? (
-                        <textarea
-                        value={noticeContent}
-                        onChange={(e) => setNoticeContent(e.target.value)}
-                        rows={10}
-                        cols={50}
-                      ></textarea>
-          ) : (
-            <textarea
-              value={noticeContent}
-              onChange={(e) => setNoticeContent(e.target.value)}
-              rows={10}
-              cols={50}
-            ></textarea>
-          )}
+          <textarea
+            value={noticeContent}
+            onChange={(e) => setNoticeContent(e.target.value)}
+            rows={10}
+            cols={50}
+            readOnly={!editMode}
+          ></textarea>
           <br></br>
           <br></br>
           {editMode ? (
@@ -64,7 +57,7 @@ function Notice(props) {
               Save
             </button>
           ) : (
-            <button onClick={changeHandler} className="btn">
+            <button onClick={editHandler} className="btn">
               Edit
             </button>
           )}
