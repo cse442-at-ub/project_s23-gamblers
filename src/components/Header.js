@@ -40,7 +40,7 @@ function Header(props) {
       
     function fetchNoticeContent() {
     axios
-        .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
+        .get(process.env.REACT_APP_BASENAME+'api/notice.php')
         .then((response) => {
 
         setNoticeContent(response.data.infomation);

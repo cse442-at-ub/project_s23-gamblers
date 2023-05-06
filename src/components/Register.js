@@ -126,9 +126,9 @@ function Register() {
                                 <button className='zzzf' onClick={() => setPopup(true)}>
                                 <span  className=''>UserAgreement</span>
                                 </button>
-                                
                             </Col>
                             
+                            <UserAgreement trigger={popup} setPopup={setPopup}></UserAgreement>
                         </Row>
                         <Row>
                             <button type='submit' onClick={submitHandler} className='usernameL RegisterButton'>
@@ -141,7 +141,6 @@ function Register() {
                             </span>
                         </Row>
                     </div>
-                    <UserAgreement trigger={popup} setPopup={setPopup}></UserAgreement>
                 </Row>
             </Container>
         </div>

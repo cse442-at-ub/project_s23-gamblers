@@ -3,7 +3,7 @@ include_once 'database/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $sql = "SELECT * FROM notice ORDER BY notice_id DESC LIMIT 1";
-    $result = get($sql, true);
+    $result = get($sql,array(), true);
     echo json_encode($result);
     exit();
 }

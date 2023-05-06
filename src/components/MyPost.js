@@ -10,7 +10,7 @@ export default function MyPost() {
     const [myItem ,setMyItem] = useState([]);
     const [popup, setPopup] = useState(false)
     const get_items_history = () => {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/my_items.php`,{withCredentials: true}).then(function(response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/my_items.php`,{withCredentials: true}).then(function(response) {
             console.log(response.data);
             setMyItem(response.data)
         }).catch(function (error) {
@@ -40,7 +40,7 @@ export default function MyPost() {
                     <div className='box'>
                         <span className='view_history_name'>{order1['item_name']}<br></br>
                             <Link to={'/iteminfo?var='+order1['item_id']}>
-                                <img className='history_item_image' src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/uploads/"+order1['item_image_dir']} ></img>
+                                <img className='history_item_image' src={process.env.REACT_APP_BASENAME+"uploads/"+order1['item_image_dir']} ></img>
                             </Link>
                         </span> 
                         <span className='view_history_time'>{order1['date_posted'].slice(0,19)}</span>
@@ -59,7 +59,7 @@ export default function MyPost() {
     }
     function deleteHandler(e){
         console.log(e)
-        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/delete.php`,{
+        axios.post(process.env.REACT_APP_BASENAME+`api/delete.php`,{
             item_id: e
           }).then(function(response){
             if(response.status === 200){
