@@ -80,8 +80,6 @@ function Header(props) {
                             </Navbar.Brand>
                         </Link>
                     </Container>
-                    <Link to='/email' ><button style={{ backgroundColor: 'pink'}}>Complain</button></Link>
-                        
                     <Button type="submit" style={{height:'40%', fontSize: 15,backgroundColor: '#10c9c3'}} onClick={togglePopup}>
                         Notice
                     </Button>
