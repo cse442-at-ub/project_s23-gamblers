@@ -35,24 +35,17 @@ function Header(props) {
     }
     function togglePopup() {
         setPopup(!popup);
-    }
-    function fetchNoticeHandler() {
-        axios
-          .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
-          .then((response) => {
-            if (response.data) {
-              setNoticeContent(response.data.information);
-            }
-          });
+        fetchNoticeContent(); 
       }
       
-      function fetchNoticeContent() {
-        axios
-          .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
-          .then((response) => {
-            setNoticeContent(response.data.information);
-          });
-      }
+    function fetchNoticeContent() {
+    axios
+        .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
+        .then((response) => {
+
+        setNoticeContent(response.data.infomation);
+        });
+    }
     let a = window.location.pathname.split('/')
     let is_in_favorite = false;
     if (a[a.length-1] == 'favorites'){
@@ -60,7 +53,6 @@ function Header(props) {
     }
     useEffect(() => {
         fetchUserHandler()
-        fetchNoticeHandler();
         fetchNoticeContent();
     }, [])
     console.log(guest)
@@ -80,11 +72,7 @@ function Header(props) {
                             </Navbar.Brand>
                         </Link>
                     </Container>
-                        
-                    <Button type="submit" className="mt-2 me-2" style={{ width: '100%' }} onClick={togglePopup}>
-                        Notice
-                    </Button>
-                    <Notice trigger={popup} setPopup={setPopup} noticeContent={noticeContent} updateNoticeContent={setNoticeContent} />
+                    <Link to='/email' ><button style={{ backgroundColor: 'white'}}>Complain</button></Link>
                 </Col>
                 <Col >
                     <Container fluid className="header d-flex flex-row-reverse mt-4 mb-3">
@@ -101,6 +89,10 @@ function Header(props) {
                                 </div>
                             : 
                         null}
+                        <Button type="submit" className="mt-2 me-2" style={{ width: '10%' }} onClick={togglePopup}>
+                        Notice
+                        </Button>
+                        <Notice trigger={popup} setPopup={setPopup} noticeContent={noticeContent} onClick={fetchNoticeContent} updateNoticeContent={setNoticeContent} />
                     </Container>
                 </Col>
             </Container>
