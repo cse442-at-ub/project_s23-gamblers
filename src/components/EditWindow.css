@@ -35,7 +35,14 @@ input[type='file'] {
 .edit_txt{
     color: #66C5FB;
     width: 70%;
-    font-size:2vw;
+    font-size: 20px;
+    
+}
+@media (max-width:1080px) {
+    .edit_txt{
+        font-size: 1.8vw;
+    }
+    
 }
 
 .image-form{

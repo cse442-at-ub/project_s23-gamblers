@@ -33,7 +33,13 @@ input[type='file'] {
 .profileedit_txt{
     color:black;
     width: 70%;
-    font-size:2vw;
+    font-size:20px;
+}
+@media (max-width:1080px) {
+    .profileedit_txt{
+        font-size: 1.8vw;
+    }
+    
 }
 
 .image-form{
