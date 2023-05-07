@@ -49,7 +49,6 @@ function Home(){
                                             /></div>
                                             
                                             <h4 className={`${styles.section__title} ${styles.text}`}>{service.item_name}</h4>
-                                            <p className={`${styles.para__text} ${styles.text__grey}`}>{service.item_description}</p>
                                             <p className={`${styles.para__text} ${styles.text__grey}`}>${service.item_price} </p>
                                             <p className={`${styles.para_text_smaller} ${styles.text__grey}`}>View: {service.view_count}</p>
                                             <Link to={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>more info</Link>
@@ -85,7 +84,6 @@ function Home(){
                                                 /></div>
                                                 
                                                 <h4 className={`${styles.section__title} ${styles.text}`}>{service.item_name}</h4>
-                                                <p className={`${styles.para__text} ${styles.text__grey}`}>{service.item_description}</p>
                                                 <p className={`${styles.para__text} ${styles.text__grey}`}>${service.item_price} </p>
                                                 <p className={`${styles.para_text_smaller} ${styles.text__grey}`}>View: {service.view_count}</p>
                                                 <Link to={`/iteminfo?var=${service.item_id}`} className={`${styles.btn}  ${styles.btn__blue}`}>more info</Link>
