@@ -1,6 +1,7 @@
 import './Register.css'
 import UserAgreement from './UserAgreement'
 import { useState } from 'react'
+import {Form,Col,Container,Row} from 'react-bootstrap/';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -52,7 +53,7 @@ function Register() {
         else if (enteredPhoneNumber === '') {
             window.alert('Please enter phone number')
         } else {
-            axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/register/', {
+            axios.post(process.env.REACT_APP_BASENAME+'api/register/', {
                 username: enteredUsername,
                 password: enteredPassword,
                 email: enteredEmail,
@@ -80,57 +81,68 @@ function Register() {
 
     return (
         <div className='frame12'>
-            <div className='loginPage'>
+            <Container fluid className='loginPage'>
                 {/* <img className='image0' src={require('../image/image0.png')} alt="icon" /> */}
-            </div>
-            <div className='login'>
-                <br></br>
-                <h1>Register</h1>
-                <br></br>
-                <form onSubmit={submitHandler}>
-                    <div className='username'>
-                        <label name='username'>Username</label>
+            </Container>
+            <Container className='formBlock'>
+                <Row className='mt-3'>
+                <h1 className='login'>Register</h1>
+                </Row>
+                <Row>
+                    <div >
+                        <Row className='usernameL' >
+                            <label name='username' className='blue'>Username</label>
+                        </Row>
+                        <Row>
+                            <input type='text' id='Username' className='login_input_input' value={enteredUsername} onChange={usernameHandler} />
+                        </Row>
+                        <Row className='usernameL'>
+                            <label name='Password' className='blue'>Password</label>
+                        </Row>
+                        <Row>
+                            <input type='password' id='password' className='login_input_input' value={enteredPassword} onChange={passwordHandler} />
+                        </Row>
+                        <Row className='usernameL'>
+                            <label name='ConfirmPassword' className='blue'>Confirm password</label>
+                        </Row>
+                        <Row>
+                            <input id='password' className='login_input_input' type='password' value={confirmPassword} onChange={cPasswordHandler} />
+                        </Row>
+                        <Row className='usernameL'>
+                            <label name='email' className='blue'>Email</label>
+                        </Row>
+                        <Row>
+                            <input type='text' id='email' className='login_input_input' value={enteredEmail} onChange={emailHandler} />
+                        </Row>
+                        <Row className='usernameL'>
+                            <label name='phoneNumber' className='blue'>Phone number</label>
+                        </Row>
+                        <Row>
+                            <input type='text' id='phone' className='login_input_input' value={enteredPhoneNumber} onChange={phoneHandler} />
+                        </Row>
+                        <Row className='mt-3'>
+                            <Col>
+                                <input type='checkbox' value={check} onChange={checkHandler} />
+                                <button className='zzzf' onClick={() => setPopup(true)}>
+                                <span  className=''>UserAgreement</span>
+                                </button>
+                            </Col>
+                            
+                            <UserAgreement trigger={popup} setPopup={setPopup}></UserAgreement>
+                        </Row>
+                        <Row>
+                            <button type='submit' onClick={submitHandler} className='usernameL RegisterButton'>
+                                Register
+                            </button>
+                        </Row>
+                        <Row>
+                            <span className='zzzy usernameL'>
+                                <Link  to='/Login'>Already have an account? Click to Login!</Link>
+                            </span>
+                        </Row>
                     </div>
-                    <div>
-                        <input type='text' id='Username' className='input' value={enteredUsername} onChange={usernameHandler} />
-                    </div>
-                    <div className='password'>
-                        <label name='Password'>Password</label>
-                    </div>
-                    <div>
-                        <input type='password' id='password' className='input' value={enteredPassword} onChange={passwordHandler} />
-                    </div>
-                    <div className='Cpassword'>
-                        <label name='ConfirmPassword'>Confirm password</label>
-                    </div>
-                    <div>
-                        <input id='password' className='input' type='password' value={confirmPassword} onChange={cPasswordHandler} />
-                    </div>
-                    <div className='email'>
-                        <label name='email'>Email</label>
-                    </div>
-                    <div>
-                        <input type='text' id='email' className='input' value={enteredEmail} onChange={emailHandler} />
-                    </div>
-                    <div className='phone'>
-                        <label name='phoneNumber'>Phone number</label>
-                    </div>
-                    <div>
-                        <input type='text' id='phone' className='input' value={enteredPhoneNumber} onChange={phoneHandler} />
-                    </div>
-                    <br></br>
-                    <div>
-                        <input type='checkbox' value={check} onChange={checkHandler} style={{ height: '20px', width: '20px' }} />
-                        <span onClick={() => setPopup(true)} className='div'>UserAgreement</span>
-                        <UserAgreement trigger={popup} setPopup={setPopup}></UserAgreement>
-                    </div>
-                    <button type='submit' className='RegisterButton'>
-                        Register
-                    </button>
-                </form>
-                <br></br>
-                <Link to='/Login'>Already have an acoount? Click to Login!</Link>
-            </div>
+                </Row>
+            </Container>
         </div>
     )
 }

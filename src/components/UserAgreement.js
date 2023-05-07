@@ -1,5 +1,6 @@
 
 import './UserAgreement.css'
+import {Form,Col,Container,Row} from 'react-bootstrap/';
 
 function UserAgreement(props) {
 
@@ -8,10 +9,9 @@ function UserAgreement(props) {
     }
 
     return (props.trigger) ? (
-        <div className="popup">
-            <div>
-                <div className="popup-inner">
-                    <div>Welcome to our service! Please read this User Agreement carefully before using our service. By using our service, you agree to be bound by the terms and conditions of this agreement. If you do not agree to the terms and conditions of this agreement, do not use our service.
+        <Container className="popup">
+                <Container className="popup-inner ZZF">
+                    <Container>Welcome to our service! Please read this User Agreement carefully before using our service. By using our service, you agree to be bound by the terms and conditions of this agreement. If you do not agree to the terms and conditions of this agreement, do not use our service.
 
                         User Content
                         You retain all ownership rights in any content that you post or share through the Service. By posting or sharing any content through the Service, you grant us a non-exclusive, transferable, sub-licensable, royalty-free, worldwide license to use, store, display, reproduce, modify, distribute, and create derivative works based on your content in connection with the Service.
@@ -34,13 +34,14 @@ function UserAgreement(props) {
                         Entire Agreement
                         This agreement constitutes the entire agreement between you and us regarding the use of the Service and supersedes all prior agreements and understandings, whether written or oral.
 
-                        By using the Service, you acknowledge that you have read, understood, and agree to be bound by this User Agreement.</div>
-                    <br></br>
-                    <br></br>
-                    <button onClick={clickHandler} className='btn'>Back</button>
-                </div>
-            </div>
-        </div>
+                        By using the Service, you acknowledge that you have read, understood, and agree to be bound by this User Agreement.</Container>
+                    <Container className='FZzsk'>
+                       <Row>
+                       <button onClick={clickHandler} className='agree_btn'>Back</button>
+                       </Row>
+                    </Container>
+                </Container>
+        </Container>
     ) : '';
 }
 export default UserAgreement

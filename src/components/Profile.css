@@ -1,3 +1,70 @@
-.information_font{
-    font-size:medium ;
+.profilewindow{
+    background-color: #66C5FB;
+}
+.the-pop-button{
+    position: fixed;
+}
+.profileedit_header_upper{
+    background-color: gainsboro;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    border-top-right-radius: 36px;
+    border-top-left-radius: 36px;
+}
+.profileedit_header_lower{
+    display: flex;
+    background-color: gainsboro;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    border-bottom-right-radius: 36px;
+    border-bottom-left-radius: 36px;
+}
+
+.edit_input{
+    background: #F5F5F5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+input[type='file'] {
+    opacity:0
+  }
+.profileedit_txt{
+    color:black;
+    width: 70%;
+    font-size:20px;
+}
+@media (max-width:1080px) {
+    .profileedit_txt{
+        font-size: 1.8vw;
+    }
+    
+}
+
+.image-form{
+    position: relative;
+    width: 1px;
+    margin-top: 50px;
+}
+.cancel_bot{
+    width: 25%;
+    height: 50px;
+    left: calc(50% - 211px/2 - 178px);
+    top: calc(50% - 79px/2 + 248.5px);
+    background: #C6C6C6;
+    border-radius: 16px;
+}
+
+.save_bot{
+    width: 25%;
+    height: 50px;
+    left: calc(50% - 211px/2 - 178px);
+    top: calc(50% - 79px/2 + 248.5px);
+    background: #66C5FB;
+    border-radius: 16px;
+}
+
+.from_layout{
+    width: 90%;
 }

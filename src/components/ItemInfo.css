@@ -13,17 +13,63 @@
   }
 
 .item-image{
-  width: 100%;
-  height: 100%;
+  width: 500px;
+  height: 500px;
   object-fit: contain;
 }
-
+.add_like_icon{
+  width: 40px;
+  height: 40px;
+}
 .reportbutton{
+  margin-top: 4px;
   background-color: red;
+  height: 7%;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .text{
   font-family: Skin-market-sans;
   align-items:center;
   text-align:center
+}
+
+.arrow_svgL{
+  width:40px;
+  height:40px;
+  margin: auto;    
+  display: block;
+
+}
+.arrow_svgR {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  display: block;
+
+}
+
+.arrow_svgL:hover{
+  cursor: pointer;
+}
+.arrow_svgR:hover {
+  cursor: pointer;
+}
+
+.plus_svg{
+  width: 40px;
+  height: 40px;
+}
+
+.plus_svg:hover{
+  cursor: pointer;
+}
+
+
+
+.iteminfoIteminfo{
+  text-align: center;
+  background-color: rgb(237, 234, 234);
+  border-radius: 10px;
 }

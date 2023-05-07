@@ -12,6 +12,7 @@ import Buying from './Buying';
 import UserImage from './UserImage';
 import PostForm from './PostForm'
 import MyPost from './MyPost';
+import toast, { Toaster } from "react-hot-toast";
 function Setting(){
     const navigate = useNavigate()
 
@@ -28,7 +29,7 @@ function Setting(){
     let a = document.getElementsByClassName('Profile')
     
     function fetchUserHandler() {
-        axios.get(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/userinfo.php`,{ withCredentials: true }).then(function (response) {
+        axios.get(process.env.REACT_APP_BASENAME+`api/userinfo.php`,{ withCredentials: true }).then(function (response) {
             console.log(response.data)
             if (response.status === 401) {
 
@@ -48,11 +49,11 @@ function Setting(){
     function image_file_check(file_type,size){
         let acceptable = ['jpg','jpeg','png']
         if(!acceptable.includes(file_type)){
-            alert("Wrong image type, try jpg or png")
+            toast.error("Wrong image type, try jpg or png")
             return false
         }
         if( size > 2000000){
-            alert("Too large, try image small than 2mb")
+            toast.error("Too large, try image small than 2mb")
             return false
         }
         return true
@@ -72,10 +73,6 @@ function Setting(){
                 return (
                     <Container>
                         <Row className='mt-3'>
-                            <Col>
-                                <UserImage></UserImage>
-
-                            </Col>
                             <Col>
                                 <Profile></Profile>
                             </Col>
@@ -114,11 +111,13 @@ function Setting(){
     }
 
     function logoutHandler() {
-        axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/logout',{withCredentials:true}).then(function(response){
+        axios.post(process.env.REACT_APP_BASENAME+'api/logout',{withCredentials:true}).then(function(response){
             console.log(response)
             if(response.status === 200){
-                window.alert('logout successful')
-                navigate('/')
+                toast.success('logout successful')
+                setTimeout(function(){
+                    navigate(`/`);
+                 }, 1800);
             }
         })
 
@@ -134,21 +133,23 @@ function Setting(){
         a[nav_case-1].style.background = 'grey'
     }
     return(
-        <div className='Background'>
+        <Container fluid className='Background'>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                />
             <Container className='Mainpage'>
             <Container  className='mt-3 '>
                 <Row className='mt-3 mb-3 '>
-                    <Col className='setting_left' md={{ span: 4}} >
-                        <Row>
+                    <Col  md={{ span: 4}} >
                         <Link to="/">
 
-                        <button type='button' className='Back' >
+                        <button className='Back' >
                         <span className='BackFont'>Back</span>
                         </button>
                         </Link>
 
-                        </Row>
-                        <Row>
+                        <Row className='mt-3'>
                             <button className='Profile' id="ch_bar" onClick={(e) =>{setNav_case(1)}}>
                                 <span className='ProfileFont' >Profile</span>
                             </button>   
@@ -184,7 +185,7 @@ function Setting(){
                     </Col>
                     <Col md={{ span: 7}}>
                         <Container className='mt-3 Icon' style={{ 
-                                backgroundImage: `url(${"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/"+bg})`,
+                                backgroundImage: `url(${process.env.REACT_APP_BASENAME+bg})`,
                             }}>
                                     <Row>
                                         <Col className='mt-5 mb-3' >
@@ -203,7 +204,7 @@ function Setting(){
                                                         e.preventDefault();
                                                         const fd = new FormData()
                                                         if(bgUpload === undefined){
-                                                            alert("please select image");
+                                                            toast.error("please select image");
                                                             return;
                                                         }
                                                         let type = bgUpload.name.split(".").at(-1)
@@ -220,9 +221,12 @@ function Setting(){
                                                                 'content-type': 'multipart/form-data',
                                                             },
                                                         };
-                                                            axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/update_bg_img.php",fd,cfg)
+                                                            axios.post(process.env.REACT_APP_BASENAME+"api/update_bg_img.php",fd,cfg)
                                                         .then(res=>{
-                                                            alert("success");
+                                                            toast.success("success")
+                                                            setTimeout(function () {
+                                                                window.location.reload();
+                                                            }, 1800);
                                                             console.log(res.data)
                                                         })
                                                     }}>
@@ -257,7 +261,7 @@ function Setting(){
 
                 
                 
-        </div>
+        </Container>
     )
 }
 

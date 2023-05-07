@@ -1,16 +1,26 @@
-.comment-group {
-    max-width: 500px;
-    margin: auto;
-    margin-bottom: 30px;
+.commentSection{
+    background-color: rgb(237, 234, 234);
+    border-radius:  10px;
 }
+
+.commentComment{
+    text-align: center;
+}
+
+.comment-group {
+    width: 67%;
+    
+}
+
 .comment_button{
+    margin-top: 1px;
     height: 7%;
-    left: 3%;
-    top: 3%;
     background: #66C5FB;
     cursor: pointer;
     border: none;
     min-width: 30%;
+    border: 1px solid black;
+    
 }
 .comment_button:hover{
     background-color: rgb(148, 197, 241);

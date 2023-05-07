@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
     phone_number varchar(32) NOT NULL,
     date_created TIMESTAMP (0) NOT NULL,
     bg_image VARCHAR(32) DEFAULT NULL,
+    likes TEXT DEFAULT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
@@ -149,3 +150,8 @@ CREATE TABLE IF NOT EXISTS report (
     PRIMARY KEY (report_id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS notice (
+    notice_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    infomation  TEXT NOT NULL,
+    PRIMARY KEY (notice_id)
+) ENGINE=InnoDB;

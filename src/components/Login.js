@@ -1,5 +1,6 @@
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
+import {Form,Col,Container,Row} from 'react-bootstrap/';
 import { useState } from 'react'
 import axios from 'axios'
 function Login() {
@@ -18,7 +19,7 @@ function Login() {
 
     function submitHandler(event) {
         event.preventDefault()
-        axios.post(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/login/`,{
+        axios.post(process.env.REACT_APP_BASENAME+`api/login/`,{
             username: userName,
             password: password,
         },{withCredentials:true}).then(function(response){
@@ -53,34 +54,36 @@ function Login() {
 
     return (
         <div className='frame12'>
-            <div className='loginPage'>
+            <Container fluid className='loginPage'>
                 {/* <img className='image0' src={require('../image/image0.png')} alt="icon" /> */}
-            </div>
-            <div className='formBlock'>
-                <br></br>
-                <br></br>
-                <h1 className='login'>Login</h1>
-                <br></br>
-                <form className='form' onSubmit={submitHandler}>
-                    <div className='usernameL'>
-                        <label name='username' className='blue'>Username</label>
-                        <Link to='/Forgot' className='forgotL'>Forgot Username</Link>
-                    </div>
-                    <div>
-                        <input type='text' id='Username' className='input' value={userName} onChange={usernameHandler} />
-                    </div>
-                    <div className='passwordL'>
-                        <label name='Password' className='blue'>Password</label>
-                        <Link to='/Forgot' className='forgotL'>Forgot Password</Link>
-                    </div>
-                    <div>
-                        <input type='password' id='opening-text' className='input' value={password} onChange={passwordHandler} />
-                    </div>
-                    <button className='LoginButton' type='submit'>Login</button>
-                    <button className='RegisterButton' onClick={registerHandler}>Register</button>
-                    <button className='RegisterButton' onClick={guestHandler}>Guest Pass</button>
-                </form>
-            </div>
+            </Container>
+            <Container className='formBlock'>
+                <Row className='mt-3'>
+                    <h1 className='login'>Login</h1>
+                </Row>
+                <Row>
+                    <form  onSubmit={submitHandler}>
+                            <Row className='usernameL'>
+                            <label name='username' className='blue'>Username</label>
+                            </Row>
+                        <Row className=''>
+                            <input type='text' id='Username' className='login_input_input' value={userName} onChange={usernameHandler} />
+                        </Row>
+                        <Row className='passwordL'>
+                            <label name='Password' className='blue'>Password</label>
+                        </Row>
+                        <Row className=''>
+                            <input type='password' id='opening-text' className='login_input_input' value={password} onChange={passwordHandler} />
+                        </Row>
+                        <Row className='jack_form'>
+                            <button className='LoginButton' type='submit'>Login</button>
+                            <button className='RegisterButton' onClick={registerHandler}>Register</button>
+                            <button className='RegisterButton' onClick={guestHandler}>Guest Pass</button>
+                        </Row>
+
+                    </form>
+                </Row>
+            </Container>
         </div>
     )
 

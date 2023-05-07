@@ -1,6 +1,6 @@
 .window{
     width: 100%;
-    min-width: 200px;
+    min-width: 180px;
 }
 .the-pop-button{
     position: fixed;
@@ -30,12 +30,19 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 input[type='file'] {
-    opacity:0    
+    opacity:0
   }
 .edit_txt{
     color: #66C5FB;
     width: 70%;
-    font-size:20px;
+    font-size: 20px;
+    
+}
+@media (max-width:1080px) {
+    .edit_txt{
+        font-size: 1.8vw;
+    }
+    
 }
 
 .image-form{
@@ -63,4 +70,15 @@ input[type='file'] {
 
 .from_layout{
     width: 90%;
+}
+
+.editpost_button{
+    width: 100%;
+    height: 7%;
+    left: 3%;
+    top: 3%;
+    border-radius: 30px;
+    background:white;
+    cursor: pointer;
+    border: none;
 }
