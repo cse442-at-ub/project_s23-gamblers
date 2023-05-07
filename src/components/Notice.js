@@ -12,7 +12,7 @@ function Notice(props) {
   }
   function fetchNoticeContent() {
     axios
-      .get(process.env.REACT_APP_BASENAME+'api/notice.php')
+      .get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php')
       .then((response) => {
         setNoticeContent(response.data.infomation);
       });
@@ -23,7 +23,7 @@ function Notice(props) {
 
   function saveHandler() {
     axios
-      .post(process.env.REACT_APP_BASENAME+'api/notice.php', {
+      .post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442m/api/notice.php', {
         information: noticeContent,
       })
       .then((response) => {
@@ -40,9 +40,9 @@ function Notice(props) {
   }, []);
 
   return props.trigger ? (
-    <div className="popup">
+    <div className="popupgg">
       <div>
-        <div className="popup-inner">
+        <div className="popup-innerzz">
           <textarea
             value={noticeContent}
             onChange={(e) => setNoticeContent(e.target.value)}
